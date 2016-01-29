@@ -28,7 +28,7 @@
     } else {
       var initial_max_progress = [];
 
-      for(var i = 0; i < 16; i++) {
+      for(var i = 0; i < 4; i++) {
         initial_max_progress.push( 0 );
       }
 
@@ -52,11 +52,11 @@
     this.type = '';
     this.destinationCoordinate = null;
     this.destinationObjective = null;
-    this.maximumProgress = max_progress;
+    this.maximum_progress = max_progress;
 
     this.objectives = DD.constants.missions[this.id].objectives;
 
-    Object.defineProperty(this, 'maximumProgress', {
+    Object.defineProperty(this, 'maximum_progress', {
       get: function() {
         var stored_maximum = FCH.localGet('dreamdateappcom_maximum_progress' + this.id);
         stored_maximum = stored_maximum.split(',');
@@ -99,12 +99,12 @@
     var executeNext = this.objectives[String(objective)];
 
     // Update maximum progress if it's less than the new progress
-    if(this.maximumProgress < objective) {
-      this.maximumProgress = objective;
+    if(this.maximum_progress < objective) {
+      this.maximum_progress = objective;
     }
 
     if(objective === 100) {
-      this.maximumProgress = 100;
+      this.maximum_progress = 100;
       DD.plot.nextMission();
     } else {
       if(objective === 0) {
