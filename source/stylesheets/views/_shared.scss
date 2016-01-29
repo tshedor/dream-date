@@ -1,0 +1,54 @@
+.view {
+  @include stack($view-stack);
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  width: 100%;
+  left: 0;
+  height: 100%;
+
+  // Specificity hack for prompt view's display: flex
+  &.view {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  &.-insert {
+    height: calc(100% - #{$toolbar-height * 2});
+  }
+
+  &.-full,
+  &.-overlay {
+    @include stack($view-stack, '.view.-overlay');
+  }
+
+  &.-full {
+    bottom: auto;
+    top: 0;
+    height: calc(100% - #{$toolbar-height});
+    position: fixed;
+  }
+
+  &.-overlay {
+    position: fixed;
+    bottom: 0;
+  }
+}
+
+.inner-view {
+  overflow: scroll;
+  height: calc(100% - #{$toolbar-height});
+  background: $c-gray;
+}
+
+.view-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px $container-padding;
+  border-bottom: 1px solid $c-dark-gray;
+  cursor: pointer;
+}

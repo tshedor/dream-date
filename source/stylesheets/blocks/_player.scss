@@ -1,0 +1,79 @@
+.player {
+  @extend %bg-pattern;
+  @include stack($view-stack);
+  bottom: 0;
+  height: $toolbar-height * 2;
+  transform: translateY( $toolbar-height );
+  transition: transform 0.4s ease-in;
+  border-top: 1px solid $c-dark-gray;
+  will-change: transform;
+  position: fixed;
+  left: 0;
+
+  &.reveal {
+    transform: translateY(0);
+  }
+}
+
+.revealed-controls,
+.hidden-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hidden-controls {
+  align-items: center;
+  padding: 20px 1.8em;
+}
+
+.handle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  transition: width;
+  will-change: width;
+  background: $c-blue;
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: -9px;
+    top: -6px;
+    background: $c-blue;
+    border-radius: 50px;
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.button {
+  .revealed-controls & {
+    padding-top: 5px;
+  }
+}
+
+.player {
+  input {
+    display: none;
+  }
+}
+
+.scrubber {
+  width: calc(100% - 3.6em - 60px);
+  margin: 0 auto;
+  height: 3px;
+  background: $c-dark-gray;
+  position: relative;
+}
+
+.drag-indicator {
+  cursor: pointer;
+
+  img {
+    display: block;
+    margin: 3px auto 0;
+    height: 6px;
+  }
+}

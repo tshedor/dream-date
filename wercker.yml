@@ -1,0 +1,26 @@
+box: phusion/passenger-ruby22
+no-response-timeout: 10
+build:
+    steps:
+        # Execute the bundle install step, a step provided by wercker
+        - bundle-install
+        # Execute a custom script step.
+        - script:
+            name: middleman build
+            code: bundle exec middleman build --verbose
+deploy:
+    steps:
+        # Execute the heroku-deploy, heroku details can be edited
+        # online at http://app.wercker.com/
+        #- heroku-deploy
+
+        # Execute the s3sync deploy step, a step provided by wercker
+        - s3sync:
+            source_dir: build/
+            delete-removed: true
+            bucket-url: $AWS_BUCKET_URL
+            key-id: $AWS_ACCESS_KEY_ID
+            key-secret: $AWS_SECRET_ACCESS_KEY
+            opts: |
+                --add-header Cache-Control:max-age=60
+                --no-preserve

@@ -1,0 +1,59 @@
+@mixin active-tab {
+  background: $c-blue;
+
+  svg {
+    fill: $c-white;
+  }
+}
+
+.nav-tabs {
+  border-radius: 5px;
+  border: 1px solid $c-blue;
+  display: flex;
+  width: 60%;
+  max-width: 300px;
+  text-align: center;
+
+  .tab {
+    height: $toolbar-height - 30px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  svg {
+    height: 70%;
+    width: auto;
+    display: block;
+    fill: $c-blue;
+  }
+}
+
+.map-active {
+  .map-tab {
+    @include active-tab;
+  }
+}
+
+.message-active {
+  .message-tab {
+    @include active-tab;
+  }
+
+  .location,
+  .onboarding-button {
+    visibility: hidden;
+  }
+}
+
+.location {
+  fill: transparent;
+  stroke: $c-blue;
+  stroke-width: 3px;
+
+  &.active {
+    fill: $c-blue;
+  }
+}
