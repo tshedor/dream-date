@@ -20,7 +20,7 @@
 
     audio.addEventListener('ended', function() {
       this.currentTime = 0;
-      EX.plot.missionObjectiveDidUpdate();
+      DD.plot.missionObjectiveDidUpdate();
     });
 
     return audio;
@@ -40,8 +40,8 @@
     scrubber_handle.style.width = (offset * 100) + '%';
   }
 
-  EX.player = {
-    audio_folder: '/assets/audio/missions/',
+  DD.player = {
+    audio_folder: '/static/audio/missions/',
     audio: null,
 
     ready: function() {
@@ -56,69 +56,68 @@
     },
 
     play: function() {
-      EX.player.scrubber.setAttribute('max', EX.player.audio.duration);
+      this.scrubber.setAttribute('max', this.audio.duration);
       this.audio.addEventListener('timeupdate', updateScrubber);
-      this.control_button.src = '/assets/images/controls/pause.svg';
+      this.control_button.src = this.control_button.getAttribute('data-pause-src');
       this.audio.play();
     },
 
     pause: function() {
       this.audio.removeEventListener('timeupdate', updateScrubber);
-      this.control_button.src = '/assets/images/controls/play.svg';
+      this.control_button.src = this.control_button.getAttribute('data-play-src');
       this.audio.pause();
     },
 
     controlsEventListeners: function() {
       function onControlClick() {
-        if( EX.player.audio.paused ) {
-          EX.player.play();
+        if( this.audio.paused ) {
+          this.play();
         } else {
-          EX.player.pause();
+          this.pause();
         }
       }
 
-      this.control_button.addEventListener('click', onControlClick);
+      this.control_button.addEventListener('click', onControlClick.bind(this) );
 
       // Fired on both previous and next
       function trackSkippers(new_src) {
-        EX.player.audio.pause();
-        EX.player.audio.currentTime = 0;
-        EX.player.audio.src = new_src;
+        this.audio.pause();
+        this.audio.currentTime = 0;
+        this.audio.src = new_src;
 
-        EX.player.audio.load();
+        this.audio.load();
       }
 
       // Next is pressed
       function onNextClick() {
-        trackSkippers( this.getAttribute('data-src') );
+        trackSkippers.call(DD.player, this.getAttribute('data-src') );
       }
 
       // Previous is pressed
       function onPreviousClick() {
-        trackSkippers( this.getAttribute('data-src') );
+        trackSkippers.call(DD.player, this.getAttribute('data-src') );
       }
 
-      this.next_button.addEventListener('click', onNextClick);
-      this.previous_button.addEventListener('click', onPreviousClick);
+      // this.next_button.addEventListener('click', onNextClick);
+      // this.previous_button.addEventListener('click', onPreviousClick);
 
       // Slider is moved
       var scrubber_handle = document.getElementById('js-scrubber-handle');
 
       function onScrubberChange() {
-        var scrubber_input_val = parseInt( EX.player.scrubber.value );
-        var offset = scrubber_input_val / parseInt( EX.player.scrubber.getAttribute('max') );
+        var scrubber_input_val = parseInt( this.scrubber.value );
+        var offset = scrubber_input_val / parseInt( this.scrubber.getAttribute('max') );
 
-        EX.player.audio.currentTime = scrubber_input_val;
+        this.audio.currentTime = scrubber_input_val;
         scrubber_handle.style.width = (offset * 100) + '%';
       }
 
-      this.scrubber.addEventListener('input', onScrubberChange);
+      this.scrubber.addEventListener('input', onScrubberChange.bind(this));
     },
 
     missionObjectiveDidUpdate: function() {
-      var is_a_track = EX.plot.current_mission.isProgressATrack();
-      var is_previous_enabled = EX.plot.current_mission.isPreviousEnabled();
-      var is_next_enabled = EX.plot.current_mission.isNextEnabled();
+      var is_a_track = DD.plot.current_mission.type === 'audio';
+      var is_next_enabled = DD.plot.isNextEnabled();
 
       this.audio.pause();
       FCH.removeClass(this.control_button, 'notify');
@@ -129,7 +128,6 @@
         FCH.addClass(this.control_button, 'notify')
       }
 
-      this.previous_button.setAttribute( 'disabled', is_previous_enabled );
       this.next_button.setAttribute( 'disabled', is_next_enabled );
     }
   };

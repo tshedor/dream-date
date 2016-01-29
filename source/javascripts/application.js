@@ -1,11 +1,10 @@
 //= require frob_core_helpers
+//= require mission
 
-//= require ex
-//= require ex.constants
-//= require ex.locate
-//= require ex.navigation
-//= require ex.player
-//= require ex.plot
-//= require ex.populate
-//= require ex.populate
-//= require ex.init
+//= require dd
+//= require dd.constants
+//= require dd.locate
+//= require dd.navigation
+//= require dd.player
+//= require dd.plot
+//= require dd.init

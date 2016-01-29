@@ -2,4 +2,4 @@
 
 'use strict';
 
-var EX = {};
+var DD = {};
