@@ -1,9 +1,13 @@
 .location {
-  fill: transparent;
-  stroke: $c-white;
-  stroke-width: 2px;
+  svg {
+    fill: transparent;
+    stroke: $c-white;
+    stroke-width: 2px;
+  }
 
   &.active {
-    fill: $c-white;
+    svg {
+      fill: $c-white;
+    }
   }
 }

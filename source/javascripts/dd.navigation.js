@@ -42,15 +42,13 @@
 
     snapSwitcher: function() {
       var switcher = document.getElementById('js-switcher');
-      var threshold = 50;
+      var threshold = 10;
 
       function switcherUpdate(e, scroll) {
         if(scroll) {
           this.switcher_y_pos = switcher.scrollTop;
         } else {
-          var touches = e.originalEvent.touches[0];
-
-          this.switcher_y_pos = touches.pageY;
+          this.switcher_y_pos = e.originalEvent.touches[0].pageY;
         }
       }
 
@@ -58,18 +56,20 @@
         var pos_y;
 
         if(scroll) {
-          pos_y = switcher.scrollTop;
+          pos_y = switcher.scrollTop - this.switcher_y_pos;
         } else {
-          pos_y = e.originalEvent.touches[0].pageY;
+          pos_y = e.originalEvent.touches[0].pageY - this.switcher_y_pos;
         }
 
         var plus_threshold = this.switcher_y_pos + threshold;
         var minus_threshold = this.switcher_y_pos - threshold;
 
         if(pos_y >= plus_threshold) {
-          alert('increase');
+          console.log('increase');
+
         } else if (pos_y <= minus_threshold ) {
-          alert('decrease');
+          console.log('decrease');
+
         }
       }
 
@@ -78,8 +78,9 @@
         switcher.addEventListener('touchend', switcherUpdate.bind(this, false));
         switcher.addEventListener('touchmove', switcherMoveUpdate.bind(this, false));
       } else {
+        // Fire after it's moved a bit
+        switcher.addEventListener('scroll', FCH.debounce( switcherUpdate.bind(this, true) ) );
         switcher.addEventListener('scroll', switcherMoveUpdate.bind(this, true));
-        switcher.addEventListener('scroll', FCH.debounce( switcherMoveUpdate.bind(this, true) ));
       }
     }
 
