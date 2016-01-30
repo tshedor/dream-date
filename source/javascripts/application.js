@@ -1,3 +1,4 @@
+//= require modernizr
 //= require frob_core_helpers
 //= require mission
 

@@ -10,6 +10,10 @@
   align-items: center;
 }
 
+.control-button {
+  padding: 0 20px 0 0;
+}
+
 .handle {
   position: absolute;
   left: 0;
@@ -40,9 +44,38 @@
 }
 
 .scrubber {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   height: 3px;
   background: $c-dark-gray;
   position: relative;
+}
+
+.switcher {
+  width: 50px;
+  text-align: center;
+  height: 50px;
+  overflow: scroll;
+  scroll-snap-type: mandatory;
+  scroll-snap-points-x: repeat(50px);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+    padding: 4px 0;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
+.inner-switcher {
 }

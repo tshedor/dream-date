@@ -1,6 +1,12 @@
 .player#js-player
-  img.button.control-button#js-control-button src=image_path('controls/play.svg') data-pause-src=image_path('controls/pause.svg') data-play-src=image_path('controls/play.svg')
+  .control-button
+    img.button#js-control-button src=image_path('controls/play.svg') data-pause-src=image_path('controls/pause.svg') data-play-src=image_path('controls/play.svg')
 
   .scrubber
     input#js-scrubber type="range"
     .handle#js-scrubber-handle
+
+  .switcher#js-switcher
+    .inner-switcher
+      - (1..4).each do |i|
+        img id="js-scene-#{i}" src=image_path("controls/#{i}.svg") alt=i

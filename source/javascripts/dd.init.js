@@ -2,4 +2,4 @@
 
 'use strict';
 
-;(function() { FCH.init(DD); })();
+;(function() { window.FCH = new FrobCoreHelpers(DD); })();
