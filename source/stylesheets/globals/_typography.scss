@@ -31,10 +31,6 @@ h2 {
   @include bp(medium-down) {
     font-size: 2.3rem;
   }
-
-  span {
-    color: $c-orange;
-  }
 }
 
 h3 {

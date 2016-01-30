@@ -9,22 +9,11 @@ $breakpoints: ();
 $breakpoints: map-merge($fine-breakpoints, $breakpoints);
 
 //Default colors (doesn't really need to be changed)
-$c-gray: rgb(236, 233, 228);
-$c-dark_gray: rgb(187, 185,184);
+$c-gray: #bfbfbf;
+$c-dark_gray: #484848;
 
-$c-beige: #dCd2b6;
-
-$c-orange: #ef9f25;
-$c-blue: #558c93;
-$c-light-blue: #1597b9;
-$c-red: #e4632d;
-
-// Messages
-$c-imessage-gray: #E5E5EA;
-$c-imessage-blue: #0B93F6;
-
-// Credits
-$c-credits-header: rgb(199, 187, 164);
+$c-red: #ff5d73;
+$c-blue: #66a6f0;
 
 $f-headline: $f-sans;
 $f-content: $f-sans;
