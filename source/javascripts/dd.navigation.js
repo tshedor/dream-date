@@ -42,45 +42,52 @@
 
     snapSwitcher: function() {
       var switcher = document.getElementById('js-switcher');
+      var inner = document.getElementById('js-inner-switcher');
       var threshold = 10;
+      var switcher_space = 50;
 
-      function switcherUpdate(e, scroll) {
-        if(scroll) {
-          this.switcher_y_pos = switcher.scrollTop;
-        } else {
-          this.switcher_y_pos = e.originalEvent.touches[0].pageY;
-        }
+      function switcherUpdate(e) {
+        this.switcher_y_pos = e.originalEvent.touches[0].pageY;
       }
 
-      function switcherMoveUpdate(e, scroll) {
-        var pos_y;
-
-        if(scroll) {
-          pos_y = switcher.scrollTop - this.switcher_y_pos;
-        } else {
-          pos_y = e.originalEvent.touches[0].pageY - this.switcher_y_pos;
-        }
+      function switcherMoveUpdate(e) {
+        var pos_y = e.originalEvent.touches[0].pageY - this.switcher_y_pos;
 
         var plus_threshold = this.switcher_y_pos + threshold;
         var minus_threshold = this.switcher_y_pos - threshold;
 
         if(pos_y >= plus_threshold) {
-          console.log('increase');
+          changeItem(true);
 
         } else if (pos_y <= minus_threshold ) {
-          console.log('decrease');
+          changeItem(false)
 
         }
       }
 
+      function changeItem(next) {
+        next = FCH.setDefault(next, true);
+        var style = inner.getAttribute('style');
+        var transform = 0;
+        var y_regex = new RegExp(/.*3d\(0\,(-?\d{1,3})px\,0\)/);
+
+        var transform = parseInt( inner.getAttribute('style').match(y_regex)[1] );
+
+        if(next) {
+          transform -= switcher_space;
+        } else {
+          transform += switcher_space;
+        }
+
+        inner.setAttribute('style', 'transform: translate3d(0,' + transform + 'px,0)');
+      }
+
       if(Modernizr.touch) {
-        switcher.addEventListener('touchstart', switcherUpdate.bind(this, false));
-        switcher.addEventListener('touchend', switcherUpdate.bind(this, false));
-        switcher.addEventListener('touchmove', switcherMoveUpdate.bind(this, false));
+        switcher.addEventListener('touchstart', switcherUpdate.bind(this));
+        switcher.addEventListener('touchend', switcherUpdate.bind(this));
+        switcher.addEventListener('touchmove', switcherMoveUpdate.bind(this));
       } else {
-        // Fire after it's moved a bit
-        switcher.addEventListener('scroll', FCH.debounce( switcherUpdate.bind(this, true) ) );
-        switcher.addEventListener('scroll', switcherMoveUpdate.bind(this, true));
+        switcher.addEventListener('click', changeItem);
       }
     }
 

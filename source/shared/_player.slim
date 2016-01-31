@@ -7,6 +7,6 @@
     .handle#js-scrubber-handle
 
   .switcher#js-switcher
-    .inner-switcher
+    .inner-switcher#js-inner-switcher style="transform: translate3d(0,0px,0)"
       - (1..4).each do |i|
         img id="js-scene-#{i}" src=image_path("controls/#{i}.svg") alt=i
