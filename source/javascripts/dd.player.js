@@ -11,7 +11,7 @@
    */
   function initPlayer(audio_folder) {
     var audio = new Audio();
-    audio.src = audio_folder + '1.0_1.mp3';
+    audio.src = audio_folder + '0.mp3';
 
     audio.addEventListener('load', function() {
       scrubber.setAttribute('max', this.duration);
@@ -47,8 +47,6 @@
     ready: function() {
       this.scrubber = scrubber;
       this.control_button = document.getElementById('js-control-button');
-      this.previous_button = document.getElementById('js-previous-button');
-      this.next_button = document.getElementById('js-next-button');
 
       this.audio = initPlayer( this.audio_folder );
 
@@ -68,6 +66,9 @@
       this.audio.pause();
     },
 
+    /**
+     * Event listeners for play/pause and the scrubber
+     */
     controlsEventListeners: function() {
       function onControlClick() {
         if( this.audio.paused ) {
@@ -78,28 +79,6 @@
       }
 
       this.control_button.addEventListener('click', onControlClick.bind(this) );
-
-      // Fired on both previous and next
-      function trackSkippers(new_src) {
-        this.audio.pause();
-        this.audio.currentTime = 0;
-        this.audio.src = new_src;
-
-        this.audio.load();
-      }
-
-      // Next is pressed
-      function onNextClick() {
-        trackSkippers.call(DD.player, this.getAttribute('data-src') );
-      }
-
-      // Previous is pressed
-      function onPreviousClick() {
-        trackSkippers.call(DD.player, this.getAttribute('data-src') );
-      }
-
-      // this.next_button.addEventListener('click', onNextClick);
-      // this.previous_button.addEventListener('click', onPreviousClick);
 
       // Slider is moved
       var scrubber_handle = document.getElementById('js-scrubber-handle');
@@ -115,9 +94,21 @@
       this.scrubber.addEventListener('input', onScrubberChange.bind(this));
     },
 
+    /**
+     * Update audio with new track based on the current mission
+     * @param {Integer} id - Mission ID
+     * @see  DD.plot.resume
+     */
+    resumeTrack: function(id) {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+      this.audio.src = this.audio_folder + id + '.mp3';
+
+      this.audio.load();
+    },
+
     missionObjectiveDidUpdate: function() {
       var is_a_track = DD.plot.current_mission.type === 'audio';
-      var is_next_enabled = DD.plot.isNextEnabled();
 
       this.audio.pause();
       FCH.removeClass(this.control_button, 'notify');

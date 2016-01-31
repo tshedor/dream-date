@@ -1,3 +1,6 @@
+$switcher-next-shadow: 0 8px 9px -7px $c-white;
+$switcher-prev-shadow: 0 -8px 9px -7px $c-white;
+
 .player {
   @extend %bg-pattern;
   @include stack($view-stack);
@@ -54,28 +57,36 @@
 .switcher {
   width: 50px;
   text-align: center;
-  height: 50px;
-  overflow: scroll;
-  scroll-snap-type: mandatory;
-  scroll-snap-points-x: repeat(50px);
+  height: 54px;
+  overflow: hidden;
+  transition: box-shadow 0.3s;
 
-  &::-webkit-scrollbar {
-    display: none;
+  &.-next {
+    box-shadow: $switcher-next-shadow;
+
+    &.-prev {
+      box-shadow: $switcher-next-shadow, $switcher-prev-shadow;
+    }
+  }
+
+  &.-prev {
+   box-shadow: $switcher-prev-shadow;;
   }
 
   img {
     display: block;
     margin: 0 auto;
-    padding: 4px 0;
+    padding: 3px 0;
+    height: 51px;
+    width: auto;
+    transition: opacity 0.4s ease;
 
-    &:first-child {
-      padding-top: 0;
-    }
-
-    &:last-child {
-      padding-bottom: 0;
+    &.-disabled {
+      opacity: 0.7;
     }
   }
 }
+
 .inner-switcher {
+  transition: transform 0.2s;
 }

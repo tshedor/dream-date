@@ -18,7 +18,7 @@
    * @return {Int} maximum progress
    */
   function loadMaximumProgress(id) {
-    var stored_maximum = FCH.localGet('dreamdateappcom_maximum_progress' + id);
+    var stored_maximum = FCH.localGet('dreamdateappcom_max_progress' + id);
 
     if(stored_maximum) {
       stored_maximum = stored_maximum.split(',');
@@ -32,7 +32,7 @@
         initial_max_progress.push( 0 );
       }
 
-      FCH.localSet('dreamdateappcom_maximum_progress' + id, initial_max_progress.join(',') );
+      FCH.localSet('dreamdateappcom_max_progress' + id, initial_max_progress.join(',') );
 
       return 0;
     }
@@ -52,31 +52,40 @@
     this.type = '';
     this.destinationCoordinate = null;
     this.destinationObjective = null;
-    this.maximum_progress = max_progress;
+    this.max_progress = max_progress;
+    this.mission_node = document.getElementById('js-scene-' + this.id);
+
+    // If max_progress is greater than 0 or is equal/lessthan max mission, then remove the disabled specifier
+    if(this.max_progress || this.id <= DD.constants.max_mission) {
+      FCH.removeClass( this.mission_node, '-disabled');
+    }
 
     this.objectives = DD.constants.missions[this.id].objectives;
 
-    Object.defineProperty(this, 'maximum_progress', {
+    Object.defineProperty(this, 'max_progress', {
       get: function() {
-        var stored_maximum = FCH.localGet('dreamdateappcom_maximum_progress' + this.id);
+        var stored_maximum = FCH.localGet('dreamdateappcom_max_progress' + this.id);
         stored_maximum = stored_maximum.split(',');
 
         return parseInt( stored_maximum[this.id] );
       },
 
       set: function(new_value) {
-        var stored_maximum = FCH.localGet('dreamdateappcom_maximum_progress' + this.id);
+        var stored_maximum = FCH.localGet('dreamdateappcom_max_progress' + this.id);
         stored_maximum = stored_maximum.split(',');
 
         stored_maximum[ this.id ] = new_value;
 
-        FCH.localSet('dreamdateappcom_maximum_progress' + this.id, stored_maximum.join(','));
-
-        return new_value;
+        FCH.localSet('dreamdateappcom_max_progress' + this.id, stored_maximum.join(','));
       }
-    })
+    });
 
+    var private_progress;
     Object.defineProperty(this, 'progress', {
+      get: function() {
+        return private_progress;
+      },
+
       set: function(new_value) {
         this.destinationCoordinate = null;
         this.destinationObjective = null;
@@ -84,7 +93,7 @@
         // TODO - does this execute BEFORE or AFTER the progress is set?
         DD.plot.missionObjectiveDidUpdate();
 
-        return new_value;
+        private_progress = new_value;
       }
     });
 
@@ -99,12 +108,12 @@
     var executeNext = this.objectives[String(objective)];
 
     // Update maximum progress if it's less than the new progress
-    if(this.maximum_progress < objective) {
-      this.maximum_progress = objective;
+    if(this.max_progress < objective) {
+      this.max_progress = objective;
     }
 
     if(objective === 100) {
-      this.maximum_progress = 100;
+      this.max_progress = 100;
       DD.plot.nextMission();
     } else {
       if(objective === 0) {

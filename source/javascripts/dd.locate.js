@@ -5,23 +5,6 @@
   DD.locate = {
     /** @type {Boolean} Is geolocation approved and possible? */
     accessible: true,
-    /** @type {Boolean} Is the app currently watching location changes? */
-
-    is_tracking: false,
-
-    set is_tracking(new_value) {
-      var location_button = document.getElementById('js-location');
-
-      if(new_value) {
-        FCH.addClass(location_button, 'active');
-
-      } else {
-        FCH.removeClass(location_button, 'active');
-
-      }
-
-      return new_value;
-    },
 
     /** @type {Double} */
     lat: null,
@@ -30,6 +13,28 @@
 
     ready: function() {
       this.watchLocation();
+
+      /** @type {Boolean} Is the app currently watching location changes? */
+      var private_is_tracking = false;
+
+      Object.defineProperty(this, 'is_tracking', {
+        get: function(){
+          return private_is_tracking;
+        },
+
+        set: function(new_value){
+          var location_button = document.getElementById('js-location');
+
+          if(new_value) {
+            FCH.addClass(location_button, 'active');
+          } else {
+            FCH.removeClass(location_button, 'active');
+          }
+
+          this.is_tracking = new_value;
+        },
+      });
+
     },
 
     /**

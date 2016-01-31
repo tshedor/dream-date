@@ -3,6 +3,20 @@
 (function() {
 
   DD.constants = {
+    ready: function() {
+      this.setDefaults();
+    },
+
+    setDefaults: function() {
+      if(!this.last_mission) {
+        this.last_mission = 0;
+      }
+
+      if(!this.max_mission) {
+        this.max_mission = 0;
+      }
+    },
+
     get last_mission() {
       return parseInt( FCH.localGet('dreamdateappcom_last_mission_id') );
     },

@@ -1,6 +1,6 @@
 /*!
  * modernizr v3.3.1
- * Build http://modernizr.com/download?-cssmask-flexbox-geolocation-scrollsnappoints-smil-svgclippaths-svgfilters-touchevents-setclasses-dontmin
+ * Build http://modernizr.com/download?-flexbox-touchevents-setclasses-dontmin
  *
  * Copyright (c)
  *  Faruk Ates
@@ -86,66 +86,6 @@
   // Overwrite name so constructor name is nicer :D
   Modernizr = new Modernizr();
 
-
-/*!
-{
-  "name": "Geolocation API",
-  "property": "geolocation",
-  "caniuse": "geolocation",
-  "tags": ["media"],
-  "notes": [{
-    "name": "MDN documentation",
-    "href": "https://developer.mozilla.org/en-US/docs/WebAPI/Using_geolocation"
-  }],
-  "polyfills": [
-    "joshuabell-polyfill",
-    "webshims",
-    "geo-location-javascript",
-    "geolocation-api-polyfill"
-  ]
-}
-!*/
-/* DOC
-Detects support for the Geolocation API for users to provide their location to web applications.
-*/
-
-  // geolocation is often considered a trivial feature detect...
-  // Turns out, it's quite tricky to get right:
-  //
-  // Using !!navigator.geolocation does two things we don't want. It:
-  //   1. Leaks memory in IE9: github.com/Modernizr/Modernizr/issues/513
-  //   2. Disables page caching in WebKit: webk.it/43956
-  //
-  // Meanwhile, in Firefox < 8, an about:config setting could expose
-  // a false positive that would throw an exception: bugzil.la/688158
-
-  Modernizr.addTest('geolocation', 'geolocation' in navigator);
-
-/*!
-{
-  "name": "SVG filters",
-  "property": "svgfilters",
-  "caniuse": "svg-filters",
-  "tags": ["svg"],
-  "builderAliases": ["svg_filters"],
-  "authors": ["Erik Dahlstrom"],
-  "notes": [{
-    "name": "W3C Spec",
-    "href": "https://www.w3.org/TR/SVG11/filters.html"
-  }]
-}
-!*/
-
-  // Should fail in Safari: https://stackoverflow.com/questions/9739955/feature-detecting-support-for-svg-filters.
-  Modernizr.addTest('svgfilters', function() {
-    var result = false;
-    try {
-      result = 'SVGFEColorMatrixElement' in window &&
-        SVGFEColorMatrixElement.SVG_FECOLORMATRIX_TYPE_SATURATE == 2;
-    }
-    catch (e) {}
-    return result;
-  });
 
 
   /**
@@ -328,60 +268,6 @@ Detects support for the Geolocation API for users to provide their location to w
   // expose these for the plugin API. Look in the source for how to join() them against your input
   ModernizrProto._prefixes = prefixes;
 
-
-
-  /**
-   * Object.prototype.toString can be used with every object and allows you to
-   * get its class easily. Abstracting it off of an object prevents situations
-   * where the toString property has been overridden
-   *
-   * @access private
-   * @function toStringFn
-   * @returns {function} An abstracted toString function
-   */
-
-  var toStringFn = ({}).toString;
-
-/*!
-{
-  "name": "SVG clip paths",
-  "property": "svgclippaths",
-  "tags": ["svg"],
-  "notes": [{
-    "name": "Demo",
-    "href": "http://srufaculty.sru.edu/david.dailey/svg/newstuff/clipPath4.svg"
-  }]
-}
-!*/
-/* DOC
-Detects support for clip paths in SVG (only, not on HTML content).
-
-See [this discussion](https://github.com/Modernizr/Modernizr/issues/213) regarding applying SVG clip paths to HTML content.
-*/
-
-  Modernizr.addTest('svgclippaths', function() {
-    return !!document.createElementNS &&
-      /SVGClipPath/.test(toStringFn.call(document.createElementNS('http://www.w3.org/2000/svg', 'clipPath')));
-  });
-
-/*!
-{
-  "name": "SVG SMIL animation",
-  "property": "smil",
-  "caniuse": "svg-smil",
-  "tags": ["svg"],
-  "notes": [{
-  "name": "W3C Synchronised Multimedia spec",
-  "href": "https://www.w3.org/AudioVideo/"
-  }]
-}
-!*/
-
-  // SVG SMIL animation
-  Modernizr.addTest('smil', function() {
-    return !!document.createElementNS &&
-      /SVGAnimate/.test(toStringFn.call(document.createElementNS('http://www.w3.org/2000/svg', 'animate')));
-  });
 
 
   /**
@@ -1036,56 +922,6 @@ Detects support for the Flexible Box Layout model, a.k.a. Flexbox, which allows 
 */
 
   Modernizr.addTest('flexbox', testAllProps('flexBasis', '1px', true));
-
-/*!
-{
-  "name": "CSS Mask",
-  "caniuse": "css-masks",
-  "property": "cssmask",
-  "tags": ["css"],
-  "builderAliases": ["css_mask"],
-  "notes": [
-    {
-      "name": "Webkit blog on CSS Masks",
-      "href": "https://webkit.org/blog/181/css-masks/"
-    },
-    {
-      "name": "Safari Docs",
-      "href": "https://developer.apple.com/library/safari/#documentation/InternetWeb/Conceptual/SafariVisualEffectsProgGuide/Masks/Masks.html"
-    },
-    {
-      "name": "CSS SVG mask",
-      "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/mask"
-    },
-    {
-      "name": "Combine with clippaths for awesomeness",
-      "href": "https://generic.cx/for/webkit/test.html"
-    }
-  ]
-}
-!*/
-
-  Modernizr.addTest('cssmask', testAllProps('maskRepeat', 'repeat-x', true));
-
-/*!
-{
-  "name": "Scroll Snap Points",
-  "property": "scrollsnappoints",
-  "notes": [{
-    "name": "Setting native-like scrolling offsets in CSS with Scrolling Snap Points",
-    "href": "http://generatedcontent.org/post/66817675443/setting-native-like-scrolling-offsets-in-css-with"
-  },{
-    "name": "MDN Article",
-    "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Scroll_Snap_Points"
-  }],
-  "polyfills": ["scrollsnap"]
-}
-!*/
-/* DOC
-Detects support for CSS Snap Points
-*/
-
-    Modernizr.addTest('scrollsnappoints', testAllProps('scrollSnapType'));
 
 
   // Run each test
