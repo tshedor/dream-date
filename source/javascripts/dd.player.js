@@ -3,6 +3,8 @@
 (function() {
   var scrubber = document.getElementById('js-scrubber');
   var scrubber_handle = document.getElementById('js-scrubber-handle');
+  var audio_folder = '/static/audio/missions/';
+  var control_button = document.getElementById('js-control-button');
 
   /**
    * Create main audio player instance
@@ -40,58 +42,54 @@
     scrubber_handle.style.width = (offset * 100) + '%';
   }
 
+  /**
+   * Event listeners for play/pause and the scrubber
+   */
+  function controlsEventListeners() {
+    function onControlClick() {
+      if( this.audio.paused ) {
+        this.play();
+      } else {
+        this.pause();
+      }
+    }
+
+    control_button.addEventListener('click', onControlClick.bind(this) );
+
+    // Slider is moved
+    var scrubber_handle = document.getElementById('js-scrubber-handle');
+
+    function onScrubberChange() {
+      var scrubber_input_val = parseInt( scrubber.value );
+      var offset = scrubber_input_val / parseInt( scrubber.getAttribute('max') );
+
+      this.audio.currentTime = scrubber_input_val;
+      scrubber_handle.style.width = (offset * 100) + '%';
+    }
+
+    scrubber.addEventListener('input', onScrubberChange.bind(this));
+  }
+
   DD.player = {
-    audio_folder: '/static/audio/missions/',
     audio: null,
 
     ready: function() {
-      this.scrubber = scrubber;
-      this.control_button = document.getElementById('js-control-button');
+      this.audio = initPlayer( audio_folder );
 
-      this.audio = initPlayer( this.audio_folder );
-
-      this.controlsEventListeners();
+      controlsEventListeners.call(this);
     },
 
     play: function() {
-      this.scrubber.setAttribute('max', this.audio.duration);
+      scrubber.setAttribute('max', this.audio.duration);
       this.audio.addEventListener('timeupdate', updateScrubber);
-      this.control_button.src = this.control_button.getAttribute('data-pause-src');
+      control_button.src = control_button.getAttribute('data-pause-src');
       this.audio.play();
     },
 
     pause: function() {
       this.audio.removeEventListener('timeupdate', updateScrubber);
-      this.control_button.src = this.control_button.getAttribute('data-play-src');
+      control_button.src = control_button.getAttribute('data-play-src');
       this.audio.pause();
-    },
-
-    /**
-     * Event listeners for play/pause and the scrubber
-     */
-    controlsEventListeners: function() {
-      function onControlClick() {
-        if( this.audio.paused ) {
-          this.play();
-        } else {
-          this.pause();
-        }
-      }
-
-      this.control_button.addEventListener('click', onControlClick.bind(this) );
-
-      // Slider is moved
-      var scrubber_handle = document.getElementById('js-scrubber-handle');
-
-      function onScrubberChange() {
-        var scrubber_input_val = parseInt( this.scrubber.value );
-        var offset = scrubber_input_val / parseInt( this.scrubber.getAttribute('max') );
-
-        this.audio.currentTime = scrubber_input_val;
-        scrubber_handle.style.width = (offset * 100) + '%';
-      }
-
-      this.scrubber.addEventListener('input', onScrubberChange.bind(this));
     },
 
     /**
@@ -102,7 +100,7 @@
     resumeTrack: function(id) {
       this.audio.pause();
       this.audio.currentTime = 0;
-      this.audio.src = this.audio_folder + id + '.mp3';
+      this.audio.src = audio_folder + id + '.mp3';
 
       this.audio.load();
     },
@@ -111,12 +109,12 @@
       var is_a_track = DD.plot.current_mission.type === 'audio';
 
       this.audio.pause();
-      FCH.removeClass(this.control_button, 'notify');
+      FCH.removeClass(control_button, 'notify');
       this.audio.currentTime = 0;
-      this.scrubber.value = 0;
+      scrubber.value = 0;
 
       if( is_a_track ) {
-        FCH.addClass(this.control_button, 'notify')
+        FCH.addClass(control_button, 'notify')
       }
 
       this.next_button.setAttribute( 'disabled', is_next_enabled );

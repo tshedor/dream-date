@@ -22,7 +22,6 @@
 
     ready: function() {
       var private_mission;
-
       Object.defineProperty(this, 'current_mission', {
         get: function() {
           return private_mission;

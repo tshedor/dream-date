@@ -1,11 +1,10 @@
 'use strict';
 
 (function() {
+  /** @type {Boolean} Is geolocation approved and possible? */
+  var accessible = true;
 
   DD.locate = {
-    /** @type {Boolean} Is geolocation approved and possible? */
-    accessible: true,
-
     /** @type {Double} */
     lat: null,
     /** @type {Double} */
@@ -43,7 +42,7 @@
     watchLocation: function() {
       function error() {
         alert('To use Dream Date, please allow access to your location.');
-        this.accessible = false;
+        accessible = false;
       }
 
       function success(position) {
@@ -52,7 +51,7 @@
         this.lng = position.coords.longitude;
       }
 
-      if(navigator.geolocation && this.accessible) {
+      if(navigator.geolocation && accessible) {
         if(this.is_tracking) {
           return;
 
@@ -77,7 +76,7 @@
 
       } else {
         alert('Our apologies, but your browser is not supported.');
-        this.accessible = false;
+        accessible = false;
 
       }
     },
@@ -110,7 +109,7 @@
      */
     currentDistance: function(lat, lng) {
       // Exit early if no location
-      if(!navigator.geolocation || !this.accessible) {
+      if(!navigator.geolocation || !accessible) {
         console.warn('Browser not supported');
         return false;
       }
