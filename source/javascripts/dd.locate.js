@@ -31,7 +31,7 @@
             FCH.removeClass(location_button, 'active');
           }
 
-          this.is_tracking = new_value;
+          private_is_tracking = new_value;
         },
       });
 
