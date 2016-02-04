@@ -1,0 +1,20 @@
+.transcript {
+  background: rgba($c-white, 0.95);
+  overflow: scroll;
+  padding: 20px $container-padding;
+  text-align: right;
+
+  p {
+    text-align: center;
+  }
+
+  hr {
+    width: 100%;
+    max-width: 250px;
+    margin: 50px auto;
+  }
+}
+
+.transcript-close {
+  cursor: pointer;
+}

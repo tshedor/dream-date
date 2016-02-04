@@ -4,6 +4,17 @@
   var switcher = document.getElementById('js-switcher');
   var inner = document.getElementById('js-inner-switcher');
 
+  /**
+   * Display transcript window
+   */
+  function openTranscriptWindow() {
+    var id = DD.plot.current_mission.id;
+
+    var transcript_window = document.getElementById('js-transcript-' + (id + 1));
+
+    FCH.addClass(transcript_window, 'active');
+  }
+
   function hideAllViewsExcept(display_view_id){
     FCH.loopAndExecute('.js-view.active', function(view) {
       FCH.removeClass(view, 'active');
@@ -25,20 +36,25 @@
     FCH.loopAndExecute('.js-overlay-close', function(close_button) {
       close_button.addEventListener('click', hideAllViewsExcept.bind(null, false));
     });
+
+    var transcript = document.getElementById('js-transcript-button');
+    transcript.addEventListener('click', openTranscriptWindow);
   }
 
   /**
-   * Control switcher and snap numbers to box
+   * Ensure year is always updated even if a static build isn't completed
    */
-  function snapSwitcher() {
-    var swiper = new Swiper(switcher, this.updateSwitcher.bind(this), true);
+  function applyYear() {
+    var year = document.getElementById('js-year');
+    year.innerHTML = new Date().getFullYear();
   }
 
   DD.navigation = {
 
     ready: function() {
       onClickListeners();
-      snapSwitcher.call(this);
+      new Swiper(switcher, this.updateSwitcher.bind(this), true);
+      applyYear();
     },
 
     /**

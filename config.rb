@@ -23,7 +23,13 @@ set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
 
-page '/sitemap.xml', :layout => false
+page '/sitemap.xml', layout: false
+page '/map.html', layout: :zoomenabled
+with_layout :zoomenabled do
+  page '/transcripts/*'
+end
+
+activate :directory_indexes
 
 # activate :directory_indexes
 
@@ -38,8 +44,6 @@ configure :build do
   # Enable cache buster
   # https://github.com/middleman/middleman/issues/480
   activate :asset_hash, ignore: %r{^static/.*}
-
-
 
   # Use relative URLs
   # activate :relative_assets

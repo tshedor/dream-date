@@ -14,5 +14,7 @@
 /.sass-cache
 /.cache
 
+/source/transcripts
+
 # Ignore .DS_store file
 .DS_Store

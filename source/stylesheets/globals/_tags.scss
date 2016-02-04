@@ -36,3 +36,10 @@ img {
 a {
   text-decoration: none;
 }
+
+iframe {
+  height: calc(100% - #{$toolbar-height * 2});
+  overflow: hidden;
+  width: 100%;
+  border: 0;
+}
