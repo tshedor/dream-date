@@ -1,0 +1,33 @@
+.ob-cloud {
+  animation: cloud-bounce 1.8s ease-in-out 0s infinite alternate;
+  margin-bottom: 80px;
+}
+
+.ob-heart-shadow {
+  animation: heart-shadow 1.8s ease-in-out 0s infinite alternate;
+  transform: scale(0.7);
+}
+
+.ob-logo {
+  margin-top: 50px;
+}
+
+@keyframes cloud-bounce {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(25px);
+  }
+}
+
+@keyframes heart-shadow {
+  0% {
+    transform: scale(0.7);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

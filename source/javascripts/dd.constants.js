@@ -33,6 +33,14 @@
       return FCH.localSet('dreamdateappcom_max_mission_id', new_value);
     },
 
+    get has_onboarded() {
+      return FCH.localGet('dreamdateappcom_has_onboarded', new_value);
+    },
+
+    set has_onboarded(new_value) {
+      return FCH.localSet('dreamdateappcom_has_onboarded', new_value);
+    },
+
     missions: [
       {
         desc: "Opening scene",

@@ -62,7 +62,7 @@
             error.bind(this),
             {
               enableHighAccuracy: true,
-              maximumAge: 30000,
+              maximumAge: 5000,
               timeout: 27000
             }
           );

@@ -1,0 +1,30 @@
+.prompt-view {
+  background: rgba($c-black, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.prompt-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+}
+
+.prompt-action {
+  padding: 1.5em;
+
+  &:first-child {
+    padding-left: 0;
+  }
+}
+
+.prompt-description {
+  text-align: center;
+  margin: 0 0 120px;
+}

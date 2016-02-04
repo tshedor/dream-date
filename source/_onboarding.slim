@@ -1,0 +1,50 @@
+.onboarding-view.view.-overlay.js-view#js-onboarding-view
+  header.header
+    img.logo src=image_path('logo.svg')
+    img.button.js-overlay-close src=image_path('onboarding/close.svg')
+
+  .scenes
+    .onboarding-scene
+      .onboarding-graphic.logo-mark
+        img.ob-cloud src=image_path('onboarding/cloud.svg')
+        img.ob-heart-shadow src=image_path('onboarding/heart-shadow.svg')
+        img.ob-logo src=image_path('logo.svg')
+
+      .caption
+        .main-text Welcome to The Exchange
+        .sub-text A location-based audio story
+
+    .onboarding-scene
+      .onboarding-graphic.crowd
+
+      .caption
+        .main-text To unlock and hear the next chapter, visit the location noted on the map
+
+    .onboarding-scene
+      .onboarding-graphic.headphones
+
+      .caption
+        .main-text Wear headphones for the best experience
+        .sub-text If you miss something, you can always replay completed stories.
+
+    .onboarding-scene.credits-scene
+      .onboarding-graphic.credits
+        .table-header Cast
+
+        table
+          tbody
+            tr
+              td Tourist
+              td Nichole Barrett
+
+    .onboarding-scene
+      .onboarding-graphic.new-exchange
+
+      .caption
+        .main-text Do you want to have an Exchange?
+
+  ul.pagination
+    li.active
+    li
+    li
+    li

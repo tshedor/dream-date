@@ -1,10 +1,6 @@
 'use strict';
 
 (function() {
-
-  var switcher_y_pos = 0;
-  var allow_to_fire = true;
-
   var switcher = document.getElementById('js-switcher');
   var inner = document.getElementById('js-inner-switcher');
 
@@ -27,7 +23,7 @@
     onboarding.addEventListener('click', hideAllViewsExcept.bind(null, 'onboarding'));
 
     FCH.loopAndExecute('.js-overlay-close', function(close_button) {
-      close_button.addEventListener('click', hideAllViewsExcept);
+      close_button.addEventListener('click', hideAllViewsExcept.bind(null, false));
     });
   }
 
@@ -35,83 +31,7 @@
    * Control switcher and snap numbers to box
    */
   function snapSwitcher() {
-    var threshold = 30;
-
-    /**
-     * Save touch start position
-     * @param  {Event} e
-     */
-    function switcherUpdate(e) {
-      switcher_y_pos = e.touches[0].pageY;
-    }
-
-    /**
-     * Update params to allow touch move events to fire - prevents duplicate firings
-     * @return {setTimeout}
-     */
-    function resetAllowToFire() {
-      allow_to_fire = false;
-
-      function changeAllowToFire() {
-        allow_to_fire = true;
-      }
-
-      return setTimeout(changeAllowToFire, 500);
-    }
-
-    /**
-     * On touch move, advance or descrease number
-     * @boundTo DD.navigation
-     * @param  {Event} e
-     * @fires changeItem
-     */
-    function switcherMoveUpdate(e) {
-      if(!allow_to_fire) {
-        return;
-      }
-
-      var pos_y = e.touches[0].pageY;
-
-      var plus_threshold = switcher_y_pos + threshold;
-      var minus_threshold = switcher_y_pos - threshold;
-
-      if(pos_y >= plus_threshold) {
-        // Move to previous
-        this.updateSwitcher(false);
-        resetAllowToFire();
-
-      } else if (pos_y <= minus_threshold ) {
-        // Move to next
-        this.updateSwitcher(true);
-        resetAllowToFire();
-
-      }
-    }
-
-    /**
-     * Determine if switcher change will be next or previous based on click position
-     * @boundTo DD.navigation
-     * @param  {Event} e
-     */
-    function nextOrPreviousClick(e) {
-      // If on the bottom half of the switcher, go to next
-      if(e.offsetY >= 25) {
-        this.updateSwitcher(true);
-
-      // If on the top half, go to previous
-      } else {
-        this.updateSwitcher(false);
-
-      }
-    }
-
-    // Bind listeners depending on touch availability
-    if( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ) {
-      switcher.addEventListener('touchstart', switcherUpdate);
-      switcher.addEventListener('touchmove', switcherMoveUpdate.bind(this));
-    } else {
-      switcher.addEventListener('click', nextOrPreviousClick.bind(this));
-    }
+    var swiper = new Swiper(switcher, this.updateSwitcher.bind(this), true);
   }
 
   DD.navigation = {

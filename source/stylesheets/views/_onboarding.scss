@@ -1,23 +1,18 @@
-$header-margin: 50px;
-
 .onboarding-view {
-  @extend %bg-pattern;
+  background: $c-red;
   padding: 0;
   text-align: center;
   overflow: scroll;
+  color: $c-white;
 
   .header {
     border-bottom: 0;
     position: fixed;
-    top: $header-margin;
+    top: 0;
     background: none;
     left: 0;
     width: 100%;
   }
-}
-
-.logo {
-  height: $toolbar-height - 15px;
 }
 
 .scenes {
@@ -35,7 +30,8 @@ $header-margin: 50px;
 
   img {
     display: block;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -66,7 +62,7 @@ $header-margin: 50px;
     &:before {
       content: '';
       background: transparent;
-      border: 1px solid $c-blue;
+      border: 1px solid $c-white;
       border-radius: 50px;
       height: 12px;
       width: 12px;
@@ -76,7 +72,7 @@ $header-margin: 50px;
 
     &.active {
       &:before {
-        background: $c-blue;
+        background: $c-white;
       }
     }
   }
