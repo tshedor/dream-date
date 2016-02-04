@@ -11,6 +11,11 @@
   }
 }
 
+html,
+body {
+  overflow: hidden;
+}
+
 html {
   // scss-lint:disable DuplicateProperty
   font-size: 100%;
