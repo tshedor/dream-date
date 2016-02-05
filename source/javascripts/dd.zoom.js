@@ -2,11 +2,22 @@
 
 (function() {
   var zoom_box = document.getElementById('js-map-zoom');
+  var max = 3;
+  var increment = 0.5;
+  var min = 0.5;
 
+  /**
+   * Retrieve present level of zoom
+   * @return {Double}
+   */
   function zoomLevel() {
     return parseFloat( zoom_box.getAttribute('data-zoom-level') );
   }
 
+  /**
+   * Apply zoom increase or decrease
+   * @param  {Event} e
+   */
   function zoomChange(e) {
     var target = e.target;
     var is_plus = FCH.hasClass(target, '-plus');
@@ -18,23 +29,23 @@
     });
 
     if(is_plus) {
-      if(current_level < 5) {
-        modified_level += 0.5;
+      if(current_level < max) {
+        modified_level += increment;
       } else {
         FCH.addClass(target, '-disabled');
       }
 
-      if(modified_level === 5) {
+      if(modified_level === max) {
         FCH.addClass(target, '-disabled');
       }
     } else {
       if(current_level >= 1) {
-        modified_level -= 0.5;
+        modified_level -= increment;
       } else {
         FCH.addClass(target, '-disabled');
       }
 
-      if(modified_level === 0.5) {
+      if(modified_level === min) {
         FCH.addClass(target, '-disabled');
       }
     }
