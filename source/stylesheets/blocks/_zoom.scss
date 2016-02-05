@@ -1,0 +1,57 @@
+.zoom-container {
+  position: relative;
+  height: calc(100% - #{$toolbar-height * 2});
+  width: 100%;
+  overflow: hidden;
+}
+
+.zoom-scroller {
+  overflow: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+.zoom-box {
+  height: 100%;
+  z-index: 3;
+  padding: $container-padding;
+
+  img {
+    width: 100%;
+  }
+}
+
+.zoom-controls {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.zoom-control {
+  background-color: rgba($c-white, 0.92);
+  background-position: center center;
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  height: 35px;
+  width: 35px;
+  padding: 20px 30px;
+  display: inline-block;
+  border-radius: 8px;
+  border: 1px solid $c-gray;
+
+  &.-disabled {
+    background-color: rgba($c-gray, 0.92);
+  }
+
+  &.-minus {
+    background-image: image-url('minus.svg');
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &.-plus {
+    background-image: image-url('plus.svg');
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

@@ -1,0 +1,63 @@
+'use strict';
+
+(function() {
+  var zoom_box = document.getElementById('js-map-zoom');
+
+  function zoomLevel() {
+    return parseFloat( zoom_box.getAttribute('data-zoom-level') );
+  }
+
+  function zoomChange(e) {
+    var target = e.target;
+    var is_plus = FCH.hasClass(target, '-plus');
+    var current_level = zoomLevel();
+    var modified_level = current_level;
+
+    FCH.loopAndExecute('.js-zoom-control', function(control) {
+      FCH.removeClass(control, '-disabled');
+    });
+
+    if(is_plus) {
+      if(current_level < 5) {
+        modified_level += 0.5;
+      } else {
+        FCH.addClass(target, '-disabled');
+      }
+
+      if(modified_level === 5) {
+        FCH.addClass(target, '-disabled');
+      }
+    } else {
+      if(current_level >= 1) {
+        modified_level -= 0.5;
+      } else {
+        FCH.addClass(target, '-disabled');
+      }
+
+      if(modified_level === 0.5) {
+        FCH.addClass(target, '-disabled');
+      }
+    }
+
+    zoom_box.style.width = (100 * modified_level) + '%';
+    zoom_box.setAttribute('data-zoom-level', modified_level);
+  }
+
+  /**
+   * Show onboarding and remove overlay when button clicked
+   */
+  function onClickListeners() {
+    FCH.loopAndExecute('.js-zoom-control', function(control) {
+      control.addEventListener('click', zoomChange);
+    });
+  }
+
+  DD.zoom = {
+
+    ready: function() {
+      onClickListeners();
+    },
+
+  };
+
+})();
