@@ -3,6 +3,7 @@
 (function() {
   var switcher = document.getElementById('js-switcher');
   var inner = document.getElementById('js-inner-switcher');
+  var directions = document.getElementById('js-directions');
 
   /**
    * Display transcript window
@@ -39,6 +40,8 @@
 
     var transcript = document.getElementById('js-transcript-button');
     transcript.addEventListener('click', openTranscriptWindow);
+
+    switcher.addEventListener('click', this.updateSwitcher.bind(this, true));
   }
 
   /**
@@ -49,12 +52,28 @@
     year.innerHTML = new Date().getFullYear();
   }
 
+  /**
+   * Overlay on player must be dismissed by swipe or click before scene advances
+   */
+  function directionsSpeedbump() {
+    function acknowledgeDirections(next) {
+      directions.style = 'transform: translate3d(100%, 0, 0)';
+      // FCH.removeClass(directions, 'active');
+    }
+
+    var swiper = new Swiper(directions, {
+      callback: acknowledgeDirections,
+      touch_threshold: 100,
+      click_threshold: directions.offsetWidth
+    });
+  }
+
   DD.navigation = {
 
     ready: function() {
-      onClickListeners();
-      new Swiper(switcher, this.updateSwitcher.bind(this), true);
+      onClickListeners.call(this);
       applyYear();
+      directionsSpeedbump();
     },
 
     /**
@@ -86,6 +105,11 @@
         } else {
           transform = 0;
         }
+      }
+
+      // Go back to start
+      if(transform === -200) {
+        transform = 0;
       }
 
       if(transform >= -150 && transform <= 0) {

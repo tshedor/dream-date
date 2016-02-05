@@ -1,0 +1,19 @@
+.directions {
+  background: rgba($c-white, 0.9);
+  padding: $container-padding;
+  color: $c-blue;
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate3d(0, 100%, 0);
+  will-change: transform;
+  transition: transform 0.2s;
+
+  &.active {
+    display: block;
+    transform: translate3d(0, 0, 0);
+  }
+}

@@ -14,10 +14,11 @@
 })(window, function factory(window) {
   'use strict';
 
+  var el;
   var panel_pos = 0;
   var allow_to_fire = true;
-  var threshold = 25;
-  var y_axis = true;
+  var touch_threshold;
+  var click_threshold;
   // Noop function
   var callback = function() {};
   // setTimeout object holder
@@ -33,16 +34,12 @@
       return;
     }
 
-    var new_pos;
+    var new_pos = e.touches[0].pageX;
 
-    if(y_axis) {
-      new_pos = e.touches[0].pageY;
-    } else {
-      new_pos = e.touches[0].pageX;
-    }
+    var plus_threshold = panel_pos + touch_threshold;
+    var minus_threshold = panel_pos - touch_threshold;
 
-    var plus_threshold = panel_pos + threshold;
-    var minus_threshold = panel_pos - threshold;
+    el.setAttribute('style', 'transform: translate3d(' + new_pos + 'px, 0, 0)');
 
     if(new_pos >= plus_threshold) {
       // Move to previous
@@ -58,20 +55,25 @@
   }
 
   /**
+   * If the threshold isn't cleared by touchend, bounce back to the begining
+   * @param  {Event} e
+   */
+  function panelEnd(e) {
+    var new_pos = e.changedTouches[0].pageX;
+
+    if(new_pos < touch_threshold) {
+      el.setAttribute('style', 'transform: translate3d(0, 0, 0)');
+    }
+  }
+
+  /**
    * Determine if panel change will be next or previous based on click position
    * @param  {Event} e
    * @fires callback
    */
   function nextOrPreviousClick(e) {
     // If on the bottom half of the panel, go to next
-    if(e.offsetY >= threshold) {
-      callback(true);
-
-    // If on the top half, go to previous
-    } else {
-      callback(false);
-
-    }
+    callback(true);
   }
 
   /**
@@ -79,11 +81,7 @@
    * @param  {Event} e
    */
   function panelUpdate(e) {
-    if(y_axis) {
-      panel_pos = e.touches[0].pageY;
-    } else {
-      panel_pos = e.touches[0].pageX;
-    }
+    panel_pos = e.touches[0].pageX;
   }
 
   /**
@@ -106,20 +104,23 @@
   /**
    * New Swiper object
    * @param {Node} el - Panel to watch
-   * @param {Function} private_callback - Fires with first argument (Boolean) declaring whether next pane is requested (right for X, down for Y)
-   * @param {Boolean} [along_y_axis=true] - If listener should be applied along Y or X axis
+   * @param {Object} options
+     * @param {Function} callback - Fires with first argument (Boolean) declaring whether next pane is requested (right for X, down for Y)
+     * @param {Integer} touch_threshold - How far a drag is completed before another panel is snapped
+     * @param {Integer} click_threshold - How far from the edge before a click event snaps to another panel
    * @return {Swiper}
    */
-  function Swiper(el, private_callback, along_y_axis) {
-    along_y_axis = FCH.setDefault(along_y_axis, true);
-
-    y_axis = along_y_axis;
-    callback = private_callback;
+  function Swiper(elem, options) {
+    el = elem
+    callback = options.callback;
+    touch_threshold = FCH.setDefault(options.touch_threshold, 50);
+    click_threshold = FCH.setDefault(options.click_threshold, (el.offsetWidth / 2));
 
     // Bind listeners depending on touch availability
     if( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ) {
       el.addEventListener('touchstart', panelUpdate);
       el.addEventListener('touchmove', panelMoveUpdate);
+      el.addEventListener('touchend', panelEnd);
     } else {
       el.addEventListener('click', nextOrPreviousClick);
     }

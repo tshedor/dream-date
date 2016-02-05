@@ -10,3 +10,6 @@
     .inner-switcher#js-inner-switcher style="transform: translate3d(0,0px,0)"
       - (1..4).each do |i|
         img.-disabled id="js-scene-#{i - 1}" src=image_path("controls/#{i}.svg") alt=i
+
+  .directions.active#js-directions
+    span Space Exhibit
