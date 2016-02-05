@@ -15,6 +15,7 @@
   height: 100%;
   z-index: 3;
   padding: $container-padding;
+  transition: width 0.3s;
 
   img {
     width: 100%;
