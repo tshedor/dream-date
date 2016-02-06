@@ -27,3 +27,11 @@ $view-stack: (
   '.player',
   '.view.-overlay'
 );
+
+$player-stack: (
+  '.player',
+  '.track',
+  '.progress',
+  '.handle',
+  '.directions'
+);

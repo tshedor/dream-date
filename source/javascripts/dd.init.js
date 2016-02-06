@@ -2,4 +2,4 @@
 
 'use strict';
 
-;(function() { window.FCH = new FrobCoreHelpers(DD); })();
+;(function() { window.FCH = new FrobCoreHelpers(DD, false); })();

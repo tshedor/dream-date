@@ -1,5 +1,6 @@
 .header {
   @extend %bg-pattern;
+  padding: 5px $container-padding;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -1,9 +1,10 @@
 $switcher-next-shadow: 0 8px 9px -9px $c-white;
 $switcher-prev-shadow: 0 -8px 9px -9px $c-white;
+$handle-dimension: 16px;
 
 .player {
   @extend %bg-pattern;
-  @include stack($view-stack);
+  @include stack($player-stack);
   bottom: 0;
   height: $toolbar-height;
   border-top: 1px solid $c-dark-gray;
@@ -14,48 +15,94 @@ $switcher-prev-shadow: 0 -8px 9px -9px $c-white;
 
   &:not(.-ready) {
     pointer-events: none;
+
+    &:before {
+      content: 'Loading';
+      background: rgba($c-dark-gray, 0.9);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      z-index: 9;
+      color: $c-white;
+    }
   }
 }
 
 .control-button {
-  padding: 0 20px 0 0;
+  padding: 20px 20px 20px $container-padding;
+}
+
+.track,
+.progress {
+  padding: 18px 0;
+  height: 1px;
+
+  &:before {
+    content: '';
+    height: 3px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 16px;
+    border-radius: 4px;
+  }
+}
+
+.track {
+  @include stack($player-stack);
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+
+  &:before {
+    background: $c-dark-gray;
+  }
 }
 
 .progress {
+  @include stack($player-stack);
   position: absolute;
   left: 0;
   top: 0;
-  height: 100%;
   width: 0;
   transition: width;
   will-change: width;
-  background: $c-white;
   cursor: pointer;
+
+  &:before {
+    background: $c-white;
+  }
 }
 
 .handle {
-  content: '';
+  @include stack($player-stack);
   position: absolute;
   right: -9px;
-  top: -6px;
-  background: $c-white;
-  border-radius: 50px;
-  width: 15px;
-  height: 15px;
+  top: 1px;
+  width: $handle-dimension;
+  height: $handle-dimension;
+  padding: 16px;
+
+  &:after {
+    content: '';
+    display: block;
+    background: $c-white;
+    border-radius: 50px;
+    height: $handle-dimension;
+    width: $handle-dimension;
+    position: absolute;
+    top: $handle-dimension / 2;
+    left: $handle-dimension / 2;
+  }
 }
 
 .player {
   input {
     display: none;
   }
-}
-
-.track {
-  width: 100%;
-  margin: 0 auto;
-  height: 3px;
-  background: $c-dark-gray;
-  position: relative;
 }
 
 .switcher {

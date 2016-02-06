@@ -101,6 +101,7 @@
    * Start everything up
    * @class
    * @param {Object} [jsHolder=FC] - The main JavaScript object being queried; adds functionality for DOM callbacks to all children
+   * @param {Boolean} [enable_mobile_FPS=true] - Disable pointer events when scrolling
    * @example
    * var FC = {
    *   ui: {
@@ -110,7 +111,7 @@
    * FCH.init(FC);
    * @return {FrobCoreHelpers}
    */
-  function FrobCoreHelpers(jsHolder) {
+  function FrobCoreHelpers(jsHolder, enable_mobile_FPS) {
     if (typeof FC === 'undefined') {
       var FC = {};
     }
@@ -126,6 +127,7 @@
     this.load = [];
 
     jsHolder = this.setDefault(jsHolder, FC);
+    enable_mobile_FPS = this.setDefault(enable_mobile_FPS, true);
 
     // IE detection
     this.IE10 = this.isIE(10);
@@ -135,7 +137,10 @@
     this.breakpoints();
 
     this.resize.push( this.breakpoints.bind(this) );
-    this.ready.push( this.mobileFPS.bind(this) );
+
+    if(enable_mobile_FPS) {
+      this.ready.push( this.mobileFPS.bind(this) );
+    }
 
     /* Cached jQuery variables */
     if(typeof jQuery !== 'undefined') {
