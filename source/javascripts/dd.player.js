@@ -6,7 +6,7 @@
   var scrubber = document.getElementById('js-scrubber-input');
   var progress = document.getElementById('js-scrubber-progress');
   var handle = document.getElementById('js-scrubber-handle');
-  var audio_folder = '/static/audio/';
+  var audio_folder = '/audio/';
   var control_button = document.getElementById('js-control-button');
 
   // Cache track dimensions variables so that touch operations are less expensive
