@@ -86,7 +86,7 @@
     updateSwitcher: function(next, should_fire_resume) {
       should_fire_resume = FCH.setDefault(should_fire_resume, true);
 
-      // console.log(next);
+      console.log('fire');
 
       var switcher_space = 50;
       var style = inner.getAttribute('style');
@@ -139,7 +139,7 @@
           var mission_node = document.getElementById('js-scene-' + zero_indexed_current_mission);
 
           if(!FCH.hasClass(mission_node, '-disabled')) {
-            DD.plot.resume(zero_indexed_current_mission);
+            DD.plot.resume(zero_indexed_current_mission, false);
           }
         }
       }

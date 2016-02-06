@@ -42,7 +42,15 @@
       this.resume();
     },
 
-    resume: function(id) {
+    /**
+     * Start/resume specific mission
+     * @param  {Integer} id              Mission id
+     * @param  {Boolean} update_switcher Should the switcher be modified
+     * @return {Mission}
+     */
+    resume: function(id, update_switcher) {
+      update_switcher = FCH.setDefault(update_switcher, true);
+
       if(!id) {
         var cached_mission_id = DD.constants.last_mission;
 
@@ -63,7 +71,9 @@
       }
 
       // Update switcher view
-      DD.navigation.updateSwitcher(id, false);
+      if(update_switcher) {
+        DD.navigation.updateSwitcher(id, false);
+      }
 
       return this.current_mission;
     },
