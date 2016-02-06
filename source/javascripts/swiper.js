@@ -117,7 +117,7 @@
     click_threshold = FCH.setDefault(options.click_threshold, (el.offsetWidth / 2));
 
     // Bind listeners depending on touch availability
-    if( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ) {
+    if( DD.constants.has_touch ) {
       el.addEventListener('touchstart', panelUpdate);
       el.addEventListener('touchmove', panelMoveUpdate);
       el.addEventListener('touchend', panelEnd);

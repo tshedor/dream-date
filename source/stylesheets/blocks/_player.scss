@@ -11,13 +11,17 @@ $switcher-prev-shadow: 0 -8px 9px -7px $c-white;
   left: 0;
   display: flex;
   align-items: center;
+
+  &:not(.-ready) {
+    pointer-events: none;
+  }
 }
 
 .control-button {
   padding: 0 20px 0 0;
 }
 
-.handle {
+.progress {
   position: absolute;
   left: 0;
   top: 0;
@@ -27,17 +31,17 @@ $switcher-prev-shadow: 0 -8px 9px -7px $c-white;
   will-change: width;
   background: $c-white;
   cursor: pointer;
+}
 
-  &:after {
-    content: '';
-    position: absolute;
-    right: -9px;
-    top: -6px;
-    background: $c-white;
-    border-radius: 50px;
-    width: 15px;
-    height: 15px;
-  }
+.handle {
+  content: '';
+  position: absolute;
+  right: -9px;
+  top: -6px;
+  background: $c-white;
+  border-radius: 50px;
+  width: 15px;
+  height: 15px;
 }
 
 .player {
@@ -46,7 +50,7 @@ $switcher-prev-shadow: 0 -8px 9px -7px $c-white;
   }
 }
 
-.scrubber {
+.track {
   width: 100%;
   margin: 0 auto;
   height: 3px;

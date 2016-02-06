@@ -2,14 +2,15 @@
   .control-button
     img.button#js-control-button src=image_path('controls/play.svg') data-pause-src=image_path('controls/pause.svg') data-play-src=image_path('controls/play.svg')
 
-  .scrubber
-    input#js-scrubber type="range"
-    .handle#js-scrubber-handle
+  .track#js-track
+    .progress#js-scrubber-progress
+      .handle#js-scrubber-handle
+    input#js-scrubber-input type="range"
 
   .switcher.-next#js-switcher
     .inner-switcher#js-inner-switcher style="transform: translate3d(0,0px,0)"
       - (1..4).each do |i|
         img.-disabled id="js-scene-#{i - 1}" src=image_path("controls/#{i}.svg") alt=i
 
-  .directions.active#js-directions
+  .directions#js-directions
     span Space Exhibit

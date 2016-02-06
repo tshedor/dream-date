@@ -5,6 +5,7 @@
   DD.constants = {
     ready: function() {
       this.setDefaults();
+      this.has_touch = ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch )
     },
 
     setDefaults: function() {
