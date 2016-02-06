@@ -58,7 +58,8 @@
   function directionsSpeedbump() {
     function acknowledgeDirections(next) {
       directions.style = 'transform: translate3d(100%, 0, 0)';
-      // FCH.removeClass(directions, 'active');
+      FCH.removeClass(directions, 'active');
+      DD.plot.current_mission.objectiveComplete();
     }
 
     var swiper = new Swiper(directions, {
@@ -85,6 +86,8 @@
     updateSwitcher: function(next, should_fire_resume) {
       should_fire_resume = FCH.setDefault(should_fire_resume, true);
 
+      // console.log(next);
+
       var switcher_space = 50;
       var style = inner.getAttribute('style');
       var transform = 0;
@@ -101,14 +104,14 @@
         }
       } else {
         if(next > 0) {
-          transform = (next * -50) - 50;
+          transform = (next * -50);
         } else {
           transform = 0;
         }
       }
 
       // Go back to start
-      if(transform === -200) {
+      if(transform <= -200) {
         transform = 0;
       }
 

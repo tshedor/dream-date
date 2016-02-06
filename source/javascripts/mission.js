@@ -11,6 +11,7 @@
 
 })(window, function factory(window) {
   'use strict';
+  var directions = document.getElementById('js-directions');
 
   /**
    * Retrieve maximum progress from local storage
@@ -28,7 +29,7 @@
     } else {
       var initial_max_progress = [];
 
-      for(var i = 0; i < 4; i++) {
+      for(var i = 0; i < DD.constants.mission_count; i++) {
         initial_max_progress.push( 0 );
       }
 
@@ -50,8 +51,6 @@
     this.id = id;
 
     this.type = '';
-    this.destinationCoordinate = null;
-    this.destinationObjective = null;
     this.max_progress = max_progress;
     this.mission_node = document.getElementById('js-scene-' + this.id);
 
@@ -80,7 +79,7 @@
       }
     });
 
-    var private_progress;
+    var private_progress = 0;
     Object.defineProperty(this, 'progress', {
       get: function() {
         return private_progress;
@@ -90,10 +89,12 @@
         this.destinationCoordinate = null;
         this.destinationObjective = null;
         this.progressSet(new_value);
-        // TODO - does this execute BEFORE or AFTER the progress is set?
-        DD.plot.missionObjectiveDidUpdate();
 
         private_progress = new_value;
+
+        // TODO - does this execute BEFORE or AFTER the progress is set?
+        // (it executes after)
+        DD.plot.missionObjectiveDidUpdate();
       }
     });
 
@@ -116,9 +117,7 @@
       this.max_progress = 100;
       DD.plot.nextMission();
     } else {
-      if(objective === 0) {
-        this.objectiveAction(executeNext);
-      }
+      this.objectiveAction(executeNext);
     }
   };
 
@@ -144,13 +143,15 @@
   Mission.prototype.objectiveAction = function(data) {
     this.type = data.type;
 
+    console.log(this.type);
+
     switch(this.type) {
       case 'audio' :
-        this.playAudio(data.content);
+        this.playAudio();
 
       break;
       case 'waypoint' :
-        this.addWaypoint(data.point, data.nextValue);
+        this.addWaypoint(data.content);
 
       break;
       case 'blank' :
@@ -158,6 +159,16 @@
 
       break;
     }
+  };
+
+  Mission.prototype.playAudio = function() {
+    DD.player.resumeTrack( this.id );
+  };
+
+  Mission.prototype.addWaypoint = function(waypoint_name) {
+    // Update span title
+    directions.querySelector('span').innerHTML = waypoint_name;
+    FCH.addClass(directions, 'active');
   };
 
   Mission.prototype.replay = function() {

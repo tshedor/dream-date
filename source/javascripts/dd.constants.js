@@ -3,6 +3,8 @@
 (function() {
 
   DD.constants = {
+    mission_count: 5,
+
     ready: function() {
       this.setDefaults();
       this.has_touch = ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch )
@@ -46,80 +48,85 @@
       {
         desc: "Opening scene",
         objectives: {
-          "0" : {
-              "type" : "audio",
-              "content" : "1.0_1",
-              "point" : 0,
-              "nextValue" : 90
+          '0': {
+            type: 'audio',
+            nextValue: 50
           },
-          "50" : {
-              "name" : "Lair Hill Bistro",
-              "type" : "waypoint",
-              "point" : [45.502544, -122.678885],
-              "nextValue" : 100
+          '50': {
+            type: 'waypoint',
+            content: 'Earthquake House',
+            nextValue: 100
           },
-          "100" : {
-            "type" : "blank"
+          '100': {
+            type: 'blank'
           }
         }
       },
       {
         desc: "Opening scene",
         objectives: {
-          "0" : {
-              "type" : "audio",
-              "content" : "1.0_1",
-              "point" : 0,
-              "nextValue" : 90
+          '0': {
+            type: 'audio',
+            nextValue: 50
           },
-          "50" : {
-              "name" : "Lair Hill Bistro",
-              "type" : "waypoint",
-              "point" : [45.502544, -122.678885],
-              "nextValue" : 100
+          '50': {
+            type: 'waypoint',
+            content: 'Exhibit A',
+            nextValue: 100
           },
-          "100" : {
-            "type" : "blank"
+          '100': {
+            type: 'blank'
           }
         }
       },
       {
         desc: "Opening scene",
         objectives: {
-          "0" : {
-              "type" : "audio",
-              "content" : "1.0_1",
-              "point" : 0,
-              "nextValue" : 90
+          '0': {
+            type: 'audio',
+            nextValue: 50
           },
-          "50" : {
-              "name" : "Lair Hill Bistro",
-              "type" : "waypoint",
-              "point" : [45.502544, -122.678885],
-              "nextValue" : 100
+          '50': {
+            type: 'waypoint',
+            content: 'Exhibit A',
+            nextValue: 100
           },
-          "100" : {
-            "type" : "blank"
+          '100': {
+            type: 'blank'
           }
         }
       },
       {
         desc: "Opening scene",
         objectives: {
-          "0" : {
-              "type" : "audio",
-              "content" : "1.0_1",
-              "point" : 0,
-              "nextValue" : 90
+          '0': {
+            type: 'audio',
+            nextValue: 50
           },
-          "50" : {
-              "name" : "Lair Hill Bistro",
-              "type" : "waypoint",
-              "point" : [45.502544, -122.678885],
-              "nextValue" : 100
+          '50': {
+            type: 'waypoint',
+            content: 'Exhibit A',
+            nextValue: 100
           },
-          "100" : {
-            "type" : "blank"
+          '100': {
+            type: 'blank'
+          }
+        }
+      },
+      {
+        desc: "Opening scene",
+        objectives: {
+          '0': {
+            type: 'audio',
+            nextValue: 50
+          },
+          '50': {
+            type: 'waypoint',
+            content: 'Thanks for Playing',
+            nextValue: 100
+          },
+          '100': {
+            type: 'blank'
           }
         }
       },

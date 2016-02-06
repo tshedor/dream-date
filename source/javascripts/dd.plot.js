@@ -38,25 +38,27 @@
         }
       });
 
-      seedMissions.call(this, 4);
+      seedMissions.call(this, DD.constants.mission_count);
       this.resume();
     },
 
     resume: function(id) {
-      var cached_mission_id = DD.constants.last_mission;
+      if(!id) {
+        var cached_mission_id = DD.constants.last_mission;
 
-      if(cached_mission_id) {
-        id = FCH.setDefault(id, cached_mission_id );
-      } else {
-        id = 0;
+        if(cached_mission_id) {
+          id = cached_mission_id;
+        } else {
+          id = 0;
+        }
       }
 
       this.current_mission = this.missions[id];
 
       FCH.removeClass(this.current_mission.mission_node, '-disabled');
 
-      // Resume audio if current objective is an audio type
-      if(this.current_mission.max_progress >= 50 || this.current_mission.type === 'audio') {
+      // Resume audio if current objective is an audio type (Audio always opens)
+      if(this.current_mission.max_progress <= 50 || this.current_mission.type === 'audio') {
         DD.player.resumeTrack(id);
       }
 
@@ -68,6 +70,7 @@
 
     nextMission: function() {
       var nextMissionId = this.current_mission.id + 1;
+
 
       if(nextMissionId < this.missions.length) {
         this.resume(nextMissionId);

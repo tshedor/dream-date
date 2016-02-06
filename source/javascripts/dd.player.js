@@ -131,7 +131,12 @@
 
       var track_dimensions = track.getBoundingClientRect();
       track_from_left = track_dimensions.left;
+      // Handle width + absolute positioning to the right
       track_from_right = track_dimensions.right + 24;
+
+      // setTimeout(function() {
+      //   DD.plot.current_mission.objectiveComplete();
+      // }, 1000);
     },
 
     play: function() {
@@ -158,7 +163,7 @@
       FCH.removeClass(player, '-ready');
 
       // Set button to be pause
-      control_button.src = control_button.getAttribute('data-pause-src');
+      control_button.src = control_button.getAttribute('data-play-src');
 
       // Load new track
       this.audio.pause();
@@ -176,8 +181,6 @@
       FCH.removeClass(control_button, 'notify');
       this.audio.currentTime = 0;
       scrubber.value = 0;
-
-      console.log(DD.plot.current_mission.progress)
 
       if( is_a_track ) {
         FCH.addClass(control_button, 'notify');
