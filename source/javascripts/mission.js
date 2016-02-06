@@ -143,8 +143,6 @@
   Mission.prototype.objectiveAction = function(data) {
     this.type = data.type;
 
-    console.log(this.type);
-
     switch(this.type) {
       case 'audio' :
         this.playAudio();

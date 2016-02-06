@@ -86,8 +86,6 @@
     updateSwitcher: function(next, should_fire_resume) {
       should_fire_resume = FCH.setDefault(should_fire_resume, true);
 
-      console.log('fire');
-
       var switcher_space = 50;
       var style = inner.getAttribute('style');
       var transform = 0;
@@ -111,11 +109,11 @@
       }
 
       // Go back to start
-      if(transform <= -200) {
+      if(transform <= -250) {
         transform = 0;
       }
 
-      if(transform >= -150 && transform <= 0) {
+      if(transform >= -200 && transform <= 0) {
         inner.setAttribute('style', 'transform: translate3d(0,' + transform + 'px,0)');
 
         // Update indicators of previous/next
@@ -124,7 +122,7 @@
           FCH.removeClass(switcher, '-prev');
           FCH.addClass(switcher, '-next');
 
-        } else if(current_mission === 4) {
+        } else if(current_mission === DD.constants.mission_count) {
           FCH.removeClass(switcher, '-next');
           FCH.addClass(switcher, '-prev');
 
