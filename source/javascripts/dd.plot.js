@@ -66,9 +66,7 @@
       FCH.removeClass(this.current_mission.mission_node, '-disabled');
 
       // Resume audio if current objective is an audio type (Audio always opens)
-      if(this.current_mission.max_progress <= 50 || this.current_mission.type === 'audio') {
-        DD.player.resumeTrack(id);
-      }
+      DD.player.resumeTrack(id);
 
       // Update switcher view
       if(update_switcher) {

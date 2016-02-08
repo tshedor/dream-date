@@ -11,9 +11,35 @@
 
   // Cache track dimensions variables so that touch operations are less expensive
   var track_from_left, track_from_right;
+  var track_dimensions = {
+    left: 0,
+    right: 0,
+    width: 0
+  }
   var duration;
 
   var audio = new Audio();
+
+  /**
+   * Resets audio position, scrubber, and progress bar
+   */
+  function resetAudioProgress() {
+    FCH.removeClass(control_button, 'notify');
+
+    if( !audio.paused ) {
+      this.pause();
+    }
+
+    audio.currentTime = 0;
+    scrubber.value = 0;
+    progress.style.width = '0%';
+
+    // Reset everything
+    audio.removeEventListener('canplaythrough', audioLoaded);
+    audio.removeEventListener('load', audioLoaded);
+    audio.removeEventListener('ended', audioEnded);
+    audio = null;
+  }
 
   /**
    * Once audio file is available, set duration and make player available for touch interactions
@@ -71,6 +97,8 @@
      * Play/Pause is changed
      */
     function onControlClick() {
+      FCH.removeClass(control_button, 'notify');
+
       if( audio.paused ) {
         this.play();
       } else {
@@ -106,10 +134,11 @@
      * On track click, slider updates
      */
     function onTrackTouch(e) {
-      determineAudioPosition(e.offsetX);
+      var position_click = e.pageX - track_dimensions.left;
+      var track_time = (position_click / track_dimensions.width) * duration;
+      determineAudioPosition(track_time);
     }
     track.addEventListener('click', onTrackTouch);
-    scrubber.addEventListener('click', onTrackTouch);
 
     /**
      * On handle drag, slider updates
@@ -117,19 +146,40 @@
     function onTouchHandle(e) {
       e.stopPropagation();
       var pos = e.touches[0].pageX;
-      var offset = pos - track_from_left ;
+      var offset = pos - track.left;
 
       if(pos < track_from_right) {
         determineAudioPosition(offset);
       }
     }
 
+    /**
+     * On mouse down, track mouse movement on screen and bind the mouseup listener
+     */
+    function onMouseDownHandle() {
+      document.addEventListener('mousemove', onTrackTouch);
+      document.addEventListener('mouseup', onMouseUpHandle);
+
+      DD.player.pause();
+    }
+
+    /**
+     * On mouse up, remove event listeners for mousemove and the mouseup to prevent duplicate firings
+     */
+    function onMouseUpHandle() {
+      document.removeEventListener('mousemove', onTrackTouch);
+      document.removeEventListener('mouseup', onMouseUpHandle);
+
+      DD.player.play();
+    }
+
     if(DD.constants.has_touch) {
       handle.addEventListener('touchstart', this.pause.bind(this) );
       handle.addEventListener('touchmove', onTouchHandle);
       handle.addEventListener('touchend', this.play.bind(this) );
+    } else {
+      handle.addEventListener('mousedown', onMouseDownHandle);
     }
-
   }
 
   DD.player = {
@@ -141,10 +191,11 @@
 
       controlsEventListeners.call(this);
 
-      var track_dimensions = track.getBoundingClientRect();
-      track_from_left = track_dimensions.left;
+      var track_bounds = track.getBoundingClientRect();
+      track_dimensions.left = track_bounds.left;
       // Handle width + absolute positioning to the right
-      track_from_right = track_dimensions.right + 24;
+      track_dimensions.right = track_bounds.right + 24;
+      track_dimensions.width = track.offsetWidth;
 
       // setTimeout(function() {
       //   DD.plot.current_mission.objectiveComplete();
@@ -169,22 +220,13 @@
      * Update audio with new track based on the current mission
      * @param  {Integer|String} file_name - mp3 file name within the audio_folder (usually the mission ID)
      * @see  DD.plot.resume
+     * @return {Audio}
      */
     resumeTrack: function(file_name) {
       // Disable interaction
       FCH.removeClass(player, '-ready');
 
-      if( !audio.paused ) {
-        this.pause();
-      }
-
-      audio.currentTime = 0;
-
-      // Reset everything
-      audio.removeEventListener('canplaythrough', audioLoaded);
-      audio.removeEventListener('load', audioLoaded);
-      audio.removeEventListener('ended', audioEnded);
-      audio = null;
+      resetAudioProgress.call(this);
 
       audio = new Audio();
 
@@ -207,10 +249,7 @@
     missionObjectiveDidUpdate: function() {
       var is_a_track = DD.plot.current_mission.type === 'audio';
 
-      audio.pause();
-      FCH.removeClass(control_button, 'notify');
-      audio.currentTime = 0;
-      scrubber.value = 0;
+      resetAudioProgress.call(this);
 
       if( is_a_track ) {
         FCH.addClass(control_button, 'notify');
