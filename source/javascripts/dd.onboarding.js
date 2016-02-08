@@ -8,7 +8,8 @@
 
   /**
    * Advance scene
-   * @param  {Boolean|String} next
+   * @param  {Boolean|Integer} next - Whether or not to increase number, or a number to increase to
+   * @return {Integer} Updated transform position
    */
   function changeScene(next) {
     var transform = 0;
@@ -51,6 +52,8 @@
       });
       FCH.addClass(inner.childNodes[index_position], 'active');
     }
+
+    return transform;
   }
 
   /**
@@ -78,7 +81,7 @@
 
       var swiper = new Swiper(inner, {
         callback: changeScene,
-        touch_threshold: 100,
+        touch_threshold: 300,
         click_threshold: (FCH.dimensions.ww / 2)
       });
     },

@@ -60,12 +60,14 @@
       directions.style = 'transform: translate3d(100%, 0, 0)';
       FCH.removeClass(directions, 'active');
       DD.plot.current_mission.objectiveComplete();
+
+      return FCH.dimensions.ww;
     }
 
     var swiper = new Swiper(directions, {
       callback: acknowledgeDirections,
       touch_threshold: 100,
-      click_threshold: 0
+      click_threshold: -1
     });
   }
 
@@ -82,6 +84,7 @@
      * @param  {Boolean|Integer} next - Whether or not to increase number, or a number to increase to
      * @param {Boolean} [should_fire_resume=true]
      * @see  snapSwitcher | DD.plot.resume
+     * @return {Integer} Updated transform position
      */
     updateSwitcher: function(next, should_fire_resume) {
       should_fire_resume = FCH.setDefault(should_fire_resume, true);

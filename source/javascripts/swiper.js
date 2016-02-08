@@ -37,22 +37,25 @@
 
     var new_pos = e.touches[0].pageX;
 
+    // If new position is less than starting position, user is swiping left
+    if(new_pos <= panel_pos) {
+      new_pos = new_pos * -1;
+    }
+
     var plus_threshold = panel_pos + touch_threshold;
     var minus_threshold = panel_pos - touch_threshold;
 
-    last_transform = 'transform: translate3d(' + parseInt(new_pos) + 'px, 0, 0)';
-
-    el.setAttribute('style', last_transform);
+    el.setAttribute('style', 'transform: translate3d(' + parseInt(new_pos) + 'px, 0, 0)');
 
     if(new_pos >= plus_threshold) {
       // Move to previous
-      callback(false);
       resetAllowToFire();
+      last_transform = callback(false);
 
     } else if (new_pos <= minus_threshold ) {
       // Move to next
-      callback(true);
       resetAllowToFire();
+      last_transform = callback(true);
 
     }
   }
@@ -76,7 +79,7 @@
    */
   function nextOrPreviousClick(e) {
     // If click occurs in a position that is greater than the threshold, go to next
-    if(click_threshold) {
+    if(click_threshold > -1) {
       callback( e.pageX >= click_threshold );
 
     } else {
@@ -115,7 +118,7 @@
    * @param {Object} options
      * @param {Function} callback - Fires with first argument (Boolean) declaring whether next pane is requested (right for X, down for Y)
      * @param {Integer} touch_threshold - How far a drag is completed before another panel is snapped
-     * @param {Integer} click_threshold - How far from the edge before a click event snaps to another panel. Setting to 0 applies a click listener to the entire element
+     * @param {Integer} click_threshold - How far from the edge before a click event snaps to another panel. Setting to -1 applies a click listener to the entire element
    * @return {Swiper}
    */
   function Swiper(elem, options) {
