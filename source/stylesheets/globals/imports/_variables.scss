@@ -2,6 +2,14 @@
 // Project Specific Variables
 //////////////////////////////
 
+// Colors 
+$c-red: #FF5D73;
+$c-dark-blue: #223843;
+$c-light-grey: #EFF1F3;
+$c-dark-grey: #E2DCDE;
+$c-light-purple: #F1E4E8;
+
+
 // Project Specific breakpoints
 $breakpoints: ();
 
@@ -12,7 +20,6 @@ $breakpoints: map-merge($fine-breakpoints, $breakpoints);
 $c-gray: #bfbfbf;
 $c-dark_gray: #484848;
 
-$c-red: #ff5d73;
 $c-blue: #66a6f0;
 
 $f-headline: 'Fira Sans', $f-sans;
@@ -27,3 +34,5 @@ $view-stack: (
   '.player',
   '.view.-overlay'
 );
+
+

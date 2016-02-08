@@ -46,6 +46,97 @@
   margin-bottom: 120px;
 }
 
+.logo-map {
+  max-width: 375px;
+  position: relative;
+  height: 50%;
+
+  .ob-cloud-map {
+    margin-bottom: 80px;
+  }
+  .cloud-group-1 {
+    position: absolute;
+    transform: scale(.6);
+    right: 5%;
+    top: 60%;
+    hr {
+      transform: scale(0);
+    }
+  }
+  .cloud-group-2 {
+    position: absolute;
+    transform: scale(.3);
+    left: 5%;
+    top: 20%;
+    hr {
+      transform: scale(0);
+    }
+  }
+  .cloud-group-3 {
+    position: absolute;
+    transform: scale(.1);
+    right: 16%;
+    top: 0%;
+    hr {
+      transform: scale(0);
+    }
+  }
+
+  .ob-map {
+    position: absolute;
+    left: 18%;
+    top: 45%;
+  }
+  .map-markers {
+    position: relative;
+    height: 350px;
+    .ob-map-marker {
+      position: absolute;
+      &:nth-child(1) {
+        transform: scale(1.1);
+        top: 46%;
+        left: 24%;
+        animation: enlarge 2s ease-in-out 2s;
+      }
+      &:nth-child(2) {
+        transform: scale(.9);
+        top: 54%;
+        left: 40%;
+        animation: enlarge 2s ease-in-out 4s;
+      }
+      &:nth-child(3) {
+        top: 41%;
+        left: 57%;
+        animation: enlarge 2s ease-in-out 6s;
+      }
+      &:nth-child(4) {
+        transform: scale(.87);
+        top: 48%;
+        left: 77%;
+        animation: enlarge 2s ease-in-out 8s;
+      }
+    }
+  }
+  .ob-headphones {
+    position: absolute;
+    top: 40%;
+  }
+} //end logo map
+
+.playback {
+  position: relative;
+  .touch-circle {
+    position: absolute;
+    background-color: $c-dark-blue;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    opacity: .5;
+  }
+  .ob-numbers:not(:first-of-type) {
+    display: none;
+  }
+}
 .pagination {
   margin: 0;
   padding: 20px 0;
@@ -86,3 +177,4 @@
 .sub-text {
   margin-top: 8px;
 }
+
