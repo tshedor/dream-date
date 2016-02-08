@@ -11,21 +11,48 @@
         img.ob-logo src=image_path('logo.svg')
 
       .caption
-        .main-text Welcome to The Exchange
+        .main-text Welcome to Dream Date
         .sub-text A location-based audio story
 
     .onboarding-scene
-      .onboarding-graphic.crowd
+      .onboarding-graphic.logo-map
+        / .cloud-group-1
+        /   img.ob-cloud-map src=image_path('onboarding/cloud.svg')
+        /   img.ob-heart-shadow-map src=image_path('onboarding/heart-shadow.svg')
+        / .cloud-group-2
+        /   img.ob-cloud-map src=image_path('onboarding/cloud.svg')
+        /   img.ob-heart-shadow-map src=image_path('onboarding/heart-shadow.svg')
+        / .cloud-group-3
+        /   img.ob-cloud-map src=image_path('onboarding/cloud.svg')
+        /   img.ob-heart-shadow-map src=image_path('onboarding/heart-shadow.svg')
+
+        img.ob-map src=image_path('onboarding/map.svg');
+        .map-markers
+          img.ob-map-marker src=image_path("onboarding/map-marker.svg");
+          img.ob-map-marker src=image_path("onboarding/map-marker.svg");
+          img.ob-map-marker src=image_path("onboarding/map-marker.svg");
+          img.ob-map-marker src=image_path("onboarding/map-marker.svg");
 
       .caption
         .main-text To unlock and hear the next chapter, visit the location noted on the map
 
     .onboarding-scene
-      .onboarding-graphic.headphones
+      .onboarding-graphic.playback
+        .touch-circle
+        img.ob-numbers src=image_path("controls/1.svg");
+        img.ob-numbers src=image_path("controls/2.svg");
+        img.ob-numbers src=image_path("controls/3.svg");
+        img.ob-numbers src=image_path("controls/4.svg");
 
       .caption
-        .main-text Wear headphones for the best experience
-        .sub-text If you miss something, you can always replay completed stories.
+        .main-text Remeber, If you miss something, you can always replay completed stories by taping the numbers.
+
+    .onboarding-scene
+      .onboarding-graphic
+        img.ob-headphones src=image_path("onboarding/headphones.svg");
+
+      .caption
+        .main-text Time to put on your headphones. Have fun and remember to return them when finished!
 
     .onboarding-scene.credits-scene
       .onboarding-graphic.credits
@@ -42,11 +69,6 @@
           span#js-year<> = Date.today.year
           | Copyright Will Chertoff, Max Ono, and Tim Shedor 2015.
 
-    .onboarding-scene
-      .onboarding-graphic.new-exchange
-
-      .caption
-        .main-text Do you want to have an Exchange?
 
   ul.pagination
     li.active

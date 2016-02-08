@@ -7,7 +7,7 @@ $handle-dimension: 16px;
   @include stack($player-stack);
   bottom: 0;
   height: $toolbar-height;
-  border-top: 1px solid $c-dark-gray;
+  border-top: 1px solid $c-dark-grey;
   position: absolute;
   left: 0;
   display: flex;
@@ -18,7 +18,7 @@ $handle-dimension: 16px;
 
     &:before {
       content: 'Loading';
-      background: rgba($c-dark-gray, 0.9);
+      background: rgba($c-dark-grey, 0.9);
       position: absolute;
       top: 0;
       left: 0;
@@ -58,7 +58,7 @@ $handle-dimension: 16px;
   position: relative;
 
   &:before {
-    background: $c-dark-gray;
+    background: $c-dark-grey;
   }
 }
 
