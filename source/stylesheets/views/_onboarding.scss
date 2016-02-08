@@ -12,13 +12,26 @@
     background: none;
     left: 0;
     width: 100%;
+    text-align: right;
+    z-index: 9;
+    justify-content: flex-end;
+
+    img {
+      display: block;
+    }
   }
 }
 
 .scenes {
+  height: 100%;
+  overflow: hidden;
+}
+
+.inner-scenes {
   display: flex;
   flex-wrap: nowrap;
-  height: 100vh;
+  height: 100%;
+  transition: transform 0.2s;
 }
 
 .onboarding-scene {

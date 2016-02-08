@@ -65,7 +65,7 @@
     var swiper = new Swiper(directions, {
       callback: acknowledgeDirections,
       touch_threshold: 100,
-      click_threshold: directions.offsetWidth
+      click_threshold: 0
     });
   }
 
@@ -92,7 +92,7 @@
       var y_regex = new RegExp(/.*3d\(0\,(-?\d{1,3})px\,0\)/);
 
       // Find the Y value of the translate3d transform
-      var transform = parseInt( inner.getAttribute('style').match(y_regex)[1] );
+      transform = parseInt( inner.getAttribute('style').match(y_regex)[1] );
 
       if(typeof(next) === 'boolean'){
         if(next) {
@@ -102,22 +102,24 @@
         }
       } else {
         if(next > 0) {
-          transform = (next * -50);
+          transform = (next * (switcher_space * -1) );
         } else {
           transform = 0;
         }
       }
 
+      var max_transform = DD.constants.mission_count * switcher_space * -1;
+
       // Go back to start
-      if(transform <= -250) {
+      if(transform <= max_transform) {
         transform = 0;
       }
 
-      if(transform >= -200 && transform <= 0) {
+      if(transform >= (max_transform + switcher_space) && transform <= 0) {
         inner.setAttribute('style', 'transform: translate3d(0,' + transform + 'px,0)');
 
         // Update indicators of previous/next
-        var current_mission = (Math.abs(transform) + 50) / 50;
+        var current_mission = (Math.abs(transform) + switcher_space) / switcher_space;
         if(current_mission === 1) {
           FCH.removeClass(switcher, '-prev');
           FCH.addClass(switcher, '-next');

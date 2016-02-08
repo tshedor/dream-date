@@ -6,6 +6,7 @@
 //= require dd
 //= require dd.constants
 //= require dd.navigation
+//= require dd.onboarding
 //= require dd.zoom
 //= require dd.player
 //= require dd.plot
