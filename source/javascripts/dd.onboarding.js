@@ -30,8 +30,6 @@
     var transform = 0;
     var switcher_index = -1;
 
-    console.log(index);
-
     // Find the X value of the translate3d transform
     if(typeof(next) === 'boolean'){
       if(next) {
