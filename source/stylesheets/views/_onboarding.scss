@@ -20,6 +20,16 @@
       display: block;
     }
   }
+
+  * {
+    animation-play-state: paused;
+  }
+
+  &.active {
+    * {
+      animation-play-state: running;
+    }
+  }
 }
 
 .scenes {

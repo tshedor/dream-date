@@ -50,7 +50,7 @@
       }
     }
 
-    zoom_box.style.width = (100 * modified_level) + '%';
+    zoom_box.style.height = (100 * modified_level) + '%';
     zoom_box.setAttribute('data-zoom-level', modified_level);
   }
 

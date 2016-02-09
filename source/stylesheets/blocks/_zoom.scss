@@ -15,10 +15,11 @@
   height: 100%;
   z-index: 3;
   padding: $container-padding;
-  transition: width 0.3s;
+  transition: height 0.3s;
 
-  img {
-    width: 100%;
+  svg {
+    height: 100%;
+    width: auto;
   }
 }
 
@@ -36,7 +37,7 @@
   height: 35px;
   width: 35px;
   padding: 20px 30px;
-  display: inline-block;
+  display: block;
   border-radius: 8px;
   border: 1px solid $c-gray;
 
@@ -44,15 +45,16 @@
     background-color: rgba($c-gray, 0.92);
   }
 
-  &.-minus {
-    background-image: image-url('minus.svg');
-    border-top-right-radius: 0;
+  &.-plus {
+    background-image: image-url('plus.svg');
+    border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  &.-plus {
-    background-image: image-url('plus.svg');
+  &.-minus {
+    background-image: image-url('minus.svg');
+    border-top: 0;
     border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
   }
 }
