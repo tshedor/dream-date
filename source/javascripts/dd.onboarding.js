@@ -3,8 +3,19 @@
 (function() {
   var scenes = document.getElementById('js-scenes');
   var inner = document.getElementById('js-inner-scenes');
-  var total_scenes = document.querySelectorAll('.onboarding-scene').length - 1;
+  var total_scenes = document.querySelectorAll('.onboarding-scene').length;
   var pagination = document.getElementById('js-onboarding-pagination');
+
+  /**
+   * Find index of list_item given the element
+   * @param  {Node} list_item
+   * @see {@link http://stackoverflow.com/a/11762035}
+   * @return {Integer}
+   */
+  function findPositionOfPaginationItem(list_item) {
+    var pagination_list_items = Array.prototype.slice.call( pagination.children );
+    return pagination_list_items.indexOf( list_item );
+  }
 
   /**
    * Advance scene
@@ -12,19 +23,23 @@
    * @return {Integer} Updated transform position
    */
   function changeScene(next) {
-    var transform = 0;
-
     var switcher_space = FCH.dimensions.ww;
-    var style = inner.getAttribute('style');
-    var x_regex = new RegExp(/.*3d\((-?\d{1,5})px\,0\,0\)/);
+    var full_onboarding_scene_width = (total_scenes - 1) * switcher_space;
+
+    var index = findPositionOfPaginationItem( document.querySelector('.pagination li.active') );
+    var transform = 0;
+    var switcher_index = -1;
+
+    console.log(index);
 
     // Find the X value of the translate3d transform
-    transform = parseInt( inner.getAttribute('style').match(x_regex)[1] );
     if(typeof(next) === 'boolean'){
       if(next) {
-        transform -= switcher_space;
+        switcher_index = index < total_scenes ? (index + 1) : index;
+        transform = (switcher_space * switcher_index * -1);
       } else {
-        transform += switcher_space;
+        switcher_index = index > 0 ? (index - 1) : index;
+        transform = (switcher_space * switcher_index * -1);
       }
     } else {
       if(next > 0) {
@@ -35,23 +50,28 @@
       }
     }
 
-    if(Math.abs(transform) <= (total_scenes * switcher_space) && transform <= 0) {
-      inner.setAttribute('style', 'transform: translate3d(' + transform + 'px,0,0)');
-
-      var index_position = ( (Math.abs(transform) + switcher_space) / switcher_space ) - 1;
-
-      // Update pagination
-      FCH.loopAndExecute(pagination.querySelectorAll('li'), function(list_item) {
-        FCH.removeClass(list_item, 'active');
-      });
-      FCH.addClass(pagination.childNodes[index_position], 'active');
-
-      // Update active class on scenes
-      FCH.loopAndExecute(inner.querySelectorAll('.onboarding-scene'), function(scene) {
-        FCH.removeClass(scene, 'active');
-      });
-      FCH.addClass(inner.childNodes[index_position], 'active');
+    // Always make sure we're going forwards, not backwards
+    if( transform > 0 ) {
+      transform = 0;
     }
+
+    // Make sure we don't go past the last slide
+    if( Math.abs(transform) > full_onboarding_scene_width ) {
+      transform = full_onboarding_scene_width * -1;
+    }
+
+    inner.setAttribute('style', 'transform: translate3d(' + transform + 'px,0,0)');
+
+    // switcher_index isn't always calculated
+    var index_position = ( (Math.abs(transform) + switcher_space) / switcher_space ) - 1;
+
+    // Update pagination
+    FCH.removeClass(pagination.childNodes[index], 'active');
+    FCH.addClass(pagination.childNodes[index_position], 'active');
+
+    // Update active class on scenes
+    FCH.removeClass(inner.childNodes[index], 'active');
+    FCH.addClass(inner.childNodes[index_position], 'active');
 
     return transform;
   }
@@ -61,11 +81,8 @@
    */
   function onPaginationClick() {
     function changeToPagination() {
-      // http://stackoverflow.com/a/11762035
-      var pagination_list_items = Array.prototype.slice.call( pagination.children );
-      var pagination_index = pagination_list_items.indexOf( this );
-
-      changeScene( pagination_index );
+      var pagination_index = findPositionOfPaginationItem( this );
+      DD.onboarding.swiper.last_transform = changeScene( pagination_index );
     }
 
     // Add it to all list items
@@ -79,9 +96,9 @@
     ready: function() {
       onPaginationClick();
 
-      var swiper = new Swiper(inner, {
+      this.swiper = new Swiper(inner, {
         callback: changeScene,
-        touch_threshold: 300,
+        touch_threshold: 220,
         click_threshold: (FCH.dimensions.ww / 2)
       });
     },

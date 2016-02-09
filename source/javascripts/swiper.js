@@ -14,61 +14,52 @@
 })(window, function factory(window) {
   'use strict';
 
-  var el;
-  var panel_pos = 0;
-  var allow_to_fire = true;
-  var touch_threshold;
-  var click_threshold;
-  // Noop function
-  var callback = function() {};
-  // setTimeout object holder
-  var reset_timer;
-  var last_transform = 'transform: translate3d(0px, 0, 0)';
 
   /**
-   * On touch move, advance or descrease number
+   * Move panel with translates
    * @param  {Event} e
    * @fires callback
    */
   function panelMoveUpdate(e) {
-    if(!allow_to_fire) {
+    if(!this.allow_to_fire) {
       return;
     }
 
-    var new_pos = e.touches[0].pageX;
+    var new_pos = parseInt(e.touches[0].pageX);
 
     // If new position is less than starting position, user is swiping left
-    if(new_pos <= panel_pos) {
+    if(new_pos <= this.start_pos) {
       new_pos = new_pos * -1;
     }
 
-    var plus_threshold = panel_pos + touch_threshold;
-    var minus_threshold = panel_pos - touch_threshold;
-
-    el.setAttribute('style', 'transform: translate3d(' + parseInt(new_pos) + 'px, 0, 0)');
-
-    if(new_pos >= plus_threshold) {
-      // Move to previous
-      resetAllowToFire();
-      last_transform = callback(false);
-
-    } else if (new_pos <= minus_threshold ) {
-      // Move to next
-      resetAllowToFire();
-      last_transform = callback(true);
-
-    }
+    this.el.setAttribute('style', 'transform: translate3d(' + (this.current_transform + new_pos) + 'px,0,0)');
   }
 
   /**
-   * If the threshold isn't cleared by touchend, bounce back to the begining
+   * If the threshold isn't cleared by touchend, bounce back to the begining; otherwise, advance or decrease
    * @param  {Event} e
    */
   function panelEnd(e) {
-    var new_pos = e.changedTouches[0].pageX;
+    var end_pos = e.changedTouches[0].pageX;
+    var changed_pos = this.start_pos - end_pos;
+    var abs_changed_pos = Math.abs(changed_pos);
 
-    if(new_pos < touch_threshold) {
-      el.setAttribute('style', last_transform);
+    if(abs_changed_pos < this.touch_threshold) {
+      this.el.setAttribute('style',  'transform: translate3d(' + this.last_transform + 'px,0,0)');
+
+    } else {
+      // If negative, swipe was to the right
+      if(changed_pos < 0) {
+        resetAllowToFire.call(this);
+        this.last_transform = this.callback(false);
+
+      } else {
+        resetAllowToFire.call(this);
+        this.last_transform = this.callback(true);
+
+      }
+
+      this.current_transform = this.last_transform;
     }
   }
 
@@ -79,11 +70,11 @@
    */
   function nextOrPreviousClick(e) {
     // If click occurs in a position that is greater than the threshold, go to next
-    if(click_threshold > -1) {
-      callback( e.pageX >= click_threshold );
+    if(this.click_threshold > -1) {
+      this.callback( e.pageX >= this.click_threshold );
 
     } else {
-      callback(true);
+      this.callback(true);
     }
   }
 
@@ -92,24 +83,21 @@
    * @param  {Event} e
    */
   function panelUpdate(e) {
-    panel_pos = e.touches[0].pageX;
+    this.start_pos = e.touches[0].pageX;
   }
 
   /**
    * Update params to allow touch move events to fire - prevents duplicate firings
-   * @return {setTimeout}
    */
   function resetAllowToFire() {
-    allow_to_fire = false;
-    clearTimeout(reset_timer);
+    this.allow_to_fire = false;
+    clearTimeout(this.reset_timer);
 
     function changeAllowToFire() {
-      allow_to_fire = true;
+      this.allow_to_fire = true;
     }
 
-    reset_timer = setTimeout(changeAllowToFire, 500);
-
-    return reset_timer;
+    this.reset_timer = setTimeout(changeAllowToFire.bind(this), 100);
   }
 
   /**
@@ -122,18 +110,26 @@
    * @return {Swiper}
    */
   function Swiper(elem, options) {
-    el = elem
-    callback = options.callback;
-    touch_threshold = FCH.setDefault(options.touch_threshold, 50);
-    click_threshold = FCH.setDefault(options.click_threshold, (el.offsetWidth / 2));
+    this.el = elem
+    this.start_pos = 0;
+    this.allow_to_fire = true;
+    // Default to noop function
+    this.callback = options.callback || function() {};
+    this.touch_threshold = FCH.setDefault(options.touch_threshold, 50);
+    this.click_threshold = FCH.setDefault(options.click_threshold, (this.el.offsetWidth / 2));
+
+    // setTimeout object holder
+    this.reset_timer = null;
+    this.last_transform = 0;
+    this.current_transform = 0;
 
     // Bind listeners depending on touch availability
     if( DD.constants.has_touch ) {
-      el.addEventListener('touchstart', panelUpdate);
-      el.addEventListener('touchmove', panelMoveUpdate);
-      el.addEventListener('touchend', panelEnd);
+      this.el.addEventListener('touchstart', panelUpdate.bind(this));
+      this.el.addEventListener('touchmove', panelMoveUpdate.bind(this));
+      this.el.addEventListener('touchend', panelEnd.bind(this));
     } else {
-      el.addEventListener('click', nextOrPreviousClick);
+      this.el.addEventListener('click', nextOrPreviousClick.bind(this));
     }
 
     return this;
