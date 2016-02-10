@@ -19,8 +19,8 @@ $breakpoints: map-merge($fine-breakpoints, $breakpoints);
 //Default colors (doesn't really need to be changed)
 $c-gray: #bfbfbf;
 
-$f-headline: 'Fira Sans', $f-sans;
-$f-content: 'Fira Sans', $f-sans;
+$f-headline: 'brandon-grotesque', $f-sans;
+$f-content: 'brandon-grotesque', $f-sans;
 
 $toolbar-height: 75px;
 $container-padding: 25px;
