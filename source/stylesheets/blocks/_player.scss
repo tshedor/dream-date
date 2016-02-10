@@ -27,6 +27,11 @@ $handle-dimension: 16px;
       text-align: center;
       z-index: 9;
       color: $c-white;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+      line-height: 1;
+      animation: letter-spread 2.4s ease-in-out 0s infinite alternate;
     }
   }
 }
@@ -140,4 +145,14 @@ $handle-dimension: 16px;
 
 .inner-switcher {
   transition: transform 0.2s;
+}
+
+@keyframes letter-spread {
+  0% {
+    letter-spacing: 0.1;
+  }
+
+  100% {
+    letter-spacing: 2.4em;
+  }
 }

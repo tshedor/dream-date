@@ -69,13 +69,6 @@
   }
 
   /**
-   * Create main audio player instance
-   * @return {Audio}
-   */
-  function initPlayer(file_name) {
-  }
-
-  /**
    * Change time position of the scrubber
    * @param  {Event} e
    */

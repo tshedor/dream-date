@@ -46,7 +46,6 @@
 
     missions: [
       {
-        desc: "Opening scene",
         objectives: {
           '0': {
             type: 'audio',
@@ -54,7 +53,7 @@
           },
           '50': {
             type: 'waypoint',
-            content: 'Earthquake House',
+            content: 'svg-turbine-hall',
             nextValue: 100
           },
           '100': {
@@ -63,7 +62,6 @@
         }
       },
       {
-        desc: "Opening scene",
         objectives: {
           '0': {
             type: 'audio',
@@ -71,7 +69,7 @@
           },
           '50': {
             type: 'waypoint',
-            content: 'Exhibit A',
+            content: 'svg-physics-lab',
             nextValue: 100
           },
           '100': {
@@ -80,7 +78,6 @@
         }
       },
       {
-        desc: "Opening scene",
         objectives: {
           '0': {
             type: 'audio',
@@ -88,7 +85,8 @@
           },
           '50': {
             type: 'waypoint',
-            content: 'Exhibit A',
+            selector: 'svg-earth-hall',
+            content: 'Earth Hall',
             nextValue: 100
           },
           '100': {
@@ -97,7 +95,6 @@
         }
       },
       {
-        desc: "Opening scene",
         objectives: {
           '0': {
             type: 'audio',
@@ -105,7 +102,8 @@
           },
           '50': {
             type: 'waypoint',
-            content: 'Exhibit A',
+            selector: 'svg-planetarium',
+            content: 'Planetarium',
             nextValue: 100
           },
           '100': {
@@ -114,7 +112,6 @@
         }
       },
       {
-        desc: "Opening scene",
         objectives: {
           '0': {
             type: 'audio',
@@ -122,7 +119,8 @@
           },
           '50': {
             type: 'waypoint',
-            content: 'Thanks for Playing',
+            selector: 'svg-lunch-room',
+            content: 'Lunch Room',
             nextValue: 100
           },
           '100': {

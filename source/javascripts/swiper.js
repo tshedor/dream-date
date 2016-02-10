@@ -41,15 +41,15 @@
    */
   function panelEnd(e) {
     var end_pos = e.changedTouches[0].pageX;
-    var changed_pos = this.start_pos - end_pos;
-    var abs_changed_pos = Math.abs(changed_pos);
+    var delta = this.start_pos - end_pos;
+    var abs_delta = Math.abs(delta);
 
-    if(abs_changed_pos < this.touch_threshold) {
+    if(abs_delta < this.touch_threshold) {
       this.el.setAttribute('style',  'transform: translate3d(' + this.last_transform + 'px,0,0)');
 
     } else {
       // If negative, swipe was to the right
-      if(changed_pos < 0) {
+      if(delta < 0) {
         resetAllowToFire.call(this);
         this.last_transform = this.callback(false);
 
