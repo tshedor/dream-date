@@ -1,0 +1,23 @@
+.playback {
+  position: relative;
+  .ob-numbers:not(:first-of-type) {
+    display: none;
+  }
+}
+
+.playback {
+  .switcher {
+    margin: auto;
+    .inner-switcher {
+      animation: touch 6s ease-in-out 0s infinite alternate;
+    }
+  }
+}
+
+@keyframes touch {
+  0% {transform: translate3d(0,0px,0)}
+  25% {transform: translate3d(0,-50px,0)}
+  50% {transform: translate3d(0,-100px,0)}
+  75% {transform: translate3d(0,-150px,0)}
+  100% {transform: translate3d(0,-200px,0)}
+}

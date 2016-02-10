@@ -1,0 +1,12 @@
+#swipe-me g {
+  animation: swipey 1.8s ease-in-out 0s infinite alternate;
+}
+
+@keyframes swipey {
+  0% {
+    transform: translate(calc(100% + 14px),254px);
+  }
+  100% {
+    transform: translate(14px,254px);
+  }
+}

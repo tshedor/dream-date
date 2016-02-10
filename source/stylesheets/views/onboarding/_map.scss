@@ -11,4 +11,9 @@
     left: 32%;
     top: 22%;
   }
+  #Life-Hall {
+    rect {
+      animation: background-pulse 1.8s ease-in-out 0s infinite alternate;
+      }
+    }
 }

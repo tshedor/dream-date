@@ -69,20 +69,6 @@
   margin-bottom: 120px;
 }
 
-.playback {
-  position: relative;
-  .touch-circle {
-    position: absolute;
-    background-color: $c-dark-blue;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    opacity: .5;
-  }
-  .ob-numbers:not(:first-of-type) {
-    display: none;
-  }
-}
 .pagination {
   margin: 0;
   padding: 20px 0;

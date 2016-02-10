@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="158px" height="134px" viewBox="0 0 158 134" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
     <!-- Generator: Sketch 3.5.1 (25234) - http://www.bohemiancoding.com/sketch -->
-    <title>Group</title>
+    <title>headphones</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Headphones" sketch:type="MSArtboardGroup" transform="translate(-117.000000, -215.000000)">
-            <g id="Group" sketch:type="MSLayerGroup" transform="translate(117.000000, 219.000000)">
+        <g id="Headphones" sketch:type="MSArtboardGroup" transform="translate(-118.000000, -115.000000)">
+            <g id="headphones" sketch:type="MSLayerGroup" transform="translate(117.000000, 119.000000)">
                 <path id="Path-44" stroke="#979797" sketch:type="MSShapeGroup" d=""></path>
-                <path d="M25.7730496,93.6644402 C25.7730496,93.6644402 25.7730496,-1.39549538 80.8975318,0.0155549838 C136.022014,-1.39549537 136.022018,93.6644402 136.022018,93.6644402" id="Path-66" stroke="#223843" stroke-width="8" sketch:type="MSShapeGroup"></path>
-                <g id="Group-Copy" transform="translate(23.965280, 93.687999) scale(-1, 1) rotate(-270.000000) translate(-23.965280, -93.687999) translate(-10.322425, 69.720103)" fill="#FFFFFF" sketch:type="MSShapeGroup">
+                <path d="M26.7730496,93.6644402 C26.7730496,93.6644402 26.7730496,-1.39549538 81.8975318,0.0155549838 C137.022014,-1.39549537 137.022018,93.6644402 137.022018,93.6644402" id="Path-66" stroke="#223843" stroke-width="8" sketch:type="MSShapeGroup"></path>
+                <g id="Group-Copy" transform="translate(24.965280, 93.687999) scale(-1, 1) rotate(-270.000000) translate(-24.965280, -93.687999) translate(-9.322425, 69.720103)" fill="#FFFFFF" sketch:type="MSShapeGroup">
                     <ellipse id="Oval-1" cx="14.4906374" cy="33.218662" rx="14.4906374" ry="11.313167"></ellipse>
                     <ellipse id="Oval-1" cx="14.3896213" cy="20.9467321" rx="9.28728413" ry="7.25079187"></ellipse>
                     <ellipse id="Oval-1" cx="28.3689944" cy="31.0160985" rx="14.4906374" ry="11.313167"></ellipse>
@@ -19,7 +19,7 @@
                     <ellipse id="Oval-1-Copy" cx="55.6405281" cy="33.4622171" rx="12.9348829" ry="10.0985544"></ellipse>
                     <ellipse id="Oval-1" cx="51.8489459" cy="23.4637792" rx="12.2548098" ry="9.56760597"></ellipse>
                 </g>
-                <g id="Group-Copy-2" transform="translate(133.780883, 94.808688) rotate(-270.000000) translate(-133.780883, -94.808688) translate(99.493178, 70.840793)" fill="#FFFFFF" sketch:type="MSShapeGroup">
+                <g id="Group-Copy-2" transform="translate(134.780883, 94.808688) rotate(-270.000000) translate(-134.780883, -94.808688) translate(100.493178, 70.840793)" fill="#FFFFFF" sketch:type="MSShapeGroup">
                     <ellipse id="Oval-1" cx="14.4906374" cy="33.218662" rx="14.4906374" ry="11.313167"></ellipse>
                     <ellipse id="Oval-1" cx="14.3896213" cy="20.9467321" rx="9.28728413" ry="7.25079187"></ellipse>
                     <ellipse id="Oval-1" cx="28.3689944" cy="31.0160985" rx="14.4906374" ry="11.313167"></ellipse>

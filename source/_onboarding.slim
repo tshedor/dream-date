@@ -17,41 +17,33 @@
 
       .onboarding-scene
         .onboarding-graphic.logo-map
-          / .cloud-group-1
-          /   img.ob-cloud-map src=image_path('onboarding/cloud.svg')
-          /   img.ob-heart-shadow-map src=image_path('onboarding/heart-shadow.svg')
-          / .cloud-group-2
-          /   img.ob-cloud-map src=image_path('onboarding/cloud.svg')
-          /   img.ob-heart-shadow-map src=image_path('onboarding/heart-shadow.svg')
-          / .cloud-group-3
-          /   img.ob-cloud-map src=image_path('onboarding/cloud.svg')
-          /   img.ob-heart-shadow-map src=image_path('onboarding/heart-shadow.svg')
-
-          img.ob-map src=image_path('onboarding/map-onboard.svg');
-          img.ob-phone src=image_path('onboarding/phone.svg');
-          / .map-markers
-          /   img.ob-map-marker src=image_path("onboarding/map-marker.svg");
-          /   img.ob-map-marker src=image_path("onboarding/map-marker.svg");
-          /   img.ob-map-marker src=image_path("onboarding/map-marker.svg");
-          /   img.ob-map-marker src=image_path("onboarding/map-marker.svg");
+          == partial 'images/onboarding/map-onboard.svg'
 
         .caption
           .main-text To unlock and hear the next chapter, visit the location noted on the map
 
       .onboarding-scene
+        .onboarding-graphic.swipe
+          == partial 'images/onboarding/swipe-onboard.svg'
+
+        .caption
+          .main-text Let us know when you arrive at the location by swiping away the play bar
+
+      .onboarding-scene
         .onboarding-graphic.playback
-          .touch-circle
-          img.ob-numbers src=image_path("controls/1.svg");
-          img.ob-numbers src=image_path("controls/2.svg");
-          img.ob-numbers src=image_path("controls/3.svg");
-          img.ob-numbers src=image_path("controls/4.svg");
+          .switcher.-next#js-switcher
+            .inner-switcher#js-inner-switcher style="transform: translate3d(0,0px,0)"
+              - (1..5).each do |i|
+                img id="js-scene-#{i - 1}" src=image_path("controls/#{i}.svg") alt=i
+          .ob-circle
 
         .caption
           .main-text Remeber, If you miss something, you can always replay completed stories by taping the numbers.
 
       .onboarding-scene
-        .onboarding-graphic
-          img.ob-headphones src=image_path("onboarding/headphones.svg");
+        .onboarding-graphic.headphones
+          == partial 'images/onboarding/headphones-onboard.svg'
+
 
         .caption
           .main-text Time to put on your headphones. Have fun and remember to return them when finished!
