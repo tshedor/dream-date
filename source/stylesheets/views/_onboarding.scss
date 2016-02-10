@@ -29,6 +29,10 @@
     * {
       animation-play-state: running;
     }
+
+    .inner-scenes {
+      will-change: transform;
+    }
   }
 }
 

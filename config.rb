@@ -43,7 +43,7 @@ configure :build do
 
   # Enable cache buster
   # https://github.com/middleman/middleman/issues/480
-  activate :asset_hash, ignore: %r{^static/.* ^audio/.*}
+  activate :asset_hash, ignore: %r{^static/.* ^audio/.* .*\.ico$}
 
   # Use relative URLs
   # activate :relative_assets

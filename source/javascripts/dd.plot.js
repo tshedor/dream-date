@@ -89,6 +89,7 @@
 
     missionObjectiveDidUpdate: function() {
       DD.player.missionObjectiveDidUpdate();
+      DD.zoom.resetZoom();
     }
   };
 

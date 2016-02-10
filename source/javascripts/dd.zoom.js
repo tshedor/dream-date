@@ -69,6 +69,19 @@
       onClickListeners();
     },
 
+    /**
+     * Set map back to start position
+     * @see DD.plot.missionObjectiveDidUpdate
+     */
+    resetZoom: function() {
+      FCH.loopAndExecute('.js-zoom-control', function(control) {
+        FCH.removeClass(control, '-disabled');
+      });
+
+      zoom_box.style.height = '0';
+      zoom_box.setAttribute('data-zoom-level', 0);
+    }
+
   };
 
 })();

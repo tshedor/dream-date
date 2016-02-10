@@ -12,6 +12,7 @@
 })(window, function factory(window) {
   'use strict';
   var directions = document.getElementById('js-directions');
+  var map_id = '#map-rasterized';
 
   /**
    * Retrieve maximum progress from local storage
@@ -149,7 +150,7 @@
 
       break;
       case 'waypoint' :
-        this.addWaypoint(data.content);
+        this.addWaypoint(data.content, data.selector);
 
       break;
       case 'blank' :
@@ -163,10 +164,23 @@
     DD.player.resumeTrack( this.id );
   };
 
-  Mission.prototype.addWaypoint = function(waypoint_name) {
-    // Update span title
+  /**
+   * Activate waypoint marker on the map
+   * @param {String} waypoint_name
+   * @param {String} map_selector
+   * @see Mission.prototype.objectiveAction
+   */
+  Mission.prototype.addWaypoint = function(waypoint_name, map_selector) {
+    // Update span title and activate directions bar
     directions.querySelector('span').innerHTML = waypoint_name;
     FCH.addClass(directions, 'active');
+
+    // Remove active classes from map SVG and add it to the appropriate one
+    FCH.loopAndExecute(map_id + ' .active', function(active_item) {
+      FCH.removeClass(active_item, 'active');
+    });
+
+    FCH.addClass( document.querySelector(map_id + ' ' + map_selector), 'active');
   };
 
   Mission.prototype.replay = function() {
