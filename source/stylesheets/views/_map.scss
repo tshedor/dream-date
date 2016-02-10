@@ -2,6 +2,9 @@
 #svg-earth-hall,
 #svg-planetarium {
   animation: background-pulse 1.8s ease-in-out 0s infinite alternate;
+  &.active {
+    animation: background-pulse 1.8s ease-in-out 0s infinite alternate;
+  }
 }
 
 @keyframes background-pulse {
