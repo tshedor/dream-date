@@ -1,11 +1,8 @@
 #svg-physics-lab,
 #svg-earth-hall,
 #svg-planetarium {
-  animation: background-pulse 1.8s ease-in-out 0s infinite alternate;
-  animation-play-state: paused;
-
   &.active {
-    animation-play-state: running;
+    animation: background-pulse 1.8s ease-in-out 0s infinite alternate;
   }
 }
 

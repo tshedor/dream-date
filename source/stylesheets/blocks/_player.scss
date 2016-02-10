@@ -7,7 +7,7 @@ $handle-dimension: 16px;
   @include stack($player-stack);
   bottom: 0;
   height: $toolbar-height;
-  border-top: 1px solid $c-dark-grey;
+  border-top: 1px solid $c-light-grey;
   position: absolute;
   left: 0;
   display: flex;
