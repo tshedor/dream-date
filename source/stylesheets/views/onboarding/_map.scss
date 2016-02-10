@@ -1,0 +1,14 @@
+.logo-map {
+  max-width: 375px;
+  position: relative;
+  height: 50%;
+  .ob-phone {
+    height: 130%;
+  }
+  .ob-map {
+    position: absolute;
+    height: 85%;
+    left: 32%;
+    top: 22%;
+  }
+}
