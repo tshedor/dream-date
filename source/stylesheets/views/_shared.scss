@@ -6,13 +6,17 @@
   width: 100%;
   left: 0;
   height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+
 
   // Specificity hack for prompt view's display: flex
   &.view {
-    display: none;
-
     &.active {
-      display: block;
+      visibility: visible;
+      opacity: 1;
+      transition: opacity .5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     }
   }
 
@@ -35,6 +39,7 @@
   &.-overlay {
     position: fixed;
     bottom: 0;
+    transition: opacity .5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
   }
 }
 
