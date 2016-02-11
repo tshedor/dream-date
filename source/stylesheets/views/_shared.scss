@@ -1,3 +1,6 @@
+$view-transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+$view-transition: opacity .5s $view-transition-timing-function;
+
 .view {
   @include stack($view-stack);
   height: 100%;
@@ -8,17 +11,7 @@
   height: 100%;
   visibility: hidden;
   opacity: 0;
-  transition: opacity .5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-
-
-  // Specificity hack for prompt view's display: flex
-  &.view {
-    &.active {
-      visibility: visible;
-      opacity: 1;
-      transition: opacity .5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    }
-  }
+  transition: $view-transition;
 
   &.-insert {
     height: calc(100% - #{$toolbar-height * 2});
@@ -39,7 +32,13 @@
   &.-overlay {
     position: fixed;
     bottom: 0;
-    transition: visibility 0s ease-in 1s, opacity .7s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    transition: visibility 0s ease-in 1s, opacity .7s $view-transition-timing-function;
+  }
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    transition: $view-transition;
   }
 }
 

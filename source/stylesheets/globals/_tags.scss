@@ -46,9 +46,23 @@ a {
   text-decoration: none;
 }
 
-iframe {
-  height: calc(100% - #{$toolbar-height * 2});
-  overflow: hidden;
+table {
   width: 100%;
-  border: 0;
+  tr {
+    padding: 2em;
+    td{
+      &:first-child {
+        font-weight: bold;
+        text-align: right;
+      }
+      &:nth-child(2) {
+        text-align: left;
+      }
+    }
+
+  }
+  td {
+    width: 50%;
+    padding: .5em
+  }
 }

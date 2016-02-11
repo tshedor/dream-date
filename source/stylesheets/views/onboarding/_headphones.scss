@@ -1,26 +1,52 @@
-#headphones-big {
-  animation: headphones-big 2s ease-in-out 0s infinite alternate;
-}
-#headphones-medium {
-  animation: headphones-medium 2s ease-in-out 0s infinite alternate;
-}
+#headphones-big,
+#headphones-medium,
 #headphones-small {
-  animation: headphones-small 2s ease-in-out 0s infinite alternate;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 2s;
+  transform-origin: 50% 50%;
 }
 
+#headphones-big {
+  animation-name: headphones-big;
+}
+
+#headphones-medium {
+  animation-name: headphones-medium;
+}
+
+#headphones-small {
+  animation-name: headphones-small;
+}
 
 @keyframes headphones-big {
-  0% {transform: translateY(99px)}
-  100% {transform: translateY(145px)}
+  0% {
+    transform: translateY(99px);
+  }
+
+  100% {
+    transform: translateY(145px);
+  }
 }
 
 @keyframes headphones-medium {
-  0% {transform: translate(182px,66px)}
-  100% {transform: translate(182px,100px)}
+  0% {
+    transform: translateY(66px);
+  }
+
+  100% {
+    transform: translateY(100px);
+  }
 }
 
 @keyframes headphones-small {
-  0% {transform: translate(111px,0.821069px)}
-  100% {transform: translate(111px,15px)}
-}
+  0% {
+    transform: translateY( emCalc(0.821069px) );
+  }
 
+  100% {
+    transform: translateY( emCalc(15px) );
+  }
+}

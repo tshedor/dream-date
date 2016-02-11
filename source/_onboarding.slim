@@ -20,7 +20,7 @@
           == partial 'images/onboarding/map-onboard.svg'
 
         .caption
-          .main-text To unlock and hear the next chapter, visit the location noted on the map
+          .main-text To hear the next chapter, visit the location noted on the map
 
       .onboarding-scene
         .onboarding-graphic.swipe
@@ -38,12 +38,11 @@
           .ob-circle
 
         .caption
-          .main-text Remeber, If you miss something, you can always replay completed stories by taping the numbers.
+          .main-text If you miss something, you can always replay completed stories by taping the numbers.
 
       .onboarding-scene
         .onboarding-graphic.headphones
           == partial 'images/onboarding/headphones-onboard.svg'
-
 
         .caption
           .main-text Time to put on your headphones. Have fun and remember to return them when finished!
@@ -55,11 +54,11 @@
           table
             tbody
               tr
-                td Narrorator
-                td Sam Something
+                td Narrator
+                td Sam LaRoe
               tr
                 td Kate
-                td Tammi H
+                td Tammi Heneveld
 
           .table-header.crew Crew
 
@@ -67,50 +66,49 @@
             tbody
               tr
                 td Produced By
-                td 
-                  br 
+                td
                   | Tim Shedor
-                  br 
+                  br
                   | Will Chertoff
                   br
                   | Max Ono
               tr
                 td Directed By
                 td
-                  br
                   | Max Ono
                   br
                   | Tim Shedor
               tr
-                td Written By
+                td Written and Programmed By
                 td Tim Shedor
               tr
-                td 
-                  |Sound Design, Recording, 
+                td
+                  | Sound Design, Recording,
                   br
                   | Editing and Mastering
                 td Max Ono
               tr
-                td 
-                  |Original Music Written
-                  br
-                  | and Performed By
+                td User Interface and<br />Animations
+                td Will Chertoff
+              tr
+                td Original Music Written<br />and Performed By
                 td Max Ono
               tr
-                td Branding and Iconography
-                td 
-                  |Will Chertoff
-                  br
-                  | Tim Shedor
+                td Branding
+                td Will Chertoff
+              tr
+                td Special Thanks
+                td == ['Dory Athey', 'Sam Kovzan', 'Cindy Shedor', 'Anne Wagner'].join('<br />')
               tr
                 td Team Captain
                 td Rowan
 
-
           .copyright
+            a href="http://southeast12.com" title="Southeast 12 Studios"
+              img src=image_path('se12-logo.svg') alt="Southeast 12 Studios"
             | &copy;
             span#js-year<> = Date.today.year
-            | Copyright Will Chertoff, Max Ono, and Tim Shedor 2015.
+            | Copyright Will Chertoff, Max Ono, and Tim Shedor.
 
 
   ul.pagination#js-onboarding-pagination
