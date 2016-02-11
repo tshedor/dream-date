@@ -9,8 +9,7 @@
    * Display transcript window
    */
   function openTranscriptWindow() {
-    var id = DD.plot.current_mission.id;
-    var transcipt_identifier = 'transcript-' + (id + 1);
+    var transcipt_identifier = 'transcript-' + (DD.plot.current_mission.id + 1);
 
     var transcript_window = document.getElementById('js-' + transcipt_identifier);
 
@@ -47,6 +46,12 @@
 
     var transcript = document.getElementById('js-transcript-button');
     transcript.addEventListener('click', openTranscriptWindow);
+
+    // Once onboarding window is closed, ensure onboarding is marked as true
+    var onboarding_close = document.getElementById('js-onboarding-close');
+    onboarding_close.addEventListener('click', function() {
+      DD.constants.has_onboarded = true;
+    });
 
     switcher.addEventListener('click', this.updateSwitcher.bind(this, true));
   }
@@ -86,6 +91,11 @@
       onClickListeners.call(this);
       applyYear();
       directionsSpeedbump();
+
+      // Show onboarding screen
+      if(!DD.constants.has_onboarded) {
+        hideAllViewsExcept.call(null, 'onboarding');
+      }
     },
 
     /**

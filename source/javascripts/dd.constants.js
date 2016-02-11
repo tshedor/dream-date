@@ -25,7 +25,7 @@
     },
 
     set last_mission(new_value) {
-      return FCH.localSet('dreamdateappcom_last_mission_id', new_value);
+      FCH.localSet('dreamdateappcom_last_mission_id', new_value);
     },
 
     get max_mission() {
@@ -33,15 +33,15 @@
     },
 
     set max_mission(new_value) {
-      return FCH.localSet('dreamdateappcom_max_mission_id', new_value);
+      FCH.localSet('dreamdateappcom_max_mission_id', new_value);
     },
 
     get has_onboarded() {
-      return FCH.localGet('dreamdateappcom_has_onboarded', new_value);
+      return FCH.localGet('dreamdateappcom_has_onboarded');
     },
 
     set has_onboarded(new_value) {
-      return FCH.localSet('dreamdateappcom_has_onboarded', new_value);
+      FCH.localSet('dreamdateappcom_has_onboarded', new_value);
     },
 
     missions: [
