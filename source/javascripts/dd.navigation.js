@@ -10,18 +10,25 @@
    */
   function openTranscriptWindow() {
     var id = DD.plot.current_mission.id;
+    var transcipt_identifier = 'transcript-' + (id + 1);
 
-    var transcript_window = document.getElementById('js-transcript-' + (id + 1));
+    var transcript_window = document.getElementById('js-' + transcipt_identifier);
 
+    DD.analytics.page(transcipt_identifier);
     FCH.addClass(transcript_window, 'active');
   }
 
+  /**
+   * Remove all overlay views
+   * @param  {String|Boolean} display_view_id
+   */
   function hideAllViewsExcept(display_view_id){
     FCH.loopAndExecute('.js-view.active', function(view) {
       FCH.removeClass(view, 'active');
     });
 
     if(display_view_id) {
+      DD.analytics.page(display_view_id);
       var view = document.getElementById('js-' + display_view_id + '-view');
       FCH.addClass(view, 'active');
     }
@@ -57,6 +64,8 @@
    */
   function directionsSpeedbump() {
     function acknowledgeDirections(next) {
+      DD.analytics.event('Navigation', 'Directions', ('Advance from ' + DD.plot.current_mission.id) );
+
       directions.style = 'transform: translate3d(100%, 0, 0)';
       FCH.removeClass(directions, 'active');
       DD.plot.current_mission.objectiveComplete();
@@ -99,8 +108,10 @@
 
       if(typeof(next) === 'boolean'){
         if(next) {
+          DD.analytics.event('Navigation', 'Switcher', 'Next');
           transform -= switcher_space;
         } else {
+          DD.analytics.event('Navigation', 'Switcher', 'Previous');
           transform += switcher_space;
         }
       } else {

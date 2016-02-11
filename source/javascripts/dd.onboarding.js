@@ -62,6 +62,7 @@
 
     // switcher_index isn't always calculated
     var index_position = ( (Math.abs(transform) + switcher_space) / switcher_space ) - 1;
+    DD.analytics.event('Onboarding', 'Change To', index_position);
 
     // Update pagination
     FCH.removeClass(pagination.childNodes[index], 'active');

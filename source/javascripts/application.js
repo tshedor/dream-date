@@ -5,6 +5,7 @@
 
 //= require dd
 //= require dd.constants
+//= require dd.analytics
 //= require dd.navigation
 //= require dd.onboarding
 //= require dd.zoom

@@ -29,6 +29,8 @@
     });
 
     if(is_plus) {
+      DD.analytics.event('Navigation', 'Zoom', 'Increase');
+
       if(current_level < max) {
         modified_level += increment;
       } else {
@@ -39,6 +41,8 @@
         FCH.addClass(target, '-disabled');
       }
     } else {
+      DD.analytics.event('Navigation', 'Zoom', 'Decrease');
+
       if(current_level >= 1) {
         modified_level -= increment;
       } else {

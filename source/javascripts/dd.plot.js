@@ -61,6 +61,7 @@
         }
       }
 
+      DD.analytics.event('Mission', 'Change To', id);
       this.current_mission = this.missions[id];
 
       FCH.removeClass(this.current_mission.mission_node, '-disabled');
@@ -79,16 +80,21 @@
     nextMission: function() {
       var nextMissionId = this.current_mission.id + 1;
 
-
       if(nextMissionId < this.missions.length) {
+        DD.analytics.event('Mission', 'Change To', 'Next');
         this.resume(nextMissionId);
       } else {
+        DD.analytics.page('completion');
+
         var completion_view = document.getElementById('js-completion-view');
         FCH.addClass(completion_view, 'active');
       }
     },
 
     missionObjectiveDidUpdate: function() {
+      var objective_label = this.current_mission.id + ' - ' + this.current_mission.progress + ' [' + this.current_mission.type + ']';
+      DD.analytics.event('Mission', 'Objective Complete', objective_label);
+
       DD.player.missionObjectiveDidUpdate();
       DD.zoom.resetZoom();
     }

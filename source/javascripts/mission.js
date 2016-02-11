@@ -144,6 +144,9 @@
   Mission.prototype.objectiveAction = function(data) {
     this.type = data.type;
 
+    var objective_label = this.id + ' - ' + this.progress + ' [' + this.type + ']';
+    DD.analytics.event('Mission', 'Objective Start', objective_label);
+
     switch(this.type) {
       case 'audio' :
         this.playAudio();

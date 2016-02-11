@@ -62,6 +62,8 @@
     // Prevent duplicate firing
     audio.removeEventListener('ended', audioEnded);
 
+    DD.analytics.event('Player', 'Audio', 'Ended');
+
     this.currentTime = 0;
     scrubber.value = 0;
     control_button.src = control_button.getAttribute('data-play-src');
@@ -93,8 +95,10 @@
       FCH.removeClass(control_button, 'notify');
 
       if( audio.paused ) {
+        DD.analytics.event('Player', 'Control Button', (DD.plot.current_mission + ' - Play'));
         this.play();
       } else {
+        DD.analytics.event('Player', 'Control Button', (DD.plot.current_mission + ' - Pause'));
         this.pause();
       }
     }
