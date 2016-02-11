@@ -39,7 +39,7 @@
   &.-overlay {
     position: fixed;
     bottom: 0;
-    transition: opacity .5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    transition: visibility 0s ease-in 1s, opacity .7s cubic-bezier(0.18, 0.89, 0.32, 1.28);
   }
 }
 
