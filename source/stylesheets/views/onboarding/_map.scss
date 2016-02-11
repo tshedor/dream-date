@@ -2,18 +2,46 @@
   max-width: 375px;
   position: relative;
   height: 50%;
+
   .ob-phone {
     height: 130%;
   }
+
   .ob-map {
     position: absolute;
     height: 85%;
     left: 32%;
     top: 22%;
   }
+
   #Life-Hall {
-    rect {
-      animation: background-pulse 1.8s ease-in-out 0s infinite alternate;
+    #marker {
+      display: none;
+
+    #marker-base {
+      transform: scale(0);
+    }
+  }
+
+  &.active {
+    #marker {
+      display: initial;
+
+      #marker-base {
+        animation: marker-base-grow 2.8s ease-in-out 0s infinite;
+        transform: scale(0);
+        transform-origin: 50% 50%;
       }
     }
+  }
+    rect {
+      animation: background-pulse 1.8s ease-in-out 0s infinite alternate;
+    }
+  }
+}
+
+.onboarding-scene.active {
+  #svg-earth-hall {
+    @extend %marker-active;
+  }
 }

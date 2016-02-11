@@ -13,15 +13,7 @@
   }
 
   &.active {
-    #marker {
-      display: initial;
-
-      #marker-base {
-        animation: marker-base-grow 2.8s ease-in-out 0s infinite;
-        transform: scale(0);
-        transform-origin: 50% 50%;
-      }
-    }
+    @extend %marker-active;
   }
 }
 
@@ -46,12 +38,24 @@
   }
 }
 
-@keyframes background-pulse {
+@keyframes marker-color {
   0% {
-    fill: $c-lighter-grey;
+    fill: $c-dark-blue;
+  }
+
+  10% {
+    fill: $c-dark-blue;
+  }
+
+  50% {
+    fill: $c-red;
+  }
+
+  70% {
+    fill: $c-red;
   }
 
   100% {
-    fill: $c-red;
+    fill: $c-dark-blue;
   }
 }

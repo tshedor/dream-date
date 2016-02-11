@@ -6,7 +6,6 @@
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-duration: 2s;
-  transform-origin: 50% 50%;
 }
 
 #headphones-big {
@@ -33,20 +32,20 @@
 
 @keyframes headphones-medium {
   0% {
-    transform: translateY(66px);
+    transform: translate(182px, 66px);
   }
 
   100% {
-    transform: translateY(100px);
+    transform: translate(182px,100px);
   }
 }
 
 @keyframes headphones-small {
   0% {
-    transform: translateY( emCalc(0.821069px) );
+    transform: translate(111px, 1px);
   }
 
   100% {
-    transform: translateY( emCalc(15px) );
+    transform: translate(111px, 15px);
   }
 }

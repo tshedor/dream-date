@@ -5,19 +5,22 @@
   &.onboarding-graphic {
     margin-top: 5em;
   }
-  .table-header {
-    font-size: 2em;
 
-    &.crew {
-      font-size: 1.5em;
-    }
+}
+
+.table-header {
+  font-size: 2em;
+  margin-top: 20px;
+}
+
+.copyright {
+  a {
+    display: block;
+    margin: 40px 0;
   }
 
-  .copyright {
-    margin-top: 2em;
-
-    a {
-      display: block;
-    }
+  img {
+    width: 100%;
+    max-width: 160px;
   }
 }
