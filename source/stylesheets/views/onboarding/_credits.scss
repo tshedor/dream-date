@@ -1,0 +1,39 @@
+.credits {
+  max-width: 80%;
+  overflow: scroll;
+
+  &.onboarding-graphic {
+    margin-top: 5em;
+  }
+  .table-header {
+    font-size: 2em;
+
+    &.crew {
+      font-size: 1.5em;
+    }
+  }
+
+  table {
+    width: 100%;
+    tr {
+      padding: 2em;
+      td{
+        &:first-child {
+          font-weight: bold;
+          text-align: right;
+        }
+        &:nth-child(2) {
+          text-align: left;
+        }
+      }
+
+    }
+    td {
+      width: 50%;
+      padding: .5em
+    }
+  }
+  .copyright {
+    margin-top: 2em;
+  }
+}

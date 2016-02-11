@@ -1,9 +1,26 @@
-#headphones {
-  animation: headphones 1.8s ease-in-out 0s infinite alternate;
+#headphones-big {
+  animation: headphones-big 2s ease-in-out 0s infinite alternate;
+}
+#headphones-medium {
+  animation: headphones-medium 2s ease-in-out 0s infinite alternate;
+}
+#headphones-small {
+  animation: headphones-small 2s ease-in-out 0s infinite alternate;
 }
 
 
-@keyframes headphones {
-  0% {transform: translateY(0px)}
-  100% {transform: translateY(100px)}
+@keyframes headphones-big {
+  0% {transform: translateY(99px)}
+  100% {transform: translateY(145px)}
 }
+
+@keyframes headphones-medium {
+  0% {transform: translate(182px,66px)}
+  100% {transform: translate(182px,100px)}
+}
+
+@keyframes headphones-small {
+  0% {transform: translate(111px,0.821069px)}
+  100% {transform: translate(111px,15px)}
+}
+
