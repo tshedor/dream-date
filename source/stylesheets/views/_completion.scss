@@ -1,0 +1,25 @@
+.completion-view {
+  background-color: $c-red;
+
+  header {
+    border-bottom: none;
+  }
+
+  .completion-message {
+    h2 {
+      color: $c-light-grey;
+      text-transform: inherit;
+    }
+  }
+  .completion-graphic {
+    text-align: center;
+  }
+
+  .caption {
+    margin-top: 3em;
+    text-align: center;
+    .main-text {
+      color: $c-light-grey;
+    }
+  }
+}
