@@ -83,7 +83,8 @@
       if(nextMissionId < this.missions.length) {
         this.resume(nextMissionId);
       } else {
-        // TODO App complete
+        var completion_view = document.getElementById('js-completion-view');
+        FCH.addClass(completion_view, 'active');
       }
     },
 

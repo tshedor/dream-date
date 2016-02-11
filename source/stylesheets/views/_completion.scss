@@ -5,21 +5,39 @@
     border-bottom: none;
   }
 
-  .completion-message {
-    h2 {
-      color: $c-light-grey;
-      text-transform: inherit;
-    }
-  }
-  .completion-graphic {
-    text-align: center;
+  h2 {
+    color: $c-light-grey;
   }
 
   .caption {
     margin-top: 3em;
     text-align: center;
+
     .main-text {
       color: $c-light-grey;
     }
+  }
+}
+
+.completion-graphic {
+  text-align: center;
+}
+
+.completion-social {
+  display: flex;
+  max-width: 350px;
+  margin: 30px auto 0;
+
+  a {
+    display: block;
+    max-width: 50%;
+    flex-grow: 1;
+    padding: 0 45px;
+  }
+
+  svg {
+    fill: $c-white;
+    max-width: 100%;
+    height: auto;
   }
 }
