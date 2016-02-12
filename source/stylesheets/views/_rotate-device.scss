@@ -1,0 +1,18 @@
+.rotate-device {
+  position:fixed;
+  top: 0;
+  left:0;
+  height:100%;
+  width:100%;
+  display: none;
+  z-index: 10;
+  background-color: $c-dark-grey;
+
+  @include bp(landscape) {
+    display: block;
+  }
+
+  #phone-opacity-reduced {
+    opacity: .2;
+  }
+}
