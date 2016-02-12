@@ -65,14 +65,25 @@
   }
 
   /**
+   * After transition, reset directions styling for the next time the directions bar appears
+   * @see  directionSpeedbump#acknowledgeDirections
+   */
+  function resetDirectionsElem() {
+    FCH.removeClass(directions, 'active');
+    directions.removeAttribute('style');
+  }
+
+  /**
    * Overlay on player must be dismissed by swipe or click before scene advances
    */
   function directionsSpeedbump() {
     function acknowledgeDirections(next) {
-      console.log(directions)
       DD.analytics.event('Navigation', 'Directions', ('Advance from ' + DD.plot.current_mission.id) );
 
-      FCH.removeClass(directions, 'active');
+      this.el.setAttribute('style', 'transform: translate3d(100%, 0, 0); transition: transform 0.4s');
+
+      setTimeout(resetDirectionsElem, 400);
+
       DD.plot.current_mission.objectiveComplete();
 
       return FCH.dimensions.ww;

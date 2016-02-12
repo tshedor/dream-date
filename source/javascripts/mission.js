@@ -180,10 +180,11 @@
 
     // Remove active classes from map SVG and add it to the appropriate one
     FCH.loopAndExecute(map_id + ' .active', function(active_item) {
-      FCH.removeClass(active_item, 'active');
+      active_item.removeAttribute('class');
     });
 
-    FCH.addClass( document.querySelector(map_id + ' ' + map_selector), 'active');
+    var new_map_element = document.querySelector(map_id + ' #' + map_selector);
+    new_map_element.setAttribute('class', 'active');
   };
 
   Mission.prototype.replay = function() {

@@ -20,12 +20,6 @@
       display: block;
     }
   }
-
-  &.active {
-    .inner-scenes {
-      will-change: transform;
-    }
-  }
 }
 
 .scenes {
@@ -37,7 +31,6 @@
   display: flex;
   flex-wrap: nowrap;
   height: 100%;
-  transition: transform 0.2s;
 }
 
 .onboarding-scene {

@@ -24,12 +24,7 @@
       return;
     }
 
-    var new_pos = parseInt(e.touches[0].pageX);
-
-    // If new position is less than starting position, user is swiping left
-    if(new_pos <= this.start_pos) {
-      new_pos = new_pos * -1;
-    }
+    var new_pos = parseInt(e.touches[0].pageX) - this.start_pos;
 
     this.el.setAttribute('style', 'transform: translate3d(' + (this.current_transform + new_pos) + 'px,0,0)');
   }
@@ -44,10 +39,9 @@
     var abs_delta = Math.abs(delta);
 
     if(abs_delta < this.touch_threshold) {
-      this.el.setAttribute('style',  'transform: translate3d(' + this.last_transform + 'px,0,0)');
+      this.el.setAttribute('style',  'transform: translate3d(' + this.last_transform + 'px,0,0); transition: transform 0.4s linear 0.1s');
 
     } else {
-      console.log(delta)
 
       // If negative, swipe was to the right
       if(delta < 0) {

@@ -23,7 +23,7 @@
    * @return {Integer} Updated transform position
    */
   function changeScene(next) {
-    var switcher_space = FCH.dimensions.ww;
+    var switcher_space = document.documentElement.clientWidth;
     var full_onboarding_scene_width = (total_scenes - 1) * switcher_space;
 
     var index = findPositionOfPaginationItem( document.querySelector('.pagination li.active') );
@@ -58,7 +58,7 @@
       transform = full_onboarding_scene_width * -1;
     }
 
-    inner.setAttribute('style', 'transform: translate3d(' + transform + 'px,0,0)');
+    inner.setAttribute('style', 'transform: translate3d(' + transform + 'px,0,0); transition: transform 0.4s;');
 
     // switcher_index isn't always calculated
     var index_position = ( (Math.abs(transform) + switcher_space) / switcher_space ) - 1;
@@ -97,9 +97,12 @@
 
       this.swiper = new Swiper(inner, {
         callback: changeScene,
-        touch_threshold: 220,
+        touch_threshold: 180,
         click_threshold: (FCH.dimensions.ww / 2)
       });
+
+      // I don't know why this works but this is necessary for the onboarding scene changes to work - TS
+      document.body.addEventListener('touchstart', function() {});
     },
   };
 
