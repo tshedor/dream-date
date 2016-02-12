@@ -21,15 +21,7 @@
     }
   }
 
-  * {
-    animation-play-state: paused;
-  }
-
   &.active {
-    * {
-      animation-play-state: running;
-    }
-
     .inner-scenes {
       will-change: transform;
     }
@@ -70,7 +62,7 @@
 }
 
 .onboarding-graphic {
-  margin-bottom: 120px;
+  margin-bottom: 60px;
 }
 
 .pagination {

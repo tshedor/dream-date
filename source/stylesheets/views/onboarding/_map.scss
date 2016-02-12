@@ -14,29 +14,9 @@
     top: 22%;
   }
 
-  #Life-Hall {
-    #marker {
-      display: none;
-
-    #marker-base {
-      transform: scale(0);
-    }
-  }
-
-  &.active {
-    #marker {
-      display: initial;
-
-      #marker-base {
-        animation: marker-base-grow 2.8s ease-in-out 0s infinite;
-        transform: scale(0);
-        transform-origin: 50% 50%;
-      }
-    }
-  }
-    rect {
-      animation: background-pulse 1.8s ease-in-out 0s infinite alternate;
-    }
+  rect {
+    @extend %active-animations;
+    animation: background-pulse 1.8s ease-in-out 0s infinite alternate none paused;
   }
 }
 

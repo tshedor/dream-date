@@ -44,6 +44,10 @@
   border: 1px solid $c-gray;
   cursor: pointer;
 
+  &:hover {
+    background-color: rgba($c-dark-blue, 0.92);
+  }
+
   &.-disabled {
     background-color: rgba($c-gray, 0.92);
   }

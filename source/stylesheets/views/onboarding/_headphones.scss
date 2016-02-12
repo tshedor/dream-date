@@ -1,11 +1,13 @@
 #headphones-big,
 #headphones-medium,
 #headphones-small {
+  @extend %active-animations;
   animation-timing-function: ease-in-out;
   animation-delay: 0s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-duration: 2s;
+  animation-play-state: paused;
 }
 
 #headphones-big {

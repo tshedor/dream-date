@@ -10,7 +10,6 @@
   var audio_folder = '/static/audio/';
 
   // Cache track dimensions variables so that touch operations are less expensive
-  var track_from_left, track_from_right;
   var track_dimensions = {
     left: 0,
     right: 0,
@@ -123,7 +122,7 @@
      */
     function onPlayScrubberChange() {
       var scrubber_value = parseInt(scrubber.value);
-      var offset = determineAudioPosition( scrubber_value );
+      determineAudioPosition( scrubber_value );
     }
     scrubber.addEventListener('input', onPlayScrubberChange.bind(this));
 
@@ -141,12 +140,14 @@
      * On handle drag, slider updates
      */
     function onTouchHandle(e) {
-      e.stopPropagation();
       var pos = e.touches[0].pageX;
-      var offset = pos - track.left;
+      var offset = pos - track_dimensions.left;
 
-      if(pos < track_from_right) {
-        determineAudioPosition(offset);
+      var track_time = (offset / track_dimensions.width) * duration;
+
+      // Don't allow user to go ALL the way to the end
+      if(pos < (track_dimensions.right - 20)) {
+        determineAudioPosition(track_time);
       }
     }
 
@@ -193,10 +194,6 @@
       // Handle width + absolute positioning to the right
       track_dimensions.right = track_bounds.right + 24;
       track_dimensions.width = track.offsetWidth;
-
-      // setTimeout(function() {
-      //   DD.plot.current_mission.objectiveComplete();
-      // }, 1000);
     },
 
     play: function() {
@@ -204,6 +201,7 @@
       duration = audio.duration;
       audio.addEventListener('timeupdate', updateScrubber);
       control_button.querySelector('img').src = control_button.getAttribute('data-pause-src');
+
       audio.play();
     },
 

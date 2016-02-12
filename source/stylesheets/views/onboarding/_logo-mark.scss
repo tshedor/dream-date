@@ -1,10 +1,12 @@
 .ob-cloud {
-  animation: cloud-bounce 1.8s ease-in-out 0s infinite alternate;
+  @extend %active-animations;
+  animation: cloud-bounce 1.8s ease-in-out 0s infinite alternate none paused;
   margin-bottom: 80px;
 }
 
 .ob-heart-shadow {
-  animation: heart-shadow 1.8s ease-in-out 0s infinite alternate;
+  @extend %active-animations;
+  animation: heart-shadow 1.8s ease-in-out 0s infinite alternate none paused;
   transform: scale(0.7);
 }
 
