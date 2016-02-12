@@ -69,9 +69,9 @@
    */
   function directionsSpeedbump() {
     function acknowledgeDirections(next) {
+      console.log(directions)
       DD.analytics.event('Navigation', 'Directions', ('Advance from ' + DD.plot.current_mission.id) );
 
-      directions.style = 'transform: translate3d(100%, 0, 0)';
       FCH.removeClass(directions, 'active');
       DD.plot.current_mission.objectiveComplete();
 

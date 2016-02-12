@@ -53,7 +53,8 @@
           },
           '50': {
             type: 'waypoint',
-            content: 'svg-turbine-hall',
+            selector: 'svg-turbine-hall',
+            content: 'Earthquake House',
             nextValue: 100
           },
           '100': {
@@ -69,7 +70,8 @@
           },
           '50': {
             type: 'waypoint',
-            content: 'svg-physics-lab',
+            selector: 'svg-physics-lab',
+            content: 'Physics Lab',
             nextValue: 100
           },
           '100': {

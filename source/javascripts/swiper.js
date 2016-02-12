@@ -14,13 +14,12 @@
 })(window, function factory(window) {
   'use strict';
 
-
   /**
    * Move panel with translates
    * @param  {Event} e
    * @fires callback
    */
-  function panelMoveUpdate(e) {
+  function touchUpdate(e) {
     if(!this.allow_to_fire) {
       return;
     }
@@ -39,7 +38,7 @@
    * If the threshold isn't cleared by touchend, bounce back to the begining; otherwise, advance or decrease
    * @param  {Event} e
    */
-  function panelEnd(e) {
+  function touchComplete(e) {
     var end_pos = e.changedTouches[0].pageX;
     var delta = this.start_pos - end_pos;
     var abs_delta = Math.abs(delta);
@@ -48,6 +47,8 @@
       this.el.setAttribute('style',  'transform: translate3d(' + this.last_transform + 'px,0,0)');
 
     } else {
+      console.log(delta)
+
       // If negative, swipe was to the right
       if(delta < 0) {
         resetAllowToFire.call(this);
@@ -82,7 +83,7 @@
    * Save touch start position
    * @param  {Event} e
    */
-  function panelUpdate(e) {
+  function touchBegin(e) {
     this.start_pos = e.touches[0].pageX;
   }
 
@@ -125,9 +126,9 @@
 
     // Bind listeners depending on touch availability
     if( DD.constants.has_touch ) {
-      this.el.addEventListener('touchstart', panelUpdate.bind(this));
-      this.el.addEventListener('touchmove', panelMoveUpdate.bind(this));
-      this.el.addEventListener('touchend', panelEnd.bind(this));
+      this.el.addEventListener('touchstart', touchBegin.bind(this));
+      this.el.addEventListener('touchmove', touchUpdate.bind(this));
+      this.el.addEventListener('touchend', touchComplete.bind(this));
     } else {
       this.el.addEventListener('click', nextOrPreviousClick.bind(this));
     }

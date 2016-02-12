@@ -1,4 +1,4 @@
-.player#js-player
+.player.-ready#js-player
   .control-button#js-control-button data-pause-src=image_path('controls/pause.svg') data-play-src=image_path('controls/play.svg')
     img.button#js-control-button src=image_path('controls/play.svg')
 
@@ -12,6 +12,6 @@
       - (1..5).each do |i|
         img.-disabled id="js-scene-#{i - 1}" src=image_path("controls/#{i}.svg") alt=i
 
-  .directions#js-directions
+  .directions.active#js-directions
     span Earthquake House
     img src=image_path('advance.svg')

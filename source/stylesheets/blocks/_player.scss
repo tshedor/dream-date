@@ -73,8 +73,6 @@ $handle-dimension: 16px;
   left: 0;
   top: 0;
   width: 0;
-  transition: width;
-  will-change: width;
   cursor: pointer;
 
   &:before {

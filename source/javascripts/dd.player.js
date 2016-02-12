@@ -219,7 +219,7 @@
      */
     resumeTrack: function(file_name) {
       // Disable interaction
-      FCH.removeClass(player, '-ready');
+      // FCH.removeClass(player, '-ready');
 
       resetAudioProgress.call(this);
 
