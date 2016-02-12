@@ -1,6 +1,9 @@
-'use strict';
+/*globals DD, FCH */
 
 (function() {
+  'use strict';
+
+  var map_id = '#map-rasterized';
 
   /**
    * Initialize missions array
@@ -12,8 +15,6 @@
       var mission = new Mission(i);
       this.missions.push( mission );
     }
-
-    this.current_mission = this.missions[0];
   }
 
   DD.plot = {
@@ -45,13 +46,13 @@
     /**
      * Start/resume specific mission
      * @param  {Integer} id              Mission id
-     * @param  {Boolean} update_switcher Should the switcher be modified
+     * @param  {Boolean} [update_switcher=true] Should the switcher be modified
      * @return {Mission}
      */
     resume: function(id, update_switcher) {
       update_switcher = FCH.setDefault(update_switcher, true);
 
-      if(!id) {
+      if(typeof id === 'undefined') {
         var cached_mission_id = DD.constants.last_mission;
 
         if(cached_mission_id) {
@@ -68,27 +69,44 @@
 
       // Resume audio if current objective is an audio type (Audio always opens)
       DD.player.resumeTrack(id);
+      this.updateMap();
 
       // Update switcher view
       if(update_switcher) {
         DD.navigation.updateSwitcher(id, false);
       }
 
+      if(this.current_mission.progress)
+
       return this.current_mission;
     },
 
-    nextMission: function() {
-      var nextMissionId = this.current_mission.id + 1;
+    nextMission: function(mission_id) {
+      var nextMissionId = mission_id + 1;
 
       if(nextMissionId < this.missions.length) {
-        DD.analytics.event('Mission', 'Change To', 'Next');
+        DD.analytics.event('Mission', 'Change To', nextMissionId);
         this.resume(nextMissionId);
+
       } else {
         DD.analytics.page('completion');
 
         var completion_view = document.getElementById('js-completion-view');
         FCH.addClass(completion_view, 'active');
       }
+    },
+
+    /**
+     * Remove animated map markers and set a new one
+     */
+    updateMap: function() {
+      // Remove active classes from map SVG and add it to the appropriate one
+      FCH.loopAndExecute(map_id + ' .active', function(active_item) {
+        active_item.removeAttribute('class');
+      });
+
+      var new_map_element = document.querySelector(map_id + ' #' + this.current_mission.map_selector);
+      new_map_element.setAttribute('class', 'active');
     },
 
     missionObjectiveDidUpdate: function() {

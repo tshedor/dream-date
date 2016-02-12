@@ -4,7 +4,7 @@
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="rotate-device">
             <g id="Group-2" transform="translate(189.000000, 41.000000)">
-                <g id="phone-opacity-reduced" transform="translate(106.500000, 149.500000) rotate(-90.000000) translate(-106.500000, -149.500000) translate(43.000000, 43.000000)">
+                <g id="phone-opacity-reduced" transform="translate(106.500000, 149.500000) rotate(-90.000000) translate(-106.500000, -149.500000) translate(43.000000, 43.000000)" opacity="0.2">
                     <rect id="Rectangle-36" fill="#EFF1F3" x="0" y="0" width="127" height="213" rx="33"></rect>
                     <rect id="Rectangle-36" fill="#484848" x="8.70564516" y="29.6971154" width="110.100806" height="152.581731" rx="3"></rect>
                     <ellipse id="Oval-283" fill="#484848" cx="43.016129" cy="14.3365385" rx="2.0483871" ry="2.04807692"></ellipse>

@@ -1,6 +1,7 @@
-'use strict';
+/*globals DD, FCH */
 
 (function() {
+  'use strict';
 
   var debug = true;
 

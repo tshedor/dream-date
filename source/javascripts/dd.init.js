@@ -1,4 +1,4 @@
-/*globals FCH */
+/*globals DD, FCH */
 
 'use strict';
 

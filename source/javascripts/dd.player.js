@@ -1,6 +1,8 @@
-'use strict';
+/*globals DD, FCH */
 
 (function() {
+  'use strict';
+
   var player = document.getElementById('js-player');
   var track = document.getElementById('js-track');
   var scrubber = document.getElementById('js-scrubber-input');
@@ -25,8 +27,12 @@
   function resetAudioProgress() {
     FCH.removeClass(control_button, 'notify');
 
+    if( !audio ) {
+      return;
+    }
+
     if( !audio.paused ) {
-      this.pause();
+      DD.player.pause();
     }
 
     audio.currentTime = 0;
@@ -109,7 +115,7 @@
      * @return {Integer}
      */
     function determineAudioPosition(new_value) {
-      DD.player.audio.currentTime = new_value;
+      audio.currentTime = new_value;
 
       var offset = new_value / duration;
       progress.style.width = (offset * 100) + '%';
@@ -130,9 +136,14 @@
      * On track click, slider updates
      */
     function onTrackTouch(e) {
-      var position_click = e.pageX - track_dimensions.left;
+      var pos = e.pageX;
+      var position_click = pos - track_dimensions.left;
       var track_time = (position_click / track_dimensions.width) * duration;
-      determineAudioPosition(track_time);
+
+      // Don't allow user to go ALL the way to the end
+      if(pos < track_dimensions.right) {
+        determineAudioPosition(track_time);
+      }
     }
     track.addEventListener('click', onTrackTouch);
 
@@ -146,7 +157,7 @@
       var track_time = (offset / track_dimensions.width) * duration;
 
       // Don't allow user to go ALL the way to the end
-      if(pos < (track_dimensions.right - 20)) {
+      if(pos < track_dimensions.right) {
         determineAudioPosition(track_time);
       }
     }
@@ -185,14 +196,13 @@
 
     ready: function() {
       audio = this.resumeTrack( 0 );
-      this.audio = audio;
 
       controlsEventListeners.call(this);
 
       var track_bounds = track.getBoundingClientRect();
       track_dimensions.left = track_bounds.left;
       // Handle width + absolute positioning to the right
-      track_dimensions.right = track_bounds.right + 24;
+      track_dimensions.right = track_bounds.right;
       track_dimensions.width = track.offsetWidth;
     },
 
@@ -221,7 +231,7 @@
       // Disable interaction
       FCH.removeClass(player, '-ready');
 
-      resetAudioProgress.call(this);
+      resetAudioProgress();
 
       audio = new Audio();
 
@@ -236,15 +246,11 @@
       // Finally load it
       audio.load();
 
-      this.audio = audio;
-
       return audio;
     },
 
     missionObjectiveDidUpdate: function() {
       var is_a_track = DD.plot.current_mission.type === 'audio';
-
-      resetAudioProgress.call(this);
 
       if( is_a_track ) {
         FCH.addClass(control_button, 'notify');

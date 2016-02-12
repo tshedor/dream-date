@@ -1,5 +1,5 @@
-$switcher-next-shadow: 0 8px 9px -9px $c-white;
-$switcher-prev-shadow: 0 -8px 9px -9px $c-white;
+$switcher-next-shadow: 0 9px 9px -9px $c-white;
+$switcher-prev-shadow: 0 -9px 9px -9px $c-white;
 $handle-dimension: 16px;
 
 .player {
@@ -13,6 +13,12 @@ $handle-dimension: 16px;
   display: flex;
   align-items: center;
 
+  &:before {
+    background: transparent;
+    transition: background 0.2s;
+    visibility: hidden;
+  }
+
   &:not(.-ready) {
     pointer-events: none;
 
@@ -23,6 +29,7 @@ $handle-dimension: 16px;
       top: 0;
       left: 0;
       width: 100%;
+      visibility: visible;
       height: 100%;
       text-align: center;
       z-index: 9;
@@ -37,7 +44,7 @@ $handle-dimension: 16px;
 }
 
 .control-button {
-  padding: 20px 20px 20px $container-padding;
+  padding: 13px 20px;
 }
 
 .track,
@@ -111,7 +118,7 @@ $handle-dimension: 16px;
 .switcher {
   width: 50px;
   text-align: center;
-  height: 54px;
+  height: $switcher-height + 2px;
   overflow: hidden;
   transition: box-shadow 0.3s;
 
@@ -130,8 +137,8 @@ $handle-dimension: 16px;
   img {
     display: block;
     margin: 0 auto;
-    padding: 3px 8px;
-    height: 51px;
+    padding: 3px 15px;
+    height: $switcher-height;
     width: auto;
     transition: opacity 0.4s ease;
 
@@ -152,6 +159,6 @@ $handle-dimension: 16px;
   }
 
   100% {
-    letter-spacing: 2.4em;
+    letter-spacing: 1.3em;
   }
 }

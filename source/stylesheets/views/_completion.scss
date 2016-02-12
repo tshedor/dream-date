@@ -1,8 +1,16 @@
 .completion-view {
   background-color: $c-red;
 
-  header {
-    border-bottom: none;
+  .header {
+    background: none;
+    text-align: right;
+    z-index: 9;
+    justify-content: flex-end;
+    border-bottom: 0;
+
+    img {
+      display: block;
+    }
   }
 
   h2 {

@@ -1,9 +1,15 @@
 .header {
   @extend %bg-pattern;
-  padding: 5px $container-padding;
+  padding: 7px $container-padding;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: $toolbar-height;
   border-bottom: 1px solid $c-light-grey;
+
+  img {
+    height: 100%;
+    width: auto;
+    padding: 5px 0;
+  }
 }

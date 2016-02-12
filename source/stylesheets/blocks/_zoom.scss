@@ -36,18 +36,19 @@
   background-repeat: no-repeat;
   height: 35px;
   width: 35px;
-  padding: 20px 30px;
+  padding: 20px 25px;
   display: block;
   border-radius: 8px;
   border: 1px solid $c-gray;
   cursor: pointer;
+  transition: background-color 0.2s;
 
   &:hover {
-    background-color: rgba($c-dark-blue, 0.92);
+    background-color: rgba($c-red, 0.56);
   }
 
   &.-disabled {
-    background-color: rgba($c-gray, 0.92);
+    background-color: rgba($c-dark-blue, 0.22);
   }
 
   &.-plus {

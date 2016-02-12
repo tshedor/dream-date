@@ -1,6 +1,7 @@
-'use strict';
+/*globals DD, FCH */
 
 (function() {
+  'use strict';
 
   DD.constants = {
     mission_count: 5,
@@ -46,6 +47,8 @@
 
     missions: [
       {
+        selector: 'svg-lunch-room',
+        content: 'Lunch Room',
         objectives: {
           '0': {
             type: 'audio',
@@ -53,8 +56,6 @@
           },
           '50': {
             type: 'waypoint',
-            selector: 'svg-turbine-hall',
-            content: 'Earthquake House',
             nextValue: 100
           },
           '100': {
@@ -63,6 +64,8 @@
         }
       },
       {
+        selector: 'svg-turbine-hall',
+        content: 'Earthquake House',
         objectives: {
           '0': {
             type: 'audio',
@@ -70,8 +73,6 @@
           },
           '50': {
             type: 'waypoint',
-            selector: 'svg-physics-lab',
-            content: 'Physics Lab',
             nextValue: 100
           },
           '100': {
@@ -80,6 +81,8 @@
         }
       },
       {
+        selector: 'svg-physics-lab',
+        content: 'Physics Lab',
         objectives: {
           '0': {
             type: 'audio',
@@ -87,8 +90,6 @@
           },
           '50': {
             type: 'waypoint',
-            selector: 'svg-earth-hall',
-            content: 'Earth Hall',
             nextValue: 100
           },
           '100': {
@@ -97,6 +98,8 @@
         }
       },
       {
+        selector: 'svg-earth-hall',
+        content: 'Earth Hall',
         objectives: {
           '0': {
             type: 'audio',
@@ -104,8 +107,6 @@
           },
           '50': {
             type: 'waypoint',
-            selector: 'svg-planetarium',
-            content: 'Planetarium',
             nextValue: 100
           },
           '100': {
@@ -114,22 +115,18 @@
         }
       },
       {
+        selector: 'svg-planetarium',
+        content: 'Planetarium',
         objectives: {
           '0': {
             type: 'audio',
-            nextValue: 50
-          },
-          '50': {
-            type: 'waypoint',
-            selector: 'svg-lunch-room',
-            content: 'Lunch Room',
             nextValue: 100
           },
           '100': {
             type: 'blank'
           }
         }
-      },
+      }
     ]
   };
 })();

@@ -1,6 +1,8 @@
-'use strict';
+/*globals DD, FCH */
 
 (function() {
+  'use strict';
+
   var scenes = document.getElementById('js-scenes');
   var inner = document.getElementById('js-inner-scenes');
   var total_scenes = document.querySelectorAll('.onboarding-scene').length;

@@ -1,6 +1,8 @@
-'use strict';
+/*globals DD, FCH */
 
 (function() {
+  'use strict';
+
   var zoom_box = document.getElementById('js-map-zoom');
   var max = 3;
   var increment = 0.5;
@@ -82,8 +84,8 @@
         FCH.removeClass(control, '-disabled');
       });
 
-      zoom_box.style.height = '0';
-      zoom_box.setAttribute('data-zoom-level', 0);
+      zoom_box.style.height = '100%';
+      zoom_box.setAttribute('data-zoom-level', 1);
     }
 
   };

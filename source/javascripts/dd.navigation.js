@@ -1,6 +1,8 @@
-'use strict';
+/*globals DD, FCH */
 
 (function() {
+  'use strict';
+
   var switcher = document.getElementById('js-switcher');
   var inner = document.getElementById('js-inner-switcher');
   var directions = document.getElementById('js-directions');
@@ -18,6 +20,19 @@
   }
 
   /**
+   * Rewind all scenes and go back to the good ol' days in the first scene
+   */
+  function resetAfterCompletion() {
+    DD.plot.current_mission.objectiveComplete();
+
+    FCH.loopAndExecute(DD.plot.missions, function(mission) {
+      mission.replay();
+    });
+
+    DD.plot.resume(0);
+  }
+
+  /**
    * Remove all overlay views
    * @param  {String|Boolean} display_view_id
    */
@@ -30,6 +45,8 @@
       DD.analytics.page(display_view_id);
       var view = document.getElementById('js-' + display_view_id + '-view');
       FCH.addClass(view, 'active');
+    } else {
+      DD.analytics.page('');
     }
   }
 
@@ -39,6 +56,10 @@
   function onClickListeners() {
     var onboarding = document.getElementById('js-onboarding-button');
     onboarding.addEventListener('click', hideAllViewsExcept.bind(null, 'onboarding'));
+
+
+    var completion_close = document.getElementById('js-completion-close');
+    completion_close.addEventListener('click', resetAfterCompletion);
 
     FCH.loopAndExecute('.js-overlay-close', function(close_button) {
       close_button.addEventListener('click', hideAllViewsExcept.bind(null, false));
@@ -119,7 +140,7 @@
     updateSwitcher: function(next, should_fire_resume) {
       should_fire_resume = FCH.setDefault(should_fire_resume, true);
 
-      var switcher_space = 50;
+      var switcher_space = 38;
       var style = inner.getAttribute('style');
       var transform = 0;
       var y_regex = new RegExp(/.*3d\(0\,(-?\d{1,3})px\,0\)/);

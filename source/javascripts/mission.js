@@ -11,8 +11,8 @@
 
 })(window, function factory(window) {
   'use strict';
+
   var directions = document.getElementById('js-directions');
-  var map_id = '#map-rasterized';
 
   /**
    * Retrieve maximum progress from local storage
@@ -60,7 +60,11 @@
       FCH.removeClass( this.mission_node, '-disabled');
     }
 
-    this.objectives = DD.constants.missions[this.id].objectives;
+    var mission_object = DD.constants.missions[this.id];
+
+    this.objectives = mission_object.objectives;
+    this.waypoint_name = mission_object.content;
+    this.map_selector = mission_object.selector;
 
     Object.defineProperty(this, 'max_progress', {
       get: function() {
@@ -87,8 +91,6 @@
       },
 
       set: function(new_value) {
-        this.destinationCoordinate = null;
-        this.destinationObjective = null;
         this.progressSet(new_value);
 
         private_progress = new_value;
@@ -116,7 +118,7 @@
 
     if(objective === 100) {
       this.max_progress = 100;
-      DD.plot.nextMission();
+      DD.plot.nextMission(this.id);
     } else {
       this.objectiveAction(executeNext);
     }
@@ -149,11 +151,15 @@
 
     switch(this.type) {
       case 'audio' :
-        this.playAudio();
+        DD.player.resumeTrack( this.id );
 
       break;
       case 'waypoint' :
-        this.addWaypoint(data.content, data.selector);
+        FCH.addClass(directions, 'active');
+
+        // Update span title and activate directions bar
+        directions.querySelector('span').innerHTML = this.current_mission.waypoint_name;
+        DD.plot.updateMap();
 
       break;
       case 'blank' :
@@ -161,30 +167,6 @@
 
       break;
     }
-  };
-
-  Mission.prototype.playAudio = function() {
-    DD.player.resumeTrack( this.id );
-  };
-
-  /**
-   * Activate waypoint marker on the map
-   * @param {String} waypoint_name
-   * @param {String} map_selector
-   * @see Mission.prototype.objectiveAction
-   */
-  Mission.prototype.addWaypoint = function(waypoint_name, map_selector) {
-    // Update span title and activate directions bar
-    directions.querySelector('span').innerHTML = waypoint_name;
-    FCH.addClass(directions, 'active');
-
-    // Remove active classes from map SVG and add it to the appropriate one
-    FCH.loopAndExecute(map_id + ' .active', function(active_item) {
-      active_item.removeAttribute('class');
-    });
-
-    var new_map_element = document.querySelector(map_id + ' #' + map_selector);
-    new_map_element.setAttribute('class', 'active');
   };
 
   Mission.prototype.replay = function() {

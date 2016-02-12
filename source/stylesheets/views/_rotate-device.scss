@@ -9,10 +9,8 @@
   background-color: $c-dark-grey;
 
   @include bp(landscape) {
-    display: block;
-  }
-
-  #phone-opacity-reduced {
-    opacity: .2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
