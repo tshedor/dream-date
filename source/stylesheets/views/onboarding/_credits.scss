@@ -3,7 +3,8 @@
   overflow: scroll;
 
   &.onboarding-graphic {
-    margin-top: 5em;
+    margin-top: 0em;
+    max-height: 400px;
   }
 }
 
