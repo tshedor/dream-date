@@ -169,8 +169,8 @@
         }
       }
 
-      // Go back to start
-      if(transform >= 0) {
+      // Go back to start if it's too much or too little
+      if(transform > 0 || transform < max_transform) {
         transform = max_transform;
       }
 
@@ -181,8 +181,8 @@
         FCH.addClass(switcher, '-before');
 
       } else if(current_mission === DD.constants.mission_count) {
-        FCH.removeClass(switcher, '-before');
         FCH.addClass(switcher, '-after');
+        FCH.removeClass(switcher, '-before');
 
       } else {
         FCH.addClass(switcher, '-after');
@@ -194,12 +194,13 @@
       var mission_node = document.getElementById('js-scene-' + zero_indexed_mission);
 
       if(!FCH.hasClass(mission_node, '-disabled')) {
-        DD.utils.translate(inner, transform);
+        DD.utils.translate(inner, transform, null, true);
 
         if(should_fire_resume) {
           DD.plot.resume(zero_indexed_mission, false);
         }
       } else {
+        // Skip over disabled missions and go back to last-active one
         this.updateSwitcher(current_mission, should_fire_resume);
       }
     }

@@ -59,7 +59,7 @@
      * @param  {String} transition - If unsupplied, transition will not be applied
      * @see  {@link https://github.com/meandmax/lory/blob/master/dist/lory.js#L178}
      */
-    translate: function(el, to, transition) {
+    translate: function(el, to, transition, y_axis) {
       var style = el && el.style;
 
       if (el.style) {
@@ -67,7 +67,11 @@
           el.style[prefixes.transition] = 'transform ' + transition;
         }
 
-        el.style[prefixes.transform] = 'translate3d(' + to + 'px,0,0)';
+        if(y_axis) {
+          el.style[prefixes.transform] = 'translate3d(0,' + to + 'px,0)';
+        } else {
+          el.style[prefixes.transform] = 'translate3d(' + to + 'px,0,0)';
+        }
       }
     },
 
@@ -77,7 +81,7 @@
      * @return {Integer}
      */
     vertTranslate: function(el) {
-      var y_regex = new RegExp(/.*3d\(0\,\s?(-?\d{1,3})px\s?\,\s?0\)/);
+      var y_regex = new RegExp(/.*3d\(0px\, (-?\d{1,3})px\, 0px\)/);
 
       // Find the Y value of the translate3d transform
       return parseInt( el.getAttribute('style').match(y_regex)[1] );
