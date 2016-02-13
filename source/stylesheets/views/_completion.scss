@@ -15,6 +15,7 @@
 
   h2 {
     color: $c-light-grey;
+    margin-top: .5em;
   }
 
   .caption {
@@ -29,6 +30,12 @@
 
 .completion-graphic {
   text-align: center;
+  max-height: 297px;
+
+  svg {
+    max-height: 100%;
+    width: auto;
+  }
 }
 
 .completion-social {
