@@ -57,6 +57,7 @@
     scrubber.setAttribute('max', this.duration);
     duration = this.duration;
     FCH.addClass(player, '-ready');
+    FCH.addClass(control_button, 'notify');
   }
 
   /**

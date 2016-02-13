@@ -129,7 +129,6 @@
       var objective_label = this.current_mission.id + ' - ' + this.current_mission.progress + ' [' + this.current_mission.type + ']';
       DD.analytics.event('Mission', 'Objective Complete', objective_label);
 
-      DD.player.missionObjectiveDidUpdate();
       DD.zoom.resetZoom();
     }
   };
