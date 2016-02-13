@@ -24,14 +24,8 @@ set :js_dir, 'javascripts'
 set :images_dir, 'images'
 
 page '/sitemap.xml', layout: false
-page '/map.html', layout: :zoomenabled
-with_layout :zoomenabled do
-  page '/transcripts/*'
-end
 
 activate :directory_indexes
-
-# activate :directory_indexes
 
 # Build-specific configuration
 configure :build do
@@ -39,11 +33,11 @@ configure :build do
   activate :minify_css
 
   # Minify Javascript on build
-  activate :minify_javascript
+  # activate :minify_javascript
 
   # Enable cache buster
   # https://github.com/middleman/middleman/issues/480
-  activate :asset_hash, ignore: %r{^static/.* ^audio/.* .*\.ico$}
+  activate :asset_hash, ignore: %r{^static/.*}
 
   # Use relative URLs
   # activate :relative_assets
