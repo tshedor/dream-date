@@ -14,6 +14,29 @@
   'use strict';
 
   /**
+   * Use cookies when localStorage is not supported
+   * @param  {String} key
+   * @see  {@link https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage}
+   * @return {String}
+   */
+  function getCookie(key) {
+    return unescape(document.cookie.replace(new RegExp("(?:^|.*;\\s*)" + escape(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1"));
+  }
+
+  /**
+   * Set cookies when localStorage is not supported
+   * @param {String} key
+   * @param {String} value
+   * @see  {@link https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage}
+   * @return {String}
+   */
+  function setCookie(key, value) {
+    if(!key) { return; }
+    document.cookie = escape(key) + "=" + escape(value) + "; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/";
+    return value;
+  }
+
+  /**
    * Attach hooks on child objects to the listener arrays
    * @private
    * @param {String} listener - Such as 'resize' or 'load'
@@ -200,7 +223,13 @@
    */
   FrobCoreHelpers.prototype.localSet = function(key, obj) {
     var value = JSON.stringify(obj);
-    localStorage[key] = JSON.stringify(obj);
+
+    try {
+      localStorage.setItem(key, value);
+    }
+    catch(e) {
+      setCookie(key, value);
+    }
 
     return value;
   };
@@ -211,8 +240,16 @@
    * @return {String|Boolean} Value of localStorage object or false if key is undefined
    */
   FrobCoreHelpers.prototype.localGet = function(key) {
-    if (typeof localStorage[key] !== 'undefined') {
-      return JSON.parse(localStorage[key]);
+    var value;
+
+    try {
+      value = localStorage.getItem(key);
+    } catch(e) {
+      value = getCookie(key);
+    }
+
+    if ( value ) {
+      return JSON.parse( value );
     } else {
       return false;
     }
