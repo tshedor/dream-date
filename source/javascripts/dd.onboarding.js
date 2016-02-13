@@ -99,8 +99,8 @@
     }
 
     var credits = document.querySelector('.onboarding-graphic.credits');
-    credits.addEventListener('touchstart', stopP);
-    credits.addEventListener('touchmove', stopP);
+    credits.addEventListener('touchstart', allowCreditsTouchScroll);
+    credits.addEventListener('touchmove', allowCreditsTouchScroll);
   }
 
   DD.onboarding = {
