@@ -28,8 +28,9 @@
     }
 
     var new_pos = parseInt(e.touches[0].pageX) - this.start_pos;
+    var transform_prop = this.last_transform + new_pos;
 
-    this.el.setAttribute('style', 'transform: translate3d(' + (this.last_transform + new_pos) + 'px,0,0)');
+    DD.utils.translate(this.el, transform_prop);
   }
 
   /**
@@ -42,7 +43,7 @@
     var abs_delta = Math.abs(delta);
 
     if(abs_delta < this.touch_threshold) {
-      this.el.setAttribute('style',  'transform: translate3d(' + this.last_transform + 'px,0,0); transition: transform 0.4s linear 0.1s');
+      DD.utils.translate(this.el, this.last_transform, '0.4s linear 0.2s');
 
     } else {
 

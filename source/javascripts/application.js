@@ -4,6 +4,7 @@
 //= require mission
 
 //= require dd
+//= require dd.utils
 //= require dd.constants
 //= require dd.analytics
 //= require dd.navigation

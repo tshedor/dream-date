@@ -31,7 +31,7 @@
 
       .onboarding-scene.playback-scene
         .onboarding-graphic.playback
-          .switcher.-before#js-switcher
+          .switcher.-before.-after#js-switcher
             .inner-switcher#js-inner-switcher style="transform: translate3d(0,0px,0)"
               - (1..5).each do |i|
                 img id="js-scene-#{i - 1}" src=image_path("controls/#{i}.svg") alt=i
@@ -85,20 +85,14 @@
                 td Written and Programmed By
                 td Tim Shedor
               tr
-                td
-                  | Sound Design, Recording,
-                  br
-                  | Editing and Mastering
+                td Sound Design, Recording, Editing<br />and Mastering
                 td Max Ono
               tr
-                td User Interface and<br />Animations
+                td Branding, User Interface and Animations
                 td Will Chertoff
               tr
-                td Original Music Written<br />and Performed By
+                td Original Music Written and Performed By
                 td Max Ono
-              tr
-                td Branding
-                td Will Chertoff
               tr
                 td Special Thanks
                 td == ['Dory Athey', 'Sam Kovzan', 'Cindy Shedor', 'Anne Wagner'].join('<br />')

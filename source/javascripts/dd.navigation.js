@@ -104,7 +104,7 @@
     function acknowledgeDirections(next) {
       DD.analytics.event('Navigation', 'Directions', ('Advance from ' + DD.plot.current_mission.id) );
 
-      this.el.setAttribute('style', 'transform: translate3d(100%, 0, 0); transition: transform 0.4s');
+      DD.utils.translate(this.el, FCH.dimensions.ww, '0.4s');
 
       DD.plot.updateMap(true);
 
@@ -148,11 +148,10 @@
       var switcher_space = 38;
       var style = inner.getAttribute('style');
       var transform = 0;
-      var y_regex = new RegExp(/.*3d\(0\,(-?\d{1,3})px\,0\)/);
       var max_transform = (DD.constants.mission_count * switcher_space * -1) + switcher_space;
 
       // Find the Y value of the translate3d transform
-      transform = parseInt( inner.getAttribute('style').match(y_regex)[1] );
+      transform = DD.utils.vertTranslate(inner);
 
       if(typeof(next) === 'boolean'){
         if(next) {
@@ -195,7 +194,7 @@
       var mission_node = document.getElementById('js-scene-' + zero_indexed_mission);
 
       if(!FCH.hasClass(mission_node, '-disabled')) {
-        inner.setAttribute('style', 'transform: translate3d(0,' + transform + 'px,0)');
+        DD.utils.translate(inner, transform);
 
         if(should_fire_resume) {
           DD.plot.resume(zero_indexed_mission, false);

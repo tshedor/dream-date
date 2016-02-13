@@ -1,10 +1,10 @@
 .credits {
-  max-width: 80%;
   overflow: scroll;
+  padding: 0 $container-padding 10px;
 
   &.onboarding-graphic {
     margin-top: 0em;
-    max-height: 400px;
+    max-height: 70vh;
   }
 }
 

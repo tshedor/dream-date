@@ -60,7 +60,7 @@
       transform = full_onboarding_scene_width * -1;
     }
 
-    inner.setAttribute('style', 'transform: translate3d(' + transform + 'px,0,0); transition: transform 0.4s;');
+    DD.utils.translate(inner, transform, '0.4s');
 
     // switcher_index isn't always calculated
     var index_position = ( (Math.abs(transform) + switcher_space) / switcher_space ) - 1;

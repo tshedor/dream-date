@@ -13,6 +13,11 @@
 .ob-logo {
   margin-top: 50px;
   width: 230px;
+
+  @include bp(iphone5) {
+    margin-top: 25px;
+    width: 200px;
+  }
 }
 
 @keyframes cloud-bounce {

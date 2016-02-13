@@ -27,6 +27,10 @@ page '/sitemap.xml', layout: false
 
 activate :directory_indexes
 
+activate :autoprefixer do |config|
+  config.browsers = ['last 2 versions']
+end
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
