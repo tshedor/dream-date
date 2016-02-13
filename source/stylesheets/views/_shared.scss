@@ -13,10 +13,6 @@ $view-transition: opacity .5s $view-transition-timing-function;
   opacity: 0;
   transition: $view-transition;
 
-  &.-insert {
-    height: calc(100% - #{$toolbar-height * 2});
-  }
-
   &.-full,
   &.-overlay {
     @include stack($view-stack, '.view.-overlay');
@@ -40,21 +36,6 @@ $view-transition: opacity .5s $view-transition-timing-function;
     opacity: 1;
     transition: $view-transition;
   }
-}
-
-.inner-view {
-  overflow: scroll;
-  height: calc(100% - #{$toolbar-height});
-  background: $c-gray;
-}
-
-.view-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px $container-padding;
-  border-bottom: 1px solid $c-dark-grey;
-  cursor: pointer;
 }
 
 .logo {
