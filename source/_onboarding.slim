@@ -31,13 +31,13 @@
 
       .onboarding-scene.playback-scene
         .onboarding-graphic.playback
-          .switcher.-next#js-switcher
+          .switcher.-before#js-switcher
             .inner-switcher#js-inner-switcher style="transform: translate3d(0,0px,0)"
               - (1..5).each do |i|
                 img id="js-scene-#{i - 1}" src=image_path("controls/#{i}.svg") alt=i
 
         .caption
-          .main-text.bold If you miss something, you can always replay completed stories by tapping the numbers
+          .main-text: strong If you miss something, you can always replay completed stories by tapping the numbers
         .caption
           .main-text Follow along with the transcripts for each scene
         .ob-transcript

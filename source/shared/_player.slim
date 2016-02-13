@@ -7,9 +7,9 @@
       .handle#js-scrubber-handle
     input#js-scrubber-input type="range"
 
-  .switcher.-next#js-switcher
-    .inner-switcher#js-inner-switcher style="transform: translate3d(0,0px,0)"
-      - (1..5).each do |i|
+  .switcher.-before#js-switcher
+    .inner-switcher#js-inner-switcher style="transform: translate3d(0,-152px,0)"
+      - (5).downto(1).each do |i|
         img.-disabled id="js-scene-#{i - 1}" src=image_path("controls/#{i}.svg") alt=i
 
   .directions#js-directions

@@ -149,6 +149,7 @@
       var style = inner.getAttribute('style');
       var transform = 0;
       var y_regex = new RegExp(/.*3d\(0\,(-?\d{1,3})px\,0\)/);
+      var max_transform = (DD.constants.mission_count * switcher_space * -1) + switcher_space;
 
       // Find the Y value of the translate3d transform
       transform = parseInt( inner.getAttribute('style').match(y_regex)[1] );
@@ -156,53 +157,51 @@
       if(typeof(next) === 'boolean'){
         if(next) {
           DD.analytics.event('Navigation', 'Switcher', 'Next');
-          transform -= switcher_space;
+          transform += switcher_space;
         } else {
           DD.analytics.event('Navigation', 'Switcher', 'Previous');
-          transform += switcher_space;
+          transform -= switcher_space;
         }
       } else {
-        if(next > 0) {
-          transform = (next * (switcher_space * -1) );
+        if(next <= 0) {
+          transform = max_transform;
         } else {
-          transform = 0;
+          transform = (max_transform + (next * switcher_space));
         }
       }
-
-      var max_transform = DD.constants.mission_count * switcher_space * -1;
 
       // Go back to start
-      if(transform <= max_transform) {
-        transform = 0;
+      if(transform >= 0) {
+        transform = max_transform;
       }
 
-      if(transform >= (max_transform + switcher_space) && transform <= 0) {
+      // Update indicators of previous/next
+      var current_mission = Math.abs( (Math.abs(transform) / switcher_space) - DD.constants.mission_count);
+      if(current_mission === 1) {
+        FCH.removeClass(switcher, '-after');
+        FCH.addClass(switcher, '-before');
+
+      } else if(current_mission === DD.constants.mission_count) {
+        FCH.removeClass(switcher, '-before');
+        FCH.addClass(switcher, '-after');
+
+      } else {
+        FCH.addClass(switcher, '-after');
+        FCH.addClass(switcher, '-before');
+      }
+
+      // Minus 1 because `DD.plot.missions` and js-scene-<int> are zero-indexed
+      var zero_indexed_mission = current_mission - 1;
+      var mission_node = document.getElementById('js-scene-' + zero_indexed_mission);
+
+      if(!FCH.hasClass(mission_node, '-disabled')) {
         inner.setAttribute('style', 'transform: translate3d(0,' + transform + 'px,0)');
 
-        // Update indicators of previous/next
-        var current_mission = (Math.abs(transform) + switcher_space) / switcher_space;
-        if(current_mission === 1) {
-          FCH.removeClass(switcher, '-prev');
-          FCH.addClass(switcher, '-next');
-
-        } else if(current_mission === DD.constants.mission_count) {
-          FCH.removeClass(switcher, '-next');
-          FCH.addClass(switcher, '-prev');
-
-        } else {
-          FCH.addClass(switcher, '-prev');
-          FCH.addClass(switcher, '-next');
-        }
-
         if(should_fire_resume) {
-          // Minus 1 because `DD.plot.missions` and js-scene-<int> are zero-indexed
-          var zero_indexed_current_mission = current_mission - 1;
-          var mission_node = document.getElementById('js-scene-' + zero_indexed_current_mission);
-
-          if(!FCH.hasClass(mission_node, '-disabled')) {
-            DD.plot.resume(zero_indexed_current_mission, false);
-          }
+          DD.plot.resume(zero_indexed_mission, false);
         }
+      } else {
+        this.updateSwitcher(current_mission, should_fire_resume);
       }
     }
 

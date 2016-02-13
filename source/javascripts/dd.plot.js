@@ -67,8 +67,7 @@
 
       FCH.removeClass(this.current_mission.mission_node, '-disabled');
 
-      // Resume audio if current objective is an audio type (Audio always opens)
-      DD.player.resumeTrack(id);
+      DD.player.pause();
       this.removeMapMarkers();
       this.current_mission.progress = 0;
 

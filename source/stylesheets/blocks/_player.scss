@@ -1,5 +1,5 @@
-$switcher-next-shadow: 0 9px 9px -9px $c-white;
-$switcher-prev-shadow: 0 -9px 9px -9px $c-white;
+$switcher-after-shadow: 0 9px 9px -9px $c-white;
+$switcher-before-shadow: 0 -9px 9px -9px $c-white;
 $handle-dimension: 16px;
 
 .player {
@@ -15,31 +15,35 @@ $handle-dimension: 16px;
   overflow: hidden;
 
   &:before {
+    @include stack($player-stack, ':player-loading');
+    content: 'LOADING';
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: $c-white;
+    display: flex;
+    justify-content: center;
     background: transparent;
-    transition: background 0.2s;
+    transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+    background: rgba($c-red, 0.85);
     visibility: hidden;
+    align-items: center;
+    line-height: 1;
+    opacity: 0;
+    letter-spacing: 0.1em;
   }
 
   &:not(.-ready) {
     pointer-events: none;
 
     &:before {
-      @include stack($player-stack, ':player-loading');
-      content: 'Loading';
-      background: rgba($c-dark-grey, 0.9);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
       visibility: visible;
-      height: 100%;
-      text-align: center;
-      color: $c-white;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      line-height: 1;
-      animation: letter-spread 2.4s ease-in-out 0s infinite alternate;
+      transition: opacity 0.4s ease-in-out;
+      opacity: 1;
     }
   }
 }
@@ -123,16 +127,16 @@ $handle-dimension: 16px;
   overflow: hidden;
   transition: box-shadow 0.3s;
 
-  &.-next {
-    box-shadow: $switcher-next-shadow;
+  &.-after {
+    box-shadow: $switcher-after-shadow;
 
-    &.-prev {
-      box-shadow: $switcher-next-shadow, $switcher-prev-shadow;
+    &.-before {
+      box-shadow: $switcher-after-shadow, $switcher-before-shadow;
     }
   }
 
-  &.-prev {
-   box-shadow: $switcher-prev-shadow;;
+  &.-before {
+   box-shadow: $switcher-before-shadow;;
   }
 
   img {

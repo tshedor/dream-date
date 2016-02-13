@@ -196,8 +196,6 @@
     audio: null,
 
     ready: function() {
-      audio = this.resumeTrack( 0 );
-
       controlsEventListeners.call(this);
 
       var track_bounds = track.getBoundingClientRect();
@@ -229,6 +227,7 @@
      * @return {Audio}
      */
     resumeTrack: function(file_name) {
+      console.log('resume')
       // Disable interaction
       FCH.removeClass(player, '-ready');
 
