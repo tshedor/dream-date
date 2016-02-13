@@ -3,7 +3,7 @@
 (function() {
   'use strict';
 
-  var debug = true;
+  var debug = false;
 
   DD.analytics = {
     page: function(page_name) {
