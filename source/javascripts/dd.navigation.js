@@ -176,6 +176,7 @@
 
       // Update indicators of previous/next
       var current_mission = Math.abs( (Math.abs(transform) / switcher_space) - DD.constants.mission_count);
+
       if(current_mission === 1) {
         FCH.removeClass(switcher, '-after');
         FCH.addClass(switcher, '-before');

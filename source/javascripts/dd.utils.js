@@ -81,7 +81,7 @@
      * @return {Integer}
      */
     vertTranslate: function(el) {
-      var y_regex = new RegExp(/.*3d\(0px\, (-?\d{1,3})px\, 0px\)/);
+      var y_regex = new RegExp(/.*3d\(\w{1,3}?\,\s?(-?\d{1,3})px\,\s?\w{1,3}?\)/);
 
       // Find the Y value of the translate3d transform
       return parseInt( el.getAttribute('style').match(y_regex)[1] );
