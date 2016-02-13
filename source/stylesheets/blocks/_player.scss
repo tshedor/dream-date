@@ -177,7 +177,7 @@ $handle-dimension: 16px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #EFF1F3;
+    background-color: $c-light-grey;
     animation: player-notify 2.8s ease-in-out 0s infinite;
   }
 }
