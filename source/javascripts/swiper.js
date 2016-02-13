@@ -29,7 +29,7 @@
 
     var new_pos = parseInt(e.touches[0].pageX) - this.start_pos;
 
-    this.el.setAttribute('style', 'transform: translate3d(' + (this.current_transform + new_pos) + 'px,0,0)');
+    this.el.setAttribute('style', 'transform: translate3d(' + (this.last_transform + new_pos) + 'px,0,0)');
   }
 
   /**
@@ -56,8 +56,6 @@
         this.last_transform = this.callback(true);
 
       }
-
-      this.current_transform = this.last_transform;
     }
   }
 
@@ -119,7 +117,6 @@
     // setTimeout object holder
     this.reset_timer = null;
     this.last_transform = 0;
-    this.current_transform = 0;
 
     // Bind listeners depending on touch availability
     if( DD.constants.has_touch ) {

@@ -90,6 +90,17 @@
     FCH.loopAndExecute(pagination.querySelectorAll('li'), function(list_item) {
       list_item.addEventListener('click', changeToPagination);
     });
+
+    /**
+     * Catch touch event that bubbles down from js-scenes
+     */
+    function allowCreditsTouchScroll(e) {
+      e.stopPropagation();
+    }
+
+    var credits = document.querySelector('.onboarding-graphic.credits');
+    credits.addEventListener('touchstart', stopP);
+    credits.addEventListener('touchmove', stopP);
   }
 
   DD.onboarding = {
