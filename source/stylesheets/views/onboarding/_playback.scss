@@ -1,3 +1,11 @@
+.playback-scene {
+  .playback {
+    margin-bottom: 30px !important;
+  }
+}
+
+
+
 .playback {
   position: relative;
 
@@ -12,7 +20,7 @@
 
     .inner-switcher {
       @extend %active-animations;
-      animation: touch 6s ease-in-out 0s infinite alternate none paused;
+      animation: touch 6s ease-in-out 0s infinite alternate;
     }
   }
 }

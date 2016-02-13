@@ -16,7 +16,7 @@
 
   rect {
     @extend %active-animations;
-    animation: background-pulse 1.8s ease-in-out 0s infinite alternate none paused;
+    animation: background-pulse 1.8s ease-in-out 0s infinite alternate;
   }
 }
 

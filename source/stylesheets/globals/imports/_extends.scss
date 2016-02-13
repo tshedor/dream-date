@@ -26,6 +26,7 @@
 }
 
 %active-animations {
+  animation-play-state: paused;
   .onboarding-scene.active & {
     animation-play-state: running;
   }

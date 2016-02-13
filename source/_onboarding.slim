@@ -29,16 +29,19 @@
         .caption
           .main-text Let us know when you arrive at the exhibit by swiping away the play bar
 
-      .onboarding-scene
+      .onboarding-scene.playback-scene
         .onboarding-graphic.playback
           .switcher.-next#js-switcher
             .inner-switcher#js-inner-switcher style="transform: translate3d(0,0px,0)"
               - (1..5).each do |i|
                 img id="js-scene-#{i - 1}" src=image_path("controls/#{i}.svg") alt=i
-          .ob-circle
 
         .caption
-          .main-text If you miss something, you can always replay completed stories by tapping the numbers
+          .main-text.bold If you miss something, you can always replay completed stories by tapping the numbers
+        .caption
+          .main-text If you'd like to read along, you can view the transcript for each scene
+        .ob-transcript 
+          == partial 'images/header/documents.svg'
 
       .onboarding-scene
         .onboarding-graphic.headphones

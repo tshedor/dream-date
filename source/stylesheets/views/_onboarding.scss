@@ -52,11 +52,23 @@
   width: 100%;
   max-width: 350px;
   margin: 2em auto;
+
+  @include bp(iphone5) {
+    margin: 1em auto;
+  }
 }
 
 .onboarding-graphic {
   margin-bottom: 60px;
   max-height: 280px;
+
+  @include bp(iphone5) {
+
+    &:not(.credits,.playback) {
+      margin-bottom: 50%;
+      max-height: 200px;
+    }
+  }
 }
 
 .pagination {
@@ -94,6 +106,10 @@
 .main-text {
   font-size: 1.3em;
   line-height: 1.3;
+
+  @include bp(iphone5) {
+    font-size: 1em;
+  }
 }
 
 .sub-text {

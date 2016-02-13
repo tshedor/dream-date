@@ -1,13 +1,13 @@
 .ob-cloud {
   @extend %active-animations;
-  animation: cloud-bounce 1.8s ease-in-out 0s infinite alternate none paused;
+  -webkit-animation: cloud-bounce 1.8s ease-in-out 0s infinite alternate;
   margin-bottom: 80px;
 }
 
 .ob-heart-shadow {
   @extend %active-animations;
-  animation: heart-shadow 1.8s ease-in-out 0s infinite alternate none paused;
-  transform: scale(0.7);
+  -webkit-animation: heart-shadow 1.8s ease-in-out 0s infinite alternate;
+  -webkit-transform: scale(0.7);
 }
 
 .ob-logo {
@@ -15,22 +15,22 @@
   width: 230px;
 }
 
-@keyframes cloud-bounce {
+@-webkit-keyframes cloud-bounce {
   0% {
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
   }
 
   100% {
-    transform: translateY(25px);
+    -webkit-transform: translateY(25px);
   }
 }
 
-@keyframes heart-shadow {
+@-webkit-keyframes heart-shadow {
   0% {
-    transform: scale(0.7);
+    -webkit-transform: scale(0.7);
   }
 
   100% {
-    transform: scale(1);
+    -webkit-transform: scale(1);
   }
 }
