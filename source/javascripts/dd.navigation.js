@@ -11,7 +11,7 @@
    * Display transcript window
    */
   function openTranscriptWindow() {
-    var transcipt_identifier = 'transcript-' + (DD.plot.current_mission.id + 1);
+    var transcipt_identifier = 'transcript-' + DD.plot.current_mission.id;
 
     var transcript_window = document.getElementById('js-' + transcipt_identifier);
 
