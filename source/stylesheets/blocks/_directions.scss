@@ -18,6 +18,10 @@
   opacity: 0;
   transition: opacity 0.6s linear 0.6s;
 
+  @include bp(iphone5) {
+    font-size: 19px;
+  }
+
   span,
   img {
     display: block;
@@ -25,6 +29,10 @@
 
   img {
     margin-left: 40px;
+
+    @include bp(iphone5) {
+      margin-left: 25px;
+    }
   }
 
   &.active {

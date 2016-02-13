@@ -94,7 +94,7 @@
    */
   function resetDirectionsElem() {
     FCH.removeClass(directions, 'active');
-    directions.removeAttribute('style');
+    DD.utils.translate(directions, 0);
   }
 
   /**
@@ -104,6 +104,7 @@
     function acknowledgeDirections(next) {
       DD.analytics.event('Navigation', 'Directions', ('Advance from ' + DD.plot.current_mission.id) );
 
+      // This refers to the swiper element, or in this case, `directions`
       DD.utils.translate(this.el, FCH.dimensions.ww, '0.4s');
 
       DD.plot.updateMap(true);
