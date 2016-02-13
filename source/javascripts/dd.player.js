@@ -227,7 +227,6 @@
      * @return {Audio}
      */
     resumeTrack: function(file_name) {
-      console.log('resume')
       // Disable interaction
       FCH.removeClass(player, '-ready');
 
