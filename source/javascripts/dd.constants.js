@@ -99,7 +99,7 @@
       },
       {
         selector: 'svg-earth-hall',
-        content: 'Earth Hall',
+        content: 'Earth Hall Dinos',
         objectives: {
           '0': {
             type: 'audio',
