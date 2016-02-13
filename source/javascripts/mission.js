@@ -159,7 +159,6 @@
 
         // Update span title and activate directions bar
         directions.querySelector('span').innerHTML = this.waypoint_name;
-        console.log('fire')
         DD.plot.updateMap();
 
       break;

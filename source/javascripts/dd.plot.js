@@ -4,6 +4,7 @@
   'use strict';
 
   var map_id = '#map-rasterized';
+  var directions = document.getElementById('js-directions');
 
   /**
    * Initialize missions array
@@ -69,8 +70,8 @@
 
       // Resume audio if current objective is an audio type (Audio always opens)
       DD.player.resumeTrack(id);
-      this.updateMap( this.current_mission.type === 'audio' );
-      console.log('fire')
+
+      this.current_mission.progress = 0;
 
       // Update switcher view
       if(update_switcher) {
@@ -100,7 +101,6 @@
      * @param {Boolean} [set_to_present=false] - Remove active and set to present, disabling circle animation
      */
     updateMap: function(set_to_present) {
-      console.log(set_to_present)
       set_to_present = FCH.setDefault(set_to_present, false);
 
       // Remove active classes from map SVG and add it to the appropriate one
