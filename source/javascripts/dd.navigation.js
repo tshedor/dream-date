@@ -103,6 +103,8 @@
 
       this.el.setAttribute('style', 'transform: translate3d(100%, 0, 0); transition: transform 0.4s');
 
+      DD.plot.updateMap(true);
+
       setTimeout(resetDirectionsElem, 400);
 
       DD.plot.current_mission.objectiveComplete();

@@ -15,6 +15,16 @@
   &.active {
     @extend %marker-active;
   }
+
+  &.present {
+    #marker {
+      display: block;
+    }
+
+    #marker-shape {
+      fill: $c-red;
+    }
+  }
 }
 
 @keyframes marker-base-grow {

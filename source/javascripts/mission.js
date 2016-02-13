@@ -158,7 +158,8 @@
         FCH.addClass(directions, 'active');
 
         // Update span title and activate directions bar
-        directions.querySelector('span').innerHTML = this.current_mission.waypoint_name;
+        directions.querySelector('span').innerHTML = this.waypoint_name;
+        console.log('fire')
         DD.plot.updateMap();
 
       break;

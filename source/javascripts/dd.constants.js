@@ -52,10 +52,6 @@
         objectives: {
           '0': {
             type: 'audio',
-            nextValue: 50
-          },
-          '50': {
-            type: 'waypoint',
             nextValue: 100
           },
           '100': {
@@ -68,11 +64,11 @@
         content: 'Earthquake House',
         objectives: {
           '0': {
-            type: 'audio',
+            type: 'waypoint',
             nextValue: 50
           },
           '50': {
-            type: 'waypoint',
+            type: 'audio',
             nextValue: 100
           },
           '100': {
@@ -85,11 +81,11 @@
         content: 'Physics Lab',
         objectives: {
           '0': {
-            type: 'audio',
+            type: 'waypoint',
             nextValue: 50
           },
           '50': {
-            type: 'waypoint',
+            type: 'audio',
             nextValue: 100
           },
           '100': {
@@ -102,11 +98,11 @@
         content: 'Earth Hall Dinos',
         objectives: {
           '0': {
-            type: 'audio',
+            type: 'waypoint',
             nextValue: 50
           },
           '50': {
-            type: 'waypoint',
+            type: 'audio',
             nextValue: 100
           },
           '100': {
@@ -119,6 +115,10 @@
         content: 'Planetarium',
         objectives: {
           '0': {
+            type: 'waypoint',
+            nextValue: 50
+          },
+          '50': {
             type: 'audio',
             nextValue: 100
           },

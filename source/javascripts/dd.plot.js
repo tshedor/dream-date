@@ -69,14 +69,13 @@
 
       // Resume audio if current objective is an audio type (Audio always opens)
       DD.player.resumeTrack(id);
-      this.updateMap();
+      this.updateMap( this.current_mission.type === 'audio' );
+      console.log('fire')
 
       // Update switcher view
       if(update_switcher) {
         DD.navigation.updateSwitcher(id, false);
       }
-
-      if(this.current_mission.progress)
 
       return this.current_mission;
     },
@@ -98,15 +97,25 @@
 
     /**
      * Remove animated map markers and set a new one
+     * @param {Boolean} [set_to_present=false] - Remove active and set to present, disabling circle animation
      */
-    updateMap: function() {
+    updateMap: function(set_to_present) {
+      console.log(set_to_present)
+      set_to_present = FCH.setDefault(set_to_present, false);
+
       // Remove active classes from map SVG and add it to the appropriate one
       FCH.loopAndExecute(map_id + ' .active', function(active_item) {
         active_item.removeAttribute('class');
       });
 
+      FCH.loopAndExecute(map_id + ' .present', function(active_item) {
+        active_item.removeAttribute('class');
+      });
+
       var new_map_element = document.querySelector(map_id + ' #' + this.current_mission.map_selector);
-      new_map_element.setAttribute('class', 'active');
+      var klass = set_to_present ? 'present' : 'active';
+
+      new_map_element.setAttribute('class', klass);
     },
 
     missionObjectiveDidUpdate: function() {

@@ -14,19 +14,20 @@
     }
   }
 
-  #Oval-209-Copy {
+  #marker-shape {
     animation: marker-color 2.8s ease-in-out 0s infinite;
     fill: $c-dark-blue;
   }
 
   #marker-base,
-  #Oval-209-Copy {
-    @extend %active-animations;
+  #marker-shape {
+    animation-play-state: running;
   }
 }
 
 %active-animations {
   animation-play-state: paused;
+
   .onboarding-scene.active & {
     animation-play-state: running;
   }
