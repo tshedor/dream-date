@@ -15,6 +15,8 @@
         hitType: 'pageview',
         page: '/' + page_name
       });
+
+      ga('send', 'screenview', { screenName: page_name });
     },
 
     event: function(category, action, label) {

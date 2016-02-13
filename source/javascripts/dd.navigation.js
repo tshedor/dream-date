@@ -195,6 +195,8 @@
       var zero_indexed_mission = current_mission - 1;
       var mission_node = document.getElementById('js-scene-' + zero_indexed_mission);
 
+      DD.analytics.event('Navigation', 'Switcher', zero_indexed_mission);
+
       if(!FCH.hasClass(mission_node, '-disabled')) {
         DD.utils.translate(inner, transform, null, true);
 
