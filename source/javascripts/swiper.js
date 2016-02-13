@@ -20,6 +20,9 @@
    * @fires callback
    */
   function touchUpdate(e) {
+
+    e.preventDefault();
+
     if(!this.allow_to_fire) {
       return;
     }
@@ -105,7 +108,7 @@
    * @return {Swiper}
    */
   function Swiper(elem, options) {
-    this.el = elem
+    this.el = FCH.setDefault(options.el, elem);
     this.start_pos = 0;
     this.allow_to_fire = true;
     // Default to noop function
@@ -120,9 +123,9 @@
 
     // Bind listeners depending on touch availability
     if( DD.constants.has_touch ) {
-      this.el.addEventListener('touchstart', touchBegin.bind(this));
-      this.el.addEventListener('touchmove', touchUpdate.bind(this));
-      this.el.addEventListener('touchend', touchComplete.bind(this));
+      elem.addEventListener('touchstart', touchBegin.bind(this));
+      elem.addEventListener('touchmove', touchUpdate.bind(this));
+      elem.addEventListener('touchend', touchComplete.bind(this));
     } else {
       this.el.addEventListener('click', nextOrPreviousClick.bind(this));
     }

@@ -97,14 +97,15 @@
     ready: function() {
       onPaginationClick();
 
-      this.swiper = new Swiper(inner, {
+      this.swiper = new Swiper(scenes, {
+        el: inner,
         callback: changeScene,
         touch_threshold: 180,
         click_threshold: (FCH.dimensions.ww / 2)
       });
 
       // I don't know why this works but this is necessary for the onboarding scene changes to work - TS
-      document.body.addEventListener('touchstart', function() {});
+      // document.body.addEventListener('touchstart', function() {});
     },
   };
 
