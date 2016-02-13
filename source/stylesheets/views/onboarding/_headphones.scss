@@ -2,6 +2,12 @@
   transform: scale(0.7);
 }
 
+.onboarding-graphic {
+  &.headphones {
+    margin-bottom: 0;
+  }
+}
+
 #headphones-big,
 #headphones-medium,
 #headphones-small {
