@@ -23,6 +23,7 @@ $handle-dimension: 16px;
     pointer-events: none;
 
     &:before {
+      @include stack($player-stack, ':player-loading');
       content: 'Loading';
       background: rgba($c-dark-grey, 0.9);
       position: absolute;
@@ -32,7 +33,6 @@ $handle-dimension: 16px;
       visibility: visible;
       height: 100%;
       text-align: center;
-      z-index: 9;
       color: $c-white;
       justify-content: center;
       display: flex;

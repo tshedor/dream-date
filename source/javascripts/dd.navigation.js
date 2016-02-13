@@ -30,6 +30,9 @@
     });
 
     DD.plot.resume(0);
+    DD.plot.removeMapMarkers();
+
+    FCH.removeClass(directions, 'active');
   }
 
   /**

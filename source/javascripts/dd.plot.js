@@ -4,7 +4,6 @@
   'use strict';
 
   var map_id = '#map-rasterized';
-  var directions = document.getElementById('js-directions');
 
   /**
    * Initialize missions array
@@ -70,7 +69,7 @@
 
       // Resume audio if current objective is an audio type (Audio always opens)
       DD.player.resumeTrack(id);
-
+      this.removeMapMarkers();
       this.current_mission.progress = 0;
 
       // Update switcher view
@@ -97,12 +96,10 @@
     },
 
     /**
-     * Remove animated map markers and set a new one
-     * @param {Boolean} [set_to_present=false] - Remove active and set to present, disabling circle animation
+     * Strip all map markers and classes
+     * @see {@link DD.navigation#resetAfterCompletion}
      */
-    updateMap: function(set_to_present) {
-      set_to_present = FCH.setDefault(set_to_present, false);
-
+    removeMapMarkers: function() {
       // Remove active classes from map SVG and add it to the appropriate one
       FCH.loopAndExecute(map_id + ' .active', function(active_item) {
         active_item.removeAttribute('class');
@@ -111,6 +108,16 @@
       FCH.loopAndExecute(map_id + ' .present', function(active_item) {
         active_item.removeAttribute('class');
       });
+    },
+
+    /**
+     * Remove animated map markers and set a new one
+     * @param {Boolean} [set_to_present=false] - Remove active and set to present, disabling circle animation
+     */
+    updateMap: function(set_to_present) {
+      set_to_present = FCH.setDefault(set_to_present, false);
+
+      this.removeMapMarkers();
 
       var new_map_element = document.querySelector(map_id + ' #' + this.current_mission.map_selector);
       var klass = set_to_present ? 'present' : 'active';
