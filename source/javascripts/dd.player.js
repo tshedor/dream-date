@@ -248,14 +248,6 @@
       audio.load();
 
       return audio;
-    },
-
-    missionObjectiveDidUpdate: function() {
-      var is_a_track = DD.plot.current_mission.type === 'audio';
-
-      if( is_a_track ) {
-        FCH.addClass(control_button, 'notify');
-      }
     }
   };
 
