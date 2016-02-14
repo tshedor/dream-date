@@ -13,7 +13,7 @@ $fine-breakpoints: (
   'retina'          : unquote('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)'),
   'portrait'        : unquote('only screen and (orientation: portrait)'),
   'landscape'       : unquote('only screen and (orientation: landscape)'),
-  'iphone5'         : unquote('only screen and (max-height: 570px)')
+  'iphone5'         : unquote('only screen and (max-height: 600px)'),
 );
 
 // Project $breakpoints map to guard against deletion in project _variables

@@ -58,6 +58,10 @@
   margin-bottom: 45px;
   max-height: 50vh;
 
+  @include bp(iphone5) {
+    max-height: 60vh;
+  }
+
   svg {
     max-height: 100%;
     width: auto;

@@ -143,6 +143,9 @@
 
       // Show onboarding screen
       if(!DD.constants.has_onboarded) {
+        // First time user opens the app freshly - may not account for private/incognito browsing
+        DD.analytics.event('Onboarding', 'Change To', 'First Time');
+
         hideAllViewsExcept.call(null, 'onboarding');
       }
     },
