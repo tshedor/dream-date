@@ -87,7 +87,7 @@
         this.resume(nextMissionId);
 
       } else {
-        DD.analytics.page('completion');
+        DD.analytics.page('completion', 'Completion');
 
         var completion_view = document.getElementById('js-completion-view');
         FCH.addClass(completion_view, 'active');

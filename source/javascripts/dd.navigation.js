@@ -8,14 +8,24 @@
   var directions = document.getElementById('js-directions');
 
   /**
+   * Capitalize
+   * @param  {String} str
+   * @see  {@link http://stackoverflow.com/a/1026087}
+   * @return {String}
+   */
+  function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  /**
    * Display transcript window
    */
   function openTranscriptWindow() {
     var transcipt_identifier = 'transcript-' + DD.plot.current_mission.id;
-
+    var transcript_name = 'Transcript ' + DD.plot.current_mission.id;
     var transcript_window = document.getElementById('js-' + transcipt_identifier);
 
-    DD.analytics.page(transcipt_identifier);
+    DD.analytics.page(transcipt_identifier, transcript_name);
     FCH.addClass(transcript_window, 'active');
   }
 
@@ -45,11 +55,13 @@
     });
 
     if(display_view_id) {
-      DD.analytics.page(display_view_id);
+      var page_name = capitalizeFirstLetter(display_view_id);
+      DD.analytics.page(display_view_id, page_name);
+
       var view = document.getElementById('js-' + display_view_id + '-view');
       FCH.addClass(view, 'active');
     } else {
-      DD.analytics.page('');
+      DD.analytics.page('', 'Home');
     }
   }
 
@@ -59,7 +71,6 @@
   function onClickListeners() {
     var onboarding = document.getElementById('js-onboarding-button');
     onboarding.addEventListener('click', hideAllViewsExcept.bind(null, 'onboarding'));
-
 
     var completion_close = document.getElementById('js-completion-close');
     completion_close.addEventListener('click', resetAfterCompletion);

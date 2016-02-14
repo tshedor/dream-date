@@ -6,19 +6,33 @@
   var debug = false;
 
   DD.analytics = {
-    page: function(page_name) {
+    /**
+     * Log pages to Google Analytics
+     * @param  {String} page_name
+     * @param  {String} full_name
+     * @see  {@link https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications}
+     */
+    page: function(page_name, full_name) {
       if(debug) {
         return;
       }
 
-      ga('send', {
-        hitType: 'pageview',
-        page: '/' + page_name
+      var page_with_slash = '/' + page_name;
+
+      ga('set', {
+        page: page_with_slash,
+        title: full_name
       });
 
-      ga('send', 'screenview', { screenName: page_name });
+      ga('send', 'pageview');
     },
 
+    /**
+     * Log events to Google Analytics
+     * @param  {String} category
+     * @param  {String} action
+     * @param  {String} label
+     */
     event: function(category, action, label) {
       if(debug) {
         return;
