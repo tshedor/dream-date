@@ -60,8 +60,8 @@
         }
       },
       {
-        selector: 'svg-turbine-hall',
-        content: 'Earthquake House',
+        selector: 'svg-earth-hall',
+        content: 'Earth Hall Dinos',
         objectives: {
           '0': {
             type: 'waypoint',
@@ -94,8 +94,8 @@
         }
       },
       {
-        selector: 'svg-earth-hall',
-        content: 'Earth Hall Dinos',
+        selector: 'svg-turbine-hall',
+        content: 'Earthquake House',
         objectives: {
           '0': {
             type: 'waypoint',
